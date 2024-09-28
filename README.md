@@ -1,2 +1,3 @@
-# wise-ui
-UI Library
+# wise-widgets
+
+Wise Widget UI Library

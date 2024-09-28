@@ -1,0 +1,30 @@
+{
+  "name": "wise-widgets",
+  "version": "0.0.1",
+  "description": "Wise Widget UI Library",
+  "repository": "git@github.com:Wise-Info/wise-ui.git",
+  "author": "Lane Zhao <lane@wiseinfo.cc>",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "main": "index.js",
+  "imports": {},
+  "scripts": {
+    "demos": "vite --config vite.config.demos.ts"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1",
+    "vue": "^3.5.10"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^2.1.1",
+    "eslint": ">=9.8.0",
+    "eslint-config-xo": "^0.46.0",
+    "eslint-config-xo-typescript": "^7.0.0",
+    "eslint-plugin-vue": "^9.28.0",
+    "sass-embedded": "^1.79.4",
+    "typescript": ">=5.5.0",
+    "vite": "^5.4.8",
+    "vitest": "^2.1.1"
+  }
+}
