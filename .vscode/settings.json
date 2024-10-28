@@ -1,0 +1,7 @@
+{
+  "html.completion.attributeDefaultValue": "singlequotes",
+  "html.format.wrapAttributes": "force-aligned",
+  "html.format.wrapLineLength": 100,
+  "eslint.format.enable": true,
+  "vue.format.wrapAttributes": "force-aligned",
+}

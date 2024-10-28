@@ -1,0 +1,52 @@
+.running {
+
+  &,
+  [class$="__original"] {
+    cursor: wait !important;
+  }
+
+  &:active {
+    pointer-events: none;
+  }
+}
+
+.disabled {
+
+  &,
+  [class$="__original"] {
+    cursor: not-allowed !important;
+  }
+
+  &:active {
+    pointer-events: none;
+  }
+}
+
+.success {
+  --color: var(--color-success);
+}
+
+.warning {
+  // --color: #{$color-warning} !important;
+
+  &.hover,
+  &:hover,
+  &:focus,
+  &.active,
+  &:active {
+    // --color: #{$color-warning-toggle};
+  }
+}
+
+.danger,
+.error {
+  // --color: #{$color-error} !important;
+
+  &.hover,
+  &:hover,
+  &:focus,
+  &.active,
+  &:active {
+    // --color: #{$color-error-toggle};
+  }
+}

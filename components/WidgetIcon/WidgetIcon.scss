@@ -1,0 +1,12 @@
+.widget-icon {
+  display: inline-block;
+  width: var(--size);
+  height: var(--size);
+  font-size: var(--size);
+  line-height: var(--size);
+  font-family: 'Material Symbols Rounded';
+  font-weight: var(--weight, 200);
+  text-align: center;
+  vertical-align: calc(var(--size)* -0.25);
+  user-select: none;
+}

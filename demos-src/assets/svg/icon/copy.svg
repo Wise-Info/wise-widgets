@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24">
+  <path fill="none"
+        stroke="currentColor"
+        d=" M12 6l4 4v12h-12v-16zv4h4" />
+  <path fill="none"
+        stroke="currentColor"
+        stroke-opacity=".64"
+        d="M6 8h4m0 2h-4m0 2h8m0 2h-8m0 2h8m0 2h-8m0 2h8M8 5v-3h8l4 4v12h-3M16 2v4h4" />
+</svg>

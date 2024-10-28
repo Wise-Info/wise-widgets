@@ -1,0 +1,41 @@
+@import './colors';
+
+@import './sizes';
+
+@import './responsive';
+
+/* ---- ---- ---- ---- */
+// Font
+$font-standard: "SF Pro", "Open Sans Regular", "PingFang SC", "Microsoft YaHei", sans-serif;
+$font-condensed: "SF Compact", "Open Sans Condensed", "PingFang SC", "Microsoft YaHei", sans-serif;
+$font-monospace: "SF Mono", "Roboto Mono", monospace;
+$font-icon: "Material Icons";
+
+/* ---- ---- ---- ---- */
+
+$global-border-size: 2px;
+$global-border-radius: 2px;
+
+$global-font: 14px/1em $font-standard;
+
+$disabled-text-decoration: none; // line-through;
+
+
+/* ---- ---- ---- ---- */
+// Global Z-Index
+$z-index-dropdown:       1000;
+$z-index-sticky:         1020;
+$z-index-fixed:          1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal:          1050;
+$z-index-popover:        1060;
+$z-index-tooltip:        1070;
+
+/* ---- ---- ---- ---- */
+// Global Layout
+$header-bar-height: $size-base * 6;
+$footer-bar-height: $size-base * 4;
+
+// spacing
+$spacing-x: $size-base * 2;
+$spacing-y: $size-base * 2;

@@ -1,0 +1,16 @@
+@import '../styles/variables';
+@import './cols-generator.scss';
+
+@include mobile {
+  $cols: 6;
+
+  .m-cols-#{$cols} {
+    @include cols-generator($cols, $mobile-max, calc($size-base / 2px * 0), 'm-');
+  }
+
+  @each $gap in 1, 2 {
+    .m-cols-#{$cols}-gap-#{$gap} {
+      @include cols-generator($cols, $mobile-max, calc($size-base / 2px * $gap), 'm-');
+    }
+  }
+}

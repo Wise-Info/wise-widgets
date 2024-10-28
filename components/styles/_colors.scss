@@ -1,11 +1,11 @@
 // Grayscale
 $color-darkest:  #000;
 $color-gray-1:   #161616; $color-dark:    $color-gray-1;
-$color-gray-3:   #333;    $color-dark-80: $color-gray-3;
-$color-gray-6:   #666;    $color-dark-60: $color-gray-6;
-$color-gray-9:   #999;    $color-dark-40: $color-gray-9;
-$color-gray-c:   #CCC;    $color-dark-20: $color-gray-c;
-$color-gray-e:   #E6E6E6; $color-dark-10: $color-gray-e;
+$color-gray-3:   #333;    $color-gray-80: $color-gray-3;
+$color-gray-6:   #666;    $color-gray-60: $color-gray-6;
+$color-gray-9:   #999;    $color-gray-40: $color-gray-9;
+$color-gray-c:   #CCC;    $color-gray-20: $color-gray-c;
+$color-gray-e:   #E6E6E6; $color-gray-10: $color-gray-e;
 $color-gray-f:   #F4F4F4; $color-light:   $color-gray-f;
 $color-lightest: #FFF;
 
@@ -35,38 +35,72 @@ $color-city-lights:         #DFE6E9;
 $color-major: $color-electron-blue; // temp
 $color-major-hover: $color-green-darner-tail; // temp
 
-$color-minor: $color-gray-9; // temp
+$color-minor: $color-gray-40;
 
-:root {
-  --color-darkest:  #{$color-darkest};
-  --color-gray-1:   #{$color-gray-1};   --color-dark:    #{$color-gray-1};
-  --color-gray-3:   #{$color-gray-3};   --color-dark-80: #{$color-gray-3};
-  --color-gray-6:   #{$color-gray-6};   --color-dark-60: #{$color-gray-6};
-  --color-gray-9:   #{$color-gray-9};   --color-dark-40: #{$color-gray-9};
-  --color-gray-c:   #{$color-gray-c};   --color-dark-20: #{$color-gray-c};
-  --color-gray-e:   #{$color-gray-e};   --color-dark-10: #{$color-gray-e};
-  --color-gray-f:   #{$color-gray-f};   --color-light:   #{$color-gray-f};
-  --color-lightest: #{$color-lightest};
-
-
-  --color-major: #{$color-major};
-  --color-minor: #{$color-minor};
+:root{
+  --color-major: #{$color-exodus-fruit};
+  --color-major-hover: #{$color-shy-moment};
 }
 
-// @media (prefers-color-scheme: dark) {
-//   :root {
-//     --color-darkest:  #{$color-lightest};
-//     --color-gray-1:   #{$color-gray-f};   --color-dark:    #{$color-gray-f};
-//     --color-gray-3:   #{$color-gray-e};   --color-dark-80: #{$color-gray-e};
-//     --color-gray-6:   #{$color-gray-c};   --color-dark-60: #{$color-gray-c};
-//     --color-gray-9:   #{$color-gray-9};   --color-dark-40: #{$color-gray-9};
-//     --color-gray-c:   #{$color-gray-6};   --color-dark-20: #{$color-gray-6};
-//     --color-gray-e:   #{$color-gray-3};   --color-dark-10: #{$color-gray-3};
-//     --color-gray-f:   #{$color-gray-1};   --color-light:   #{$color-gray-1};
-//     --color-lightest: #{$color-darkest};
+@mixin light {
+  --color-darkest:  #{$color-darkest};
+  --color-gray-1:   #{$color-gray-1};   --color-dark:    #{$color-dark};
+  --color-gray-3:   #{$color-gray-3};   --color-gray-80: #{$color-gray-80};
+  --color-gray-6:   #{$color-gray-6};   --color-gray-60: #{$color-gray-60};
+  --color-gray-9:   #{$color-gray-9};   --color-gray-40: #{$color-gray-40};
+  --color-gray-c:   #{$color-gray-c};   --color-gray-20: #{$color-gray-20};
+  --color-gray-e:   #{$color-gray-e};   --color-gray-10: #{$color-gray-10};
+  --color-gray-f:   #{$color-gray-f};   --color-light:   #{$color-light};
+  --color-lightest: #{$color-lightest};
+
+  --color-minor: #{$color-gray-60};
+  --color-minor-hover: #{$color-gray-40};
+
+  --global-background-color: #{$color-light};
+  --global-font-color: #{$color-gray-80};
+
+  --global-frost-color:  #{rgba($color-lightest, 0.64)};
+  --global-shadow-color: #{rgba($color-darkest, 0.08)};
+
+}
+
+@mixin dark {
+  --color-darkest:  #{$color-lightest};
+  --color-gray-1:   #{$color-gray-f};   --color-dark:    #{$color-light};
+  --color-gray-3:   #{$color-gray-e};   --color-gray-80: #{$color-gray-10};
+  --color-gray-6:   #{$color-gray-c};   --color-gray-60: #{$color-gray-20};
+  --color-gray-9:   #{$color-gray-9};   --color-gray-40: #{$color-gray-40};
+  --color-gray-c:   #{$color-gray-6};   --color-gray-20: #{$color-gray-60};
+  --color-gray-e:   #{$color-gray-3};   --color-gray-10: #{$color-gray-80};
+  --color-gray-f:   #{$color-gray-1};   --color-light:   #{$color-dark};
+  --color-lightest: #{$color-darkest};
+
+  --color-minor: #{$color-gray-40};
+  --color-minor-hover: #{$color-gray-60};
+
+  --global-background-color: #{$color-dark};
+  --global-font-color: #{$color-gray-20};
 
 
-//     // --color-major: #{$color-major};
-//     // --color-minor: #{$color-minor};
-//   }
-// }
+  --global-frost-color:  #{rgba($color-darkest, 0.64)};
+  --global-shadow-color: #{rgba($color-lightest, 0.08)};
+}
+
+
+html.light{
+  @include light;
+}
+
+html.dark {
+  @include dark;
+}
+
+:root {
+  @include light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root{
+    @include dark;
+  }
+}

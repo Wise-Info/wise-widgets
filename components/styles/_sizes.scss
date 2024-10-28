@@ -6,3 +6,12 @@ $size-large:  $size-base * 5;
 $size-normal: $size-base * 4;
 $size-mini:   $size-base * 3;
 $size-micro:  $size-base * 2;
+
+:root {
+  --size-base:   #{$size-base};
+  --size-extra:  #{$size-extra};
+  --size-large:  #{$size-large};
+  --size-normal: #{$size-normal};
+  --size-mini:   #{$size-mini};
+  --size-micro:  #{$size-micro};
+}

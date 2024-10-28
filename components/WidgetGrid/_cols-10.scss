@@ -1,0 +1,16 @@
+@import '../styles/variables';
+@import './cols-generator';
+
+// @include desktop {
+  $cols: 10;
+
+  .cols-#{$cols} {
+    @include cols-generator($cols, $desktop-mix, calc($size-base / 1px * 0));
+  }
+
+  @each $gap in 1, 2, 3, 4 {
+    .cols-#{$cols}-gap-#{$gap} {
+      @include cols-generator($cols, $desktop-mix, calc($size-base / 1px * $gap));
+    }
+  }
+// }

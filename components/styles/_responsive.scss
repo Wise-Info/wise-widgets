@@ -1,0 +1,29 @@
+// Responsive
+$min-width: 320;
+
+$mobile-max: 460;
+//  320 ~ 460  -- Mobile Devices
+$portrait-max: 1199;
+//  320 ~ 1199 -- Portrait Devices ( Mobile Devices & Portrait Tablet Devices )
+$desktop-mix: 1200;
+// 1200 ~ ∞ -- Horizontal Tablet Devices or Desktop Devices
+$desktop-extra: 1920;
+// 1920 ~ ∞ -- Extra Screen Devices
+
+// Simplified Responsive Breakpoint
+$responsive-breakpoint: 1200px;
+// 0 ~ 1199 -- Mobile Devices
+// 1200 ~ ∞ -- Desktop Devices
+
+@mixin mobile {
+  @media (max-width: ($responsive-breakpoint - 1)) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $responsive-breakpoint) {
+    @content;
+  }
+}
+
