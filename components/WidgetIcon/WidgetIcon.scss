@@ -4,7 +4,7 @@
   height: var(--size);
   font-size: var(--size);
   line-height: var(--size);
-  font-family: 'Material Symbols Rounded';
+  font-family: $font-icon;
   font-weight: var(--weight, 200);
   text-align: center;
   vertical-align: calc(var(--size)* -0.25);

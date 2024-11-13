@@ -1,0 +1,119 @@
+.widget-group {
+  $this: &;
+
+  --label-color: var(--color-minor);
+  --size: var(--size-normal);
+  --gap: var(--gap-1);
+
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+
+  max-width: 100%;
+
+  &+& {
+    margin: var(--gap) 0 0;
+  }
+
+  &.disabled {
+    --label-color: var(--color-disabled);
+  }
+
+  &.error {
+    --label-color: var(--color-error);
+  }
+
+  &.right {
+    flex-direction: row-reverse;
+
+    #{$this}__inner {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &.wrap {
+    #{$this}__inner {
+      flex-wrap: wrap;
+    }
+  }
+
+
+  &.column {
+    #{$this}__inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    // #{$this}__label {
+    //   margin: 0 0 $size-base 0;
+    // }
+
+    // .widget-radio,
+    // .widget-checkbox {
+    //   margin: 0 0 $size-base $spacing-x;
+
+    //   &:last-child {
+    //     margin: 0 0 $spacing-y $spacing-x;
+    //   }
+    // }
+  }
+
+  // &.rounded {
+  //   .widget-radio:first-child,
+  //   .widget-checkbox:first-child,
+  //   .widget-checkbox-group__check-all+.widget-checkbox {
+  //     border-radius: $global-border-radius 0 0 $global-border-radius;
+  //   }
+
+  //   .widget-radio,
+  //   .widget-checkbox {
+  //     &:last-child {
+  //       border-radius: 0 $global-border-radius $global-border-radius 0;
+  //     }
+  //   }
+  // }
+
+  // &.capsule {
+
+  //   .widget-radio:first-child,
+  //   .widget-checkbox:first-child,
+  //   .widget-checkbox-group__check-all+.widget-checkbox {
+  //     border-radius: calc(var(--size) / 2) 0 0 calc(var(--size) / 2);
+  //   }
+
+  //   .widget-radio,
+  //   .widget-checkbox {
+  //     &:last-child {
+  //       border-radius: 0 calc(var(--size) / 2) calc(var(--size) / 2) 0;
+  //     }
+  //   }
+  // }
+
+  // &.line {
+  //   .widget-radio,
+  //   .widget-checkbox {
+  //     border-top-color: transparent;
+  //     border-right: none;
+  //     border-left: none;
+  //   }
+  // }
+
+  &.extra {
+    --group-size: var(--size-extra);
+  }
+
+  &.large {
+    --group-size: var(--size-large);
+  }
+
+  &.mini {
+    --group-size: var(--size-mini);
+    text-transform: capitalize;
+  }
+
+  &.micro {
+    --group-size: var(--size-micro);
+    text-transform: lowercase;
+  }
+
+}

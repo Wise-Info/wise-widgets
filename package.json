@@ -1,19 +1,33 @@
 {
-  "name": "wise-widgets",
+  "name": "@wiseinfo/wise-widgets",
   "version": "0.0.1",
-  "description": "Wise Widget UI Library",
-  "repository": "git@github.com:Wise-Info/wise-ui.git",
+  "description": "Wise Widgets UI Library",
+  "keywords": [
+    "Wise Widgets",
+    "wise-widgets",
+    "vue",
+    "vue3",
+    "UI Library",
+    "WiseInfo"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Wise-Info/wise-widgets.git"
+  },
   "author": "Lane Zhao <lane@wiseinfo.cc>",
   "license": "MIT",
-  "private": true,
   "type": "module",
   "main": "index.js",
-  "imports": {},
+  "imports": {
+    "@wiseinfo/wise-widgets": "./components/index.ts"
+  },
   "scripts": {
-    "demos": "vite --config vite.config.demos.js",
-    "build:demos": "vite build --config vite.config.demos.js --emptyOutDir"
+    "dev": "vite --config vite.config.docs.js",
+    "build:lib": "vue-tsc --noEmit && vite build",
+    "build:docs": "dotenv -e .env.docs vite build --config vite.config.docs.js"
   },
   "dependencies": {
+    "@fontsource/material-symbols-outlined": "^5.1.3",
     "@fontsource/material-symbols-rounded": "^5.1.2",
     "@highlightjs/vue-plugin": "^2.1.0",
     "highlight.js": "^11.10.0",
@@ -28,8 +42,10 @@
     "@types/node": "^22.7.5",
     "@vitejs/plugin-vue": "^5.1.4",
     "@vitest/coverage-v8": "^2.1.1",
+    "dotenv-cli": "^7.4.2",
     "eslint": "^9.12.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-vue": "^9.29.0",
     "globals": "^15.11.0",

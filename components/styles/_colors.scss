@@ -12,22 +12,31 @@ $color-lightest: #FFF;
 // Flat UI Colors 2 -- American Palette
 $color-prunus-avium:        #E84393;
 $color-pico-8-pink:         #FD79A8;
+
 $color-chi-gong:            #D63031;
 $color-pink-glamour:        #FF7675;
+
 $color-orangeville:         #E17055;
 $color-first-date:          #FAB1A0;
+
 $color-bright-yarrow:       #FDCB6E;
 $color-sour-lemon:          #FFEAA7;
+
 $color-mint-leaf:           #00B894;
 $color-light-greenish-blue: #55EFC4;
+
 $color-robins-egg-blue:     #00CEC9;
 $color-faded-poster:        #81ECEC;
+
 $color-electron-blue:       #0984E3;
 $color-green-darner-tail:   #74B9FF;
+
 $color-exodus-fruit:        #6C5CE7;
 $color-shy-moment:          #A29BFE;
+
 $color-dracula-orchid:      #2D3436;
 $color-american-river:      #636E72;
+
 $color-soothing-breeze:     #B2BEC3;
 $color-city-lights:         #DFE6E9;
 
@@ -39,10 +48,28 @@ $color-minor: $color-gray-40;
 
 :root{
   --color-major: #{$color-exodus-fruit};
-  --color-major-hover: #{$color-shy-moment};
+  --color-major-toggle: #{$color-shy-moment};
+
+  --color-minor: #{$color-gray-60};
+  --color-minor-toggle: var(--color-major-hover);
+
+  --color-inactive: var(--color-gray-40);
+  --color-active: var(--color-major);
+  --color-disabled: var(--color-gray-20);
+
+  --color-warning: #{$color-bright-yarrow};
+  --color-warning-toggle: #{$color-sour-lemon};
+
+  --color-danger: #{$color-chi-gong};
+  --color-danger-toggle: #{$color-pink-glamour};
+
+  --color-error: #{$color-chi-gong};
+  --color-error-toggle: #{$color-pink-glamour};
 }
 
 @mixin light {
+  color-scheme: light;
+
   --color-darkest:  #{$color-darkest};
   --color-gray-1:   #{$color-gray-1};   --color-dark:    #{$color-dark};
   --color-gray-3:   #{$color-gray-3};   --color-gray-80: #{$color-gray-80};
@@ -53,8 +80,8 @@ $color-minor: $color-gray-40;
   --color-gray-f:   #{$color-gray-f};   --color-light:   #{$color-light};
   --color-lightest: #{$color-lightest};
 
-  --color-minor: #{$color-gray-60};
-  --color-minor-hover: #{$color-gray-40};
+  --color-minor: #{$color-gray-40};
+  --color-minor-hover: #{$color-gray-20};
 
   --global-background-color: #{$color-light};
   --global-font-color: #{$color-gray-80};
@@ -65,6 +92,8 @@ $color-minor: $color-gray-40;
 }
 
 @mixin dark {
+  color-scheme: dark;
+
   --color-darkest:  #{$color-lightest};
   --color-gray-1:   #{$color-gray-f};   --color-dark:    #{$color-light};
   --color-gray-3:   #{$color-gray-e};   --color-gray-80: #{$color-gray-10};
@@ -83,7 +112,7 @@ $color-minor: $color-gray-40;
 
 
   --global-frost-color:  #{rgba($color-darkest, 0.64)};
-  --global-shadow-color: #{rgba($color-lightest, 0.08)};
+  --global-shadow-color: #{rgba($color-darkest, 0.32)};
 }
 
 

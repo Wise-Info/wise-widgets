@@ -1,7 +1,7 @@
 {
-  "html.completion.attributeDefaultValue": "singlequotes",
+  "cSpell.words": ["highlightjs", "orangeville"],
+  "eslint.format.enable": true,
   "html.format.wrapAttributes": "force-aligned",
   "html.format.wrapLineLength": 100,
-  "eslint.format.enable": true,
-  "vue.format.wrapAttributes": "force-aligned",
+  "vue.format.wrapAttributes": "force-aligned"
 }

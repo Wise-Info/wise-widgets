@@ -5,8 +5,8 @@
     :class="`widget-icon__${icon}`"
     :title="label"
     :style="{
-      '--size': `${size}px`,
-      '--weight': Number(weight),
+      '--size': `var(--icon-size, ${size}px)`,
+      '--weight': `var(--icon-weight, ${Number(weight)}`,
     }">
     {{ String.fromCharCode(parseInt(icon, 16)) }}
   </span>
@@ -24,15 +24,32 @@
     <use :href="`#${svgPrefix}${icon}`" />
   </svg>
 </template>
+<script lang="ts">
+  const enums = {
+    type: ['font', 'svg'],
+    weight: [100, 200, 300, 400, 500, 600, 700],
+  };
+
+  export const WidgetIconEnums = enums;
+
+  export interface WidgetIconProps {
+    type?: 'font' | 'svg';
+    icon: string;
+    label?: string;
+    size?: number | string;
+    weight?: number | string;
+    svgPrefix?: string;
+  }
+</script>
 <script setup lang="ts">
-  import '@fontsource/material-symbols-rounded';
+  // import '@fontsource/material-symbols-outlined';
 
   const props = defineProps({
     type: {
       type: String,
       default: 'font',
-      enum: ['font', 'svg'],
-      validator: (value: string) => ['font', 'svg'].includes(value),
+      enums: enums.type,
+      validator: (value: string) => enums.type.includes(value),
     },
     icon: {
       type: String,
@@ -40,7 +57,7 @@
     },
     label: {
       type: String,
-      default: '',
+      default: undefined,
     },
     size: {
       type: [Number, String],
@@ -50,6 +67,8 @@
     weight: {
       type: [Number, String],
       default: 200,
+      enums: enums.weight,
+      validator: (value: number | string) => enums.weight.includes(Number(value)),
     },
     svgPrefix: {
       type: String,
@@ -65,6 +84,3 @@
     );
   }
 </script>
-<style lang="scss">
-  @import './WidgetIcon.scss';
-</style>

@@ -6,4 +6,6 @@ WidgetSvg.install = (app: App) => {
   app.component('WidgetSvg', WidgetSvg);
 };
 
+export * from './WidgetSvg.vue';
+
 export { WidgetSvg };

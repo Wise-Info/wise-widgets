@@ -1,7 +1,6 @@
 .running {
 
-  &,
-  [class$="__original"] {
+  &, [class$="__original"] {
     cursor: wait !important;
   }
 
@@ -11,9 +10,7 @@
 }
 
 .disabled {
-
-  &,
-  [class$="__original"] {
+  &, [class$="__original"] {
     cursor: not-allowed !important;
   }
 
@@ -22,31 +19,42 @@
   }
 }
 
-.success {
-  --color: var(--color-success);
-}
+// .success {
+//   --color: var(--color-success);
+// }
 
 .warning {
-  // --color: #{$color-warning} !important;
+  --color: var(--color-warning);
 
   &.hover,
   &:hover,
   &:focus,
   &.active,
   &:active {
-    // --color: #{$color-warning-toggle};
+    --color: var(--color-warning-toggle);
   }
 }
 
-.danger,
-.error {
-  // --color: #{$color-error} !important;
+.danger {
+  --color: var(--color-danger);
 
   &.hover,
   &:hover,
   &:focus,
   &.active,
   &:active {
-    // --color: #{$color-error-toggle};
+    --color: var(--color-danger-toggle);
+  }
+}
+
+.error {
+  --color: var(--color-error);
+
+  &.hover,
+  &:hover,
+  &:focus,
+  &.active,
+  &:active {
+    --color: var(--color-error-toggle);
   }
 }

@@ -1,21 +1,12 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import globals from 'globals';
 import pluginJs from '@eslint/js';
-import tseslint from 'typescript-eslint';
+import pluginTs from 'typescript-eslint';
+import pluginImport from 'eslint-plugin-import';
 import pluginVue from 'eslint-plugin-vue';
 import pluginPrettierRecommendedConfigs from 'eslint-plugin-prettier/recommended';
 
 export default [
-  {
-    files: ['**/*.{js,mjs,cjs,ts,vue}'],
-    rules: {
-      // 'import/extensions': 'off',
-      // 'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/*.test.js'] }],
-      // 'import/no-unresolved': [2, { ignore: ['^#.+$'] }],
-      // 'import/prefer-default-export': 'off',
-      'no-console': ['warn', { allow: ['debug', 'info', 'warn', 'error'] }],
-    },
-  },
-
   {
     languageOptions: {
       globals: {
@@ -27,21 +18,35 @@ export default [
 
   pluginJs.configs.recommended,
 
-  ...tseslint.configs.recommended,
+  ...pluginTs.configs.recommended,
 
-  ...pluginVue.configs['flat/essential'],
+  pluginImport.flatConfigs.recommended,
+
+  ...pluginVue.configs['flat/recommended'],
 
   pluginPrettierRecommendedConfigs,
+
+  {
+    files: ['**/*.{js,mjs,cjs,ts,vue}'],
+    rules: {
+      'import/extensions': 'off',
+      'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/*.test.js'] }],
+      'import/no-unresolved': [2, { ignore: ['^#.+$', '^@.+$'] }],
+      'import/prefer-default-export': 'off',
+      'no-console': ['warn', { allow: ['debug', 'info', 'warn', 'error'] }],
+    },
+  },
 
   {
     files: ['**/*.vue'],
     languageOptions: {
       parserOptions: {
-        parser: tseslint.parser,
+        parser: pluginTs.parser,
       },
     },
     rules: {
       'vue/multi-word-component-names': 'off',
+      'vue/valid-define-props': 'off',
     },
   },
 ];

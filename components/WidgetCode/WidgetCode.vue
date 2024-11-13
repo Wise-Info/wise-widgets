@@ -14,8 +14,6 @@
 
   const highlightjs = hljsVuePlugin.component;
 
-  console.log(highlightjs);
-
   defineProps({
     code: {
       type: String,

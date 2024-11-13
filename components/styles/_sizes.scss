@@ -1,17 +1,46 @@
 // Size
 $size-base: 8px;
 
-$size-extra:  $size-base * 6;
-$size-large:  $size-base * 5;
-$size-normal: $size-base * 4;
-$size-mini:   $size-base * 3;
-$size-micro:  $size-base * 2;
+$size-micro:  $size-base * 2; // 16px
+$size-mini:   $size-base * 3; // 24px
+$size-normal: $size-base * 4; // 32px
+$size-large:  $size-base * 5; // 40px
+$size-extra:  $size-base * 6; // 48px
+
+
+.micro {
+  --size: #{$size-micro};
+}
+
+.mini {
+  --size: #{$size-mini};
+}
+
+.normal {
+  --size: #{$size-normal};
+}
+
+.large {
+  --size: #{$size-large};
+  --icon-weight: 300;
+}
+
+.extra {
+  --size: #{$size-extra};
+  --icon-weight: 400;
+}
 
 :root {
-  --size-base:   #{$size-base};
-  --size-extra:  #{$size-extra};
-  --size-large:  #{$size-large};
-  --size-normal: #{$size-normal};
-  --size-mini:   #{$size-mini};
-  --size-micro:  #{$size-micro};
+  --size-base:   #{$size-base};   // 8px
+
+  --size-micro:  calc(var(--size-base) * 2); // 16px
+  --size-mini:   calc(var(--size-base) * 3); // 24px
+  --size-normal: calc(var(--size-base) * 4); // 32px
+  --size-large:  calc(var(--size-base) * 5); // 40px
+  --size-extra:  calc(var(--size-base) * 6); // 48px
+
+  --gap-1: var(--size-base);
+  --gap-2: calc(var(--size-base) * 2);
+  --gap-3: calc(var(--size-base) * 3);
+  --gap-4: calc(var(--size-base) * 4);
 }

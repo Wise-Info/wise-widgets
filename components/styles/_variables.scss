@@ -2,6 +2,8 @@
 
 @import './sizes';
 
+@import 'typography';
+
 @import './responsive';
 
 /* ---- ---- ---- ---- */
@@ -9,12 +11,12 @@
 $font-standard: "SF Pro", "Open Sans Regular", "PingFang SC", "Microsoft YaHei", sans-serif;
 $font-condensed: "SF Compact", "Open Sans Condensed", "PingFang SC", "Microsoft YaHei", sans-serif;
 $font-monospace: "SF Mono", "Roboto Mono", monospace;
-$font-icon: "Material Icons";
+$font-icon: "Material Symbols Outlined";
 
 /* ---- ---- ---- ---- */
 
 $global-border-size: 2px;
-$global-border-radius: 2px;
+$global-border-radius: 4px;
 
 $global-font: 14px/1em $font-standard;
 

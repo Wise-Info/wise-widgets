@@ -1,0 +1,43 @@
+$size-base: 8px;
+
+h1, h2, h3{
+  margin: calc($size-base * 2) 0;
+}
+
+h4, h5, h6{
+  margin: $size-base 0;
+}
+
+h1{
+  font-size:   calc($size-base * 3.5);  // 28px
+  line-height: calc($size-base * 6);    // 48px, 28 / 48 = 0.58333333333
+}
+
+h2{
+  font-size:   calc($size-base * 3);    // 24px
+  line-height: calc($size-base * 5);    // 40px, 24 / 40 = 0.6
+}
+
+h3{
+  font-size:   calc($size-base * 2.5);  // 20px
+  line-height: calc($size-base * 4);    // 32px, 20 / 32 = 0.625
+}
+
+h4{
+  font-size:   calc($size-base * 2);    // 16px
+  line-height: calc($size-base * 3);    // 24px, 16 / 24 = 0.66666666667
+}
+
+h5, h6{
+  font-size:   calc($size-base * 1.75); // 14px
+  line-height: calc($size-base * 2.5);  // 20px, 14 / 20 = 0.7
+}
+
+hgroup{
+
+}
+
+p {
+  margin: $size-base 0;
+  line-height: calc($size-base * 2.5);  // 20px, 14 / 20 = 0.7
+}
