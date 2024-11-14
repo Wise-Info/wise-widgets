@@ -12,12 +12,6 @@
 
   import { Aside, HeaderBar } from './components/layout';
 
-  // import { WidgetWatermark } from '../components';
-
-  // WidgetWatermark.add({
-  //   watermark: 'lane.zhao@nio.io',
-  // });
-
   const route = useRoute();
 
   const frameFree = [];

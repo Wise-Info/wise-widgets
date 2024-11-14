@@ -19,12 +19,14 @@
   "type": "module",
   "main": "index.js",
   "imports": {
-    "@wiseinfo/wise-widgets": "./components/index.ts"
+    "@wiseinfo/wise-widgets": "./components/index.ts",
+    "@componests": "./docs-src/components"
   },
   "scripts": {
     "dev": "vite --config vite.config.docs.js",
     "build:lib": "vue-tsc --noEmit && vite build",
-    "build:docs": "dotenv -e .env.docs vite build --config vite.config.docs.js"
+    "build:docs": "dotenv -e .env.docs vue-tsc -b && vite build --config vite.config.docs.js",
+    "preview": "vite preview --config vite.config.docs.js"
   },
   "dependencies": {
     "@fontsource/material-symbols-outlined": "^5.1.3",

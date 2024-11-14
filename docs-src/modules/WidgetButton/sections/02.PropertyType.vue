@@ -1,17 +1,9 @@
 <template>
   <section class="section">
     <hgroup class="section__title">
-      <h4>Property [ type ]</h4>
-      <span class="property-enums">
-        <span
-          v-for="(e, i) in WidgetButton.props.type.enums"
-          :key="i"
-          :class="{
-            default: WidgetButton.props.type.default === e,
-          }">
-          {{ e }}
-        </span>
-      </span>
+      <PropEnums
+        widget="WidgetButton"
+        prop="type" />
     </hgroup>
     <WidgetGroup>
       <WidgetButton
@@ -37,4 +29,5 @@
 </template>
 <script setup lang="ts">
   import { WidgetButton } from '@wiseinfo/wise-widgets';
+  import { PropEnums } from '@components';
 </script>

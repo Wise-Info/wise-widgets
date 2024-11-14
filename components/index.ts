@@ -1,11 +1,16 @@
-import { createApp, App, Component } from 'vue';
-import { Widgets } from './useWidgets';
-import * as widgetCollection from './widgets';
-import 'normalize.css';
+import { createApp } from 'vue';
+
+import type { App, Component } from 'vue';
+
+import { Widgets } from './useWidgets/index.ts';
+
+import * as widgetCollection from './widgets.ts';
+
 import '@fontsource/material-symbols-outlined';
+import 'normalize.css';
 import './styles/main.scss';
 
-export * from './widgets';
+export * from './widgets.ts';
 
 export default (app: App) => {
   if (!document.getElementById('widgets')) {

@@ -18,21 +18,26 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       input: {
-        demos: 'demos-src/index.html',
+        docs: './docs-src/index.html',
       },
     },
   },
+  preview: {
+    open: true,
+    port: 4040,
+  },
   resolve: {
     alias: {
+      '@wiseinfo/wise-widgets': fileURLToPath(new URL('./components/index.ts', import.meta.url)),
       '@': fileURLToPath(new URL('./docs-src', import.meta.url)),
-      '@wiseinfo/wise-widgets': fileURLToPath(new URL('./components', import.meta.url)),
+      '@components': fileURLToPath(new URL('./docs-src/components/index.ts', import.meta.url)),
     },
   },
   plugins: [
     vue(),
     vueDevTools(),
     createSvgIconsPlugin({
-      iconDirs: [fileURLToPath(new URL('/docs-src/assets/svg', import.meta.url))],
+      iconDirs: [fileURLToPath(new URL('./docs-src/assets/svg', import.meta.url))],
       symbolId: '[dir]-[name]',
     }),
   ],

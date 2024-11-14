@@ -1,10 +1,10 @@
 import { createApp } from 'vue';
 
-// import 'virtual:svg-icons-register';
+import 'virtual:svg-icons-register';
 
-import widgets from '../components/index.ts';
+import widgets from '@wiseinfo/wise-widgets';
 
-import * as widgetCollection from '../components/index.ts';
+// import * as widgetCollection from '@wiseinfo/wise-widgets';
 
 import routers from './routers.js';
 

@@ -6,8 +6,8 @@
   </WidgetGroup>
 </template>
 <script lang="ts">
-  import { WidgetGroup, WidgetGroupEnums, WidgetGroupProps } from '../WidgetGroup';
-  import { WidgetButton, WidgetButtonProps } from '../WidgetButton';
+  import { WidgetGroup, WidgetGroupEnums, WidgetGroupProps } from '../WidgetGroup/index.ts';
+  import WidgetButton, { WidgetButtonProps } from './WidgetButton.vue';
 
   export interface WidgetButtonGroupProps extends WidgetGroupProps {
     items: WidgetButtonProps[];
