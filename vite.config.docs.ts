@@ -7,6 +7,7 @@ import vueDevTools from 'vite-plugin-vue-devtools';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 
 export default defineConfig({
+  base: './',
   root: './docs-src',
   server: {
     open: true,
