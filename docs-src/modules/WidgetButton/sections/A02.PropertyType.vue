@@ -28,6 +28,6 @@
   </section>
 </template>
 <script setup lang="ts">
-  import { WidgetButton } from '@wiseinfo/wise-widgets';
-  import { PropEnums } from '@components';
+import { WidgetButton } from '@wiseinfo/wise-widgets';
+import { PropEnums } from '@components';
 </script>

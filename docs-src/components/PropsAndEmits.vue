@@ -45,97 +45,96 @@
   </section>
 </template>
 <script setup>
-  import { computed } from 'vue';
+import { computed } from 'vue';
 
-  const props = defineProps({
-    widget: {
-      type: Object,
-      required: true,
-    },
-  });
+const props = defineProps({
+  widget: {
+    type: Object,
+    required: true,
+  },
+});
 
-  // eslint-disable-next-line no-underscore-dangle
-  const widgetName = computed(() => props.widget.__name);
+const widgetName = computed(() => props.widget.__name);
 
-  const widgetProps =
-    props.widget.props &&
-    Object.entries(props.widget.props).map(([name, value]) => ({
-      name,
-      type: Array.isArray(value.type)
-        ? `[${value.type.map((type) => type.name).join(' | ')}]`
-        : value.type.name,
-      default: value.default,
-      enums: value.enum,
-    }));
+const widgetProps =
+  props.widget.props &&
+  Object.entries(props.widget.props).map(([name, value]) => ({
+    name,
+    type: Array.isArray(value.type)
+      ? `[${value.type.map((type) => type.name).join(' | ')}]`
+      : value.type.name,
+    default: value.default,
+    enums: value.enum,
+  }));
 
-  const widgetEmits =
-    props.widget.emits &&
-    Object.entries(props.widget.emits).map(([, name]) => ({
-      name,
-    }));
+const widgetEmits =
+  props.widget.emits &&
+  Object.entries(props.widget.emits).map(([, name]) => ({
+    name,
+  }));
 </script>
 
 <style lang="scss">
-  .prop,
-  .emit {
-    display: inline-block;
-    margin: 0 $size-base * 2 0 0;
+.prop,
+.emit {
+  display: inline-block;
+  margin: 0 $size-base * 2 0 0;
 
-    &__name {
-      font-weight: bold;
+  &__name {
+    font-weight: bold;
+  }
+
+  &__type {
+    font-style: italic;
+
+    &::before {
+      content: ' :';
     }
+  }
 
-    &__type {
-      font-style: italic;
+  &__default {
+    color: var(--color-major);
+    font-weight: bold;
 
-      &::before {
-        content: ' :';
-      }
+    &::before {
+      content: ' :';
     }
+  }
 
-    &__default {
-      color: var(--color-major);
-      font-weight: bold;
+  &__enum {
+    color: var(--color-major);
 
-      &::before {
-        content: ' :';
-      }
-    }
-
-    &__enum {
-      color: var(--color-major);
-
-      &::before {
-        content: ' [ ';
-      }
-
-      &::after {
-        content: ' ] ';
-      }
-
-      b,
-      span {
-        &::after {
-          content: ' , ';
-          font-weight: normal;
-        }
-        &:last-child::after {
-          content: '';
-        }
-      }
+    &::before {
+      content: ' [ ';
     }
 
     &::after {
-      content: ' , ';
+      content: ' ] ';
     }
 
-    &:last-of-type::after {
-      content: '';
-    }
-
-    &s {
-      margin: 0 0 0 $size-base * 4;
-      line-height: $size-base * 4;
+    b,
+    span {
+      &::after {
+        content: ' , ';
+        font-weight: normal;
+      }
+      &:last-child::after {
+        content: '';
+      }
     }
   }
+
+  &::after {
+    content: ' , ';
+  }
+
+  &:last-of-type::after {
+    content: '';
+  }
+
+  &s {
+    margin: 0 0 0 $size-base * 4;
+    line-height: $size-base * 4;
+  }
+}
 </style>

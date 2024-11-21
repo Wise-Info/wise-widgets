@@ -5,13 +5,10 @@
     </hgroup>
 
     <WidgetButton label="Button" />
-
-    <WidgetCode>
-      {{`
-      <WidgetButton label="Button" />
-      `}}
-    </WidgetCode>
+    <code style="margin: 0 0 0 40px"> {{`<WidgetButton label="Button" />`}}</code>
   </section>
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+// export const viewTitle = 'WidgetButton';
+</script>

@@ -1,7 +1,9 @@
 <template>
   <section class="section">
     <hgroup class="section__title">
-      <h4>Property [ <span class="highlight">State</span> ]</h4>
+      <PropEnums
+        widget="WidgetButton"
+        prop="state" />
     </hgroup>
     <WidgetGroup>
       <WidgetButton label="Normal" />
@@ -46,15 +48,18 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue';
+import { ref } from 'vue';
 
-  const isRunning = ref(false);
+import { WidgetButton } from '@wiseinfo/wise-widgets';
+import { PropEnums } from '@components';
 
-  const run = () => {
-    isRunning.value = true;
+const isRunning = ref(false);
 
-    setTimeout(() => {
-      isRunning.value = false;
-    }, 2000);
-  };
+const run = () => {
+  isRunning.value = true;
+
+  setTimeout(() => {
+    isRunning.value = false;
+  }, 2000);
+};
 </script>

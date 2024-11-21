@@ -7,17 +7,17 @@
 </template>
 
 <script setup>
-  import { computed } from 'vue';
-  import { useRoute } from 'vue-router';
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 
-  import { Aside, HeaderBar } from './components/layout';
+import { Aside, HeaderBar } from './components/layout';
 
-  const route = useRoute();
+const route = useRoute();
 
-  const frameFree = [];
+const frameFree = [];
 
-  const isFrameFree = computed(() => frameFree.includes(route.name));
+const isFrameFree = computed(() => frameFree.includes(route.name));
 </script>
 <style lang="scss">
-  @import './styles/main.scss';
+@import './styles/main.scss';
 </style>

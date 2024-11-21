@@ -1,8 +1,9 @@
-import { ref, Ref } from 'vue';
+import { ref } from 'vue';
+import type { Ref } from 'vue';
 import { uid } from 'uid';
 
 interface WidgetProps {
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 interface Widget {

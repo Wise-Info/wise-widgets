@@ -18,6 +18,11 @@ $font-icon: "Material Symbols Outlined";
 $global-border-size: 2px;
 $global-border-radius: 4px;
 
+:root {
+  --global-border-size: #{$global-border-size};
+  --global-border-radius: #{$global-border-radius};
+}
+
 $global-font: 14px/1em $font-standard;
 
 $disabled-text-decoration: none; // line-through;
@@ -33,11 +38,3 @@ $z-index-modal:          1050;
 $z-index-popover:        1060;
 $z-index-tooltip:        1070;
 
-/* ---- ---- ---- ---- */
-// Global Layout
-$header-bar-height: $size-base * 6;
-$footer-bar-height: $size-base * 4;
-
-// spacing
-$spacing-x: $size-base * 2;
-$spacing-y: $size-base * 2;

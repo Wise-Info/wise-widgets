@@ -1,10 +1,9 @@
 <template>
   <section class="section">
     <hgroup class="section__title">
-      <h4>
-        Property [ <span class="highlight">size</span> ] : atom , micro , mini ,
-        <span class="default">normal</span> , large , extra
-      </h4>
+      <PropEnums
+        widget="WidgetButton"
+        prop="size" />
     </hgroup>
     <WidgetGroup>
       <WidgetButton
@@ -55,4 +54,7 @@
   </section>
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+import { WidgetButton } from '@wiseinfo/wise-widgets';
+import { PropEnums } from '@components';
+</script>

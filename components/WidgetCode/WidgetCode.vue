@@ -10,14 +10,14 @@
 </template>
 
 <script setup lang="ts">
-  import hljsVuePlugin from '@highlightjs/vue-plugin';
+// import hljsVuePlugin from '@highlightjs/vue-plugin';
 
-  const highlightjs = hljsVuePlugin.component;
+// const highlightjs = hljsVuePlugin.component;
 
-  defineProps({
-    code: {
-      type: String,
-      default: '',
-    },
-  });
+defineProps({
+  code: {
+    type: String,
+    default: '',
+  },
+});
 </script>

@@ -2,11 +2,11 @@ import type { DefineComponent } from 'vue';
 
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 
-import { routers } from './routes';
+import { routers } from './routes.ts';
 
 import Demo from './components/Demo.vue';
 
-const modules: Record<string, { default: DefineComponent }> = import.meta.glob(
+const modules: Record<string, { default: DefineComponent; viewTitle?: string }> = import.meta.glob(
   './modules/**/sections/*.vue',
   { eager: true },
 );
@@ -14,10 +14,12 @@ const modules: Record<string, { default: DefineComponent }> = import.meta.glob(
 const moduleSections = Object.entries(modules).reduce(
   (acc, [path, module]) => {
     const match = path.match(
-      /\.\/modules\/(?<module>[\w]+)\/sections\/(?<order>[\d]+)\.(?<section>[^/]+).vue$/,
+      /\.\/modules\/(?<module>[\w]+)\/sections\/(?<group>[A-F]*)(?<order>[\d]+)\.(?<section>[^/]+).vue$/,
     );
     if (match && match.groups)
       (acc[match.groups.module] ||= []).push({
+        group: match.groups.group || 'A',
+        viewTitle: module.viewTitle,
         index: parseInt(match.groups.order, 10),
         name: match.groups.section.replace(/((?<!^)[A-Z])/g, (_, c) => ` ${c}`),
         component: module.default,
@@ -27,6 +29,8 @@ const moduleSections = Object.entries(modules).reduce(
   {} as Record<
     string,
     Array<{
+      group: string;
+      viewTitle?: string;
       index: number;
       name: string;
       component: DefineComponent;

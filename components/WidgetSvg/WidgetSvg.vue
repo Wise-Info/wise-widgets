@@ -10,26 +10,26 @@
 </template>
 
 <script setup lang="ts">
-  defineProps({
-    svg: {
-      type: String,
-      required: true,
-    },
-    label: {
-      type: String,
-      default: '',
-    },
-    width: {
-      type: Number,
-      default: 24,
-    },
-    height: {
-      type: Number,
-      default: 24,
-    },
-    auto: {
-      type: Boolean,
-      default: false,
-    },
-  });
+defineProps({
+  svg: {
+    type: String,
+    required: true,
+  },
+  label: {
+    type: String,
+    default: '',
+  },
+  width: {
+    type: Number,
+    default: 24,
+  },
+  height: {
+    type: Number,
+    default: 24,
+  },
+  auto: {
+    type: Boolean,
+    default: false,
+  },
+});
 </script>

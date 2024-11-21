@@ -1,10 +1,9 @@
 <template>
   <section class="section">
     <hgroup class="section__title">
-      <h4>Property [ shape ]</h4>
-      <span class="property-enums">
-        <span class="default">rectangle</span> , rounded , capsule , line
-      </span>
+      <PropEnums
+        widget="WidgetButton"
+        prop="shape" />
     </hgroup>
     <WidgetGroup>
       <WidgetButton
@@ -40,3 +39,8 @@
     </WidgetGroup>
   </section>
 </template>
+
+<script setup lang="ts">
+import { WidgetButton } from '@wiseinfo/wise-widgets';
+import { PropEnums } from '@components';
+</script>

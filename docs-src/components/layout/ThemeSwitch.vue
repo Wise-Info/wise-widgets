@@ -27,88 +27,88 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+import { ref } from 'vue';
 
-  type Theme = 'light' | 'dark' | 'auto';
+type Theme = 'light' | 'dark' | 'auto';
 
-  const html = document.documentElement;
+const html = document.documentElement;
 
-  const theme = ref<Theme>('auto');
+const theme = ref<Theme>('auto');
 
-  const switchTheme = (targetTheme: Theme = 'auto') => {
-    (document.activeElement as HTMLElement)?.blur();
-    theme.value = targetTheme;
-    localStorage.setItem('theme', targetTheme);
-    switch (targetTheme) {
-      case 'light':
-        html.classList.remove('dark');
-        html.classList.add('light');
-        break;
-      case 'dark':
-        html.classList.remove('light');
-        html.classList.add('dark');
-        break;
-      case 'auto':
-        html.classList.remove('dark', 'light');
-        break;
-    }
-  };
+const switchTheme = (targetTheme: Theme = 'auto') => {
+  (document.activeElement as HTMLElement)?.blur();
+  theme.value = targetTheme;
+  localStorage.setItem('theme', targetTheme);
+  switch (targetTheme) {
+    case 'light':
+      html.classList.remove('dark');
+      html.classList.add('light');
+      break;
+    case 'dark':
+      html.classList.remove('light');
+      html.classList.add('dark');
+      break;
+    case 'auto':
+      html.classList.remove('dark', 'light');
+      break;
+  }
+};
 
-  switchTheme(localStorage.getItem('theme') as Theme);
+switchTheme(localStorage.getItem('theme') as Theme);
 
-  setTimeout(() => {
-    html.style.setProperty('--theme-switch-duration', '1s');
-  }, 1200);
+setTimeout(() => {
+  html.style.setProperty('--theme-switch-duration', '1s');
+}, 1200);
 </script>
 
 <style lang="scss">
-  .theme-switch {
-    $this: &;
+.theme-switch {
+  $this: &;
 
-    position: relative;
-    display: block;
-    flex-shrink: 0;
-    width: $size-base * 4;
-    height: $size-base * 4;
-    margin: $size-base ($size-base * 2) $size-base 0;
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  width: $size-base * 4;
+  height: $size-base * 4;
+  margin: $size-base ($size-base * 2) $size-base 0;
 
-    &:focus-within,
-    &:hover {
-      #{$this}__menu {
-        height: auto;
-      }
-    }
-
-    &__menu {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      padding: 0;
-      margin: 0;
-      // background-color: var(--global-background-color);
-      backdrop-filter: blur($size-base * 0.5);
-      transition: background-color var(--theme-switch-duration);
-    }
-
-    &__menu-item {
-      display: block;
-      margin: calc($size-base / 2);
-      outline: none;
-      cursor: pointer;
-
-      transition: color 400ms;
-
-      &:focus,
-      &:hover {
-        color: var(--color-major);
-      }
-
-      &.active {
-        order: -1;
-      }
+  &:focus-within,
+  &:hover {
+    #{$this}__menu {
+      height: auto;
     }
   }
+
+  &__menu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    // background-color: var(--global-background-color);
+    backdrop-filter: blur($size-base * 0.5);
+    transition: background-color var(--theme-switch-duration);
+  }
+
+  &__menu-item {
+    display: block;
+    margin: calc($size-base / 2);
+    outline: none;
+    cursor: pointer;
+
+    transition: color 400ms;
+
+    &:focus,
+    &:hover {
+      color: var(--color-major);
+    }
+
+    &.active {
+      order: -1;
+    }
+  }
+}
 </style>

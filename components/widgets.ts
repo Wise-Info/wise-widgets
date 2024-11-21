@@ -1,9 +1,38 @@
-export * from './WidgetIcon/index';
-export * from './WidgetSvg/index';
-export * from './WidgetButton/index';
+export * from './WidgetIcon/index.ts';
+export * from './WidgetSvg/index.ts';
+export * from './WidgetButton/index.ts';
+export * from './WidgetGroup/index.ts';
+export * from './WidgetCode/index.ts';
 
-export * from './WidgetGroup/index';
+const modules = import.meta.glob('./Widget*/index.ts', { eager: true });
 
-export * from './WidgetCode/index';
+interface Modules {
+  [key: string]: {
+    [key: string]: {
+      install?: () => void;
+      [key: string]: unknown;
+    };
+  };
+}
 
-import * as WidgetButton from './WidgetButton/index';
+interface Accumulator {
+  widgets: Record<string, unknown>;
+  enums: Record<string, unknown>;
+}
+
+const { widgets, enums } = Object.entries(modules as Modules).reduce<Accumulator>(
+  (acc, [, module]) => {
+    Object.entries(module).forEach(([name, object]) => {
+      if (object.install) {
+        acc.widgets[name] = object;
+      }
+      if (name.endsWith('Enums')) {
+        Object.assign(acc.enums, object);
+      }
+    });
+    return acc;
+  },
+  { widgets: {}, enums: {} },
+);
+
+export { widgets, enums };

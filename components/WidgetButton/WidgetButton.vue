@@ -6,8 +6,9 @@
       [shape]: shape !== 'rectangle',
       [size]: size !== 'normal',
       [state]: state !== 'normal',
-      [usage]: usage !== 'normal',
       disabled: disabled || state === 'disabled',
+      [usage]: usage !== 'normal',
+      error: error || usage === 'error',
       block: block,
       'icon-only': iconOnly,
     }"
@@ -21,7 +22,9 @@
         'widget-button__running-icon': state === 'running',
       }"
       v-bind="localIcon" />
-    <span class="widget-button__label">
+    <span
+      class="widget-button__label"
+      :style="{ textTransform } as StyleValue">
       <template v-if="Boolean(label)">
         {{ label }}
       </template>
@@ -31,98 +34,116 @@
 </template>
 
 <script lang="ts">
-  const enums = {
-    type: ['text', 'minor', 'major', 'reset', 'button', 'submit'],
-    shape: ['rectangle', 'rounded', 'capsule', 'line'],
-    size: ['extra', 'large', 'normal', 'mini', 'micro', 'atom'],
-    state: ['normal', 'active', 'running', 'disabled'],
-    usage: ['mute', 'normal', 'warning', 'danger', 'error'],
-  };
+import type { StyleValue } from 'vue';
 
-  export const WidgetButtonEnums = enums;
+const enums = {
+  type: ['text', 'minor', 'major', 'reset', 'button', 'submit'],
+  shape: ['rectangle', 'rounded', 'capsule', 'line'],
+  size: ['extra', 'large', 'normal', 'mini', 'micro', 'atom'],
+  state: ['normal', 'active', 'running', 'disabled'],
+  usage: ['mute', 'normal', 'warning', 'danger', 'error'],
+  textTransform: ['capitalize', 'lowercase', 'uppercase'],
+};
 
-  type WidgetButtonType = (typeof enums.type)[number];
-  type WidgetButtonShape = (typeof enums.shape)[number];
-  type WidgetButtonSize = (typeof enums.size)[number];
-  type WidgetButtonState = (typeof enums.state)[number];
-  type WidgetButtonUsage = (typeof enums.usage)[number];
+export const WidgetButtonEnums = enums;
 
-  export interface WidgetButtonProps {
-    label?: string;
-    type?: WidgetButtonType;
-    shape?: WidgetButtonShape;
-    size?: WidgetButtonSize;
-    block?: boolean;
-    state?: WidgetButtonState;
-    disabled?: boolean;
-    usage?: WidgetButtonUsage;
-    icon?: string | WidgetIconProps;
-    iconOnly?: boolean;
-  }
+type WidgetButtonType = (typeof enums.type)[number];
+type WidgetButtonShape = (typeof enums.shape)[number];
+type WidgetButtonSize = (typeof enums.size)[number];
+type WidgetButtonState = (typeof enums.state)[number];
+type WidgetButtonUsage = (typeof enums.usage)[number];
+type WidgetButtonTextTransform = (typeof enums.textTransform)[number];
+
+export interface WidgetButtonProps {
+  label?: string;
+  type?: WidgetButtonType;
+  shape?: WidgetButtonShape;
+  size?: WidgetButtonSize;
+  block?: boolean;
+  state?: WidgetButtonState;
+  disabled?: boolean;
+  usage?: WidgetButtonUsage;
+  error?: boolean;
+  icon?: string | WidgetIconProps;
+  iconOnly?: boolean;
+  textTransform?: WidgetButtonTextTransform | string;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+  events?: Record<string, Function>;
+}
 </script>
 
 <script setup lang="ts">
-  import { computed } from 'vue';
-  import { WidgetIcon, WidgetIconProps } from '../WidgetIcon';
+import { computed } from 'vue';
+import { WidgetIcon, WidgetIconProps } from '../WidgetIcon/index.ts';
 
-  const props = defineProps({
-    label: {
-      type: String,
-      default: '',
-    },
-    type: {
-      type: String,
-      default: 'button',
-      enums: enums.type,
-      validator: (type: string) => enums.type.includes(type),
-    },
-    shape: {
-      type: String,
-      default: 'rectangle',
-      enums: enums.shape,
-      validator: (shape: string) => enums.shape.includes(shape),
-    },
-    size: {
-      type: String,
-      default: 'normal',
-      enums: enums.size,
-      validator: (size: string) => enums.size.includes(size),
-    },
-    block: {
-      type: Boolean,
-      default: false,
-    },
-    state: {
-      type: String,
-      default: 'normal',
-      enums: enums.state,
-      validator: (state: string) => enums.state.includes(state),
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-    usage: {
-      type: String,
-      default: 'normal',
-      enums: enums.usage,
-      validator: (usage: string) => enums.usage.includes(usage),
-    },
-    icon: {
-      type: [String, Object],
-      default: undefined,
-    },
-    iconOnly: {
-      type: Boolean,
-      default: false,
-    },
-  });
+const props = defineProps({
+  label: {
+    type: String,
+    default: '',
+  },
+  type: {
+    type: String,
+    default: 'button',
+    enums: enums.type,
+    validator: (type: string) => enums.type.includes(type),
+  },
+  shape: {
+    type: String,
+    default: 'rectangle',
+    enums: enums.shape,
+    validator: (shape: string) => enums.shape.includes(shape),
+  },
+  size: {
+    type: String,
+    default: 'normal',
+    enums: enums.size,
+    validator: (size: string) => enums.size.includes(size),
+  },
+  block: {
+    type: Boolean,
+    default: false,
+  },
+  state: {
+    type: String,
+    default: 'normal',
+    enums: enums.state,
+    validator: (state: string) => enums.state.includes(state),
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  usage: {
+    type: String,
+    default: 'normal',
+    enums: enums.usage,
+    validator: (usage: string) => enums.usage.includes(usage),
+  },
+  error: {
+    type: Boolean,
+    default: false,
+  },
+  icon: {
+    type: [String, Object],
+    default: undefined,
+  },
+  iconOnly: {
+    type: Boolean,
+    default: false,
+  },
+  textTransform: {
+    type: String,
+    default: undefined,
+    enums: enums.textTransform,
+    validator: (textTransform: string) => enums.textTransform.includes(textTransform),
+  },
+});
 
-  const localIcon = computed((): WidgetIconProps => {
-    return props.state === 'running'
-      ? { icon: 'e863' }
-      : typeof props.icon === 'string'
-        ? { icon: props.icon }
-        : (props.icon as WidgetIconProps);
-  });
+const localIcon = computed((): WidgetIconProps => {
+  return props.state === 'running'
+    ? { icon: 'e863' }
+    : typeof props.icon === 'string'
+      ? { icon: props.icon }
+      : (props.icon as WidgetIconProps);
+});
 </script>

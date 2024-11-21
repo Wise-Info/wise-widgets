@@ -39,6 +39,7 @@ $size-extra:  $size-base * 6; // 48px
   --size-large:  calc(var(--size-base) * 5); // 40px
   --size-extra:  calc(var(--size-base) * 6); // 48px
 
+  --gap-0: 0;
   --gap-1: var(--size-base);
   --gap-2: calc(var(--size-base) * 2);
   --gap-3: calc(var(--size-base) * 3);

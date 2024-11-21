@@ -1,4 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable import/no-unresolved */
 import globals from 'globals';
 import pluginJs from '@eslint/js';
 import pluginTs from 'typescript-eslint';

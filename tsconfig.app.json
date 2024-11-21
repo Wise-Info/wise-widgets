@@ -22,13 +22,15 @@
     "noFallthroughCasesInSwitch": true,
 
     "paths": {
-      "@wiseinfo/wise-widgets": ["./components/index.ts"]
-    },
+      "@wiseinfo/wise-widgets": ["./components/index.ts"],
+      "@components": ["./docs-src/components/index.ts"]
+    }
   },
   "include": [
     "components/**/*.ts",
     "components/**/*.vue",
     "docs-src/**/*.ts",
-    "docs-src/**/*.vue"
+    "docs-src/**/*.vue",
+    "docs-src/components/layout/index.js"
   ]
 }

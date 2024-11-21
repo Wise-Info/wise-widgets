@@ -8,8 +8,8 @@
   </template>
 </template>
 <script setup lang="ts">
-  import { useWidgets } from './useWidgets.js';
-  import * as widgets from '../widgets.js';
+import { useWidgets } from './useWidgets.ts';
+import { widgets } from '../widgets.ts';
 
-  const widgetArray = useWidgets();
+const widgetArray = useWidgets();
 </script>
