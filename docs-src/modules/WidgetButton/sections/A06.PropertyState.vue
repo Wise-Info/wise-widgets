@@ -35,7 +35,7 @@
         label="Disabled" />
     </WidgetGroup>
     <br /><br />
-    <WidgetGroup label="Try It:">
+    <WidgetGroup label="Try It">
       <WidgetButton
         type="major"
         size="large"
@@ -47,7 +47,7 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 
 import { WidgetButton } from '@wiseinfo/wise-widgets';

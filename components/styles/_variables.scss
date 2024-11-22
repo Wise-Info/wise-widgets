@@ -1,17 +1,12 @@
 @import './colors';
 
+@import './fonts';
+
 @import './sizes';
 
-@import 'typography';
+@import './typography';
 
 @import './responsive';
-
-/* ---- ---- ---- ---- */
-// Font
-$font-standard: "SF Pro", "Open Sans Regular", "PingFang SC", "Microsoft YaHei", sans-serif;
-$font-condensed: "SF Compact", "Open Sans Condensed", "PingFang SC", "Microsoft YaHei", sans-serif;
-$font-monospace: "SF Mono", "Roboto Mono", monospace;
-$font-icon: "Material Symbols Outlined";
 
 /* ---- ---- ---- ---- */
 
@@ -22,10 +17,6 @@ $global-border-radius: 4px;
   --global-border-size: #{$global-border-size};
   --global-border-radius: #{$global-border-radius};
 }
-
-$global-font: 14px/1em $font-standard;
-
-$disabled-text-decoration: none; // line-through;
 
 
 /* ---- ---- ---- ---- */

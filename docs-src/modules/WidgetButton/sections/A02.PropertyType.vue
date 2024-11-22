@@ -25,6 +25,22 @@
         type="submit"
         label="Submit" />
     </WidgetGroup>
+    <br /><br /><br /><br />
+    <WidgetCard
+      class="active"
+      style="width: 400px; height: 160px">
+      <p>I am an example.</p>
+      <br /><br /><br /><br />
+      <WidgetGroup direction="row-reverse">
+        <WidgetButton
+          type="major"
+          icon="e541"
+          label="Coffee Time" />
+        <WidgetButton
+          type="text"
+          label="Cancel" />
+      </WidgetGroup>
+    </WidgetCard>
   </section>
 </template>
 <script setup lang="ts">

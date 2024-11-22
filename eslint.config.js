@@ -8,6 +8,7 @@ import pluginVue from 'eslint-plugin-vue';
 import pluginPrettierRecommendedConfigs from 'eslint-plugin-prettier/recommended';
 
 export default [
+  { ignorePatterns: ['dist/', 'docs', 'node_modules/'] },
   {
     languageOptions: {
       globals: {

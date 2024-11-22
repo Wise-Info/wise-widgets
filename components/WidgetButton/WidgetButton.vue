@@ -36,12 +36,14 @@
 <script lang="ts">
 import type { StyleValue } from 'vue';
 
+import { enumUsage } from '../enums.ts';
+
 const enums = {
   type: ['text', 'minor', 'major', 'reset', 'button', 'submit'],
   shape: ['rectangle', 'rounded', 'capsule', 'line'],
   size: ['extra', 'large', 'normal', 'mini', 'micro', 'atom'],
-  state: ['normal', 'active', 'running', 'disabled'],
-  usage: ['mute', 'normal', 'warning', 'danger', 'error'],
+  state: ['normal', 'active', 'running', 'disabled', 'error'],
+  usage: enumUsage,
   textTransform: ['capitalize', 'lowercase', 'uppercase'],
 };
 

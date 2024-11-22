@@ -3,36 +3,36 @@
     <hgroup class="section__title">
       <PropEnums
         widget="WidgetButtonGroup"
-        prop="gap" />
+        prop="direction" />
     </hgroup>
-    <div class="gap-group">
-      <div class="gap">
-        <label>gap-0</label>
+    <div style="display: flex; flex-direction: column; gap: 16px">
+      <div>
         <WidgetButtonGroup
           :items="items"
-          gap="0" />
+          label="row" />
       </div>
-      <div class="gap">
-        <label>gap-1</label>
-        <WidgetButtonGroup :items="items" />
-      </div>
-      <div class="gap">
-        <label>gap-2</label>
+      <hr />
+      <div>
         <WidgetButtonGroup
           :items="items"
-          gap="2" />
+          label="row-reverse"
+          direction="row-reverse" />
       </div>
-      <div class="gap">
-        <label>gap-3</label>
+      <hr />
+      <div>
         <WidgetButtonGroup
           :items="items"
-          gap="3" />
+          label="column"
+          direction="column"
+          inline />
       </div>
-      <div class="gap">
-        <label>gap-4</label>
+      <hr />
+      <div>
         <WidgetButtonGroup
           :items="items"
-          gap="4" />
+          label="column-reverse"
+          direction="column-reverse"
+          inline />
       </div>
     </div>
   </section>
@@ -54,23 +54,4 @@ const items = [
 ];
 </script>
 
-<style lang="scss" scoped>
-.gap {
-  display: flex;
-
-  &-group {
-    display: flex;
-    flex-direction: column;
-    gap: $size-base * 2;
-  }
-
-  label {
-    margin: 0 ($size-base * 2) 0 0;
-    line-height: $size-base * 4;
-
-    &::after {
-      content: ' : ';
-    }
-  }
-}
-</style>
+<style lang="scss" scoped></style>

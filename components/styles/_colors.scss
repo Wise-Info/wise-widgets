@@ -42,7 +42,7 @@ $color-city-lights:         #DFE6E9;
 
 
 $color-major: $color-electron-blue; // temp
-$color-major-hover: $color-green-darner-tail; // temp
+$color-major-toggle: $color-green-darner-tail; // temp
 
 $color-minor: $color-gray-40;
 
@@ -51,7 +51,9 @@ $color-minor: $color-gray-40;
   --color-major-toggle: #{$color-shy-moment};
 
   --color-minor: #{$color-gray-60};
-  --color-minor-toggle: var(--color-major-hover);
+  --color-minor-toggle: var(--color-major-toggle);
+
+  --color-mute: #{$color-gray-40};
 
   --color-inactive: var(--color-gray-40);
   --color-active: var(--color-major);
@@ -80,9 +82,6 @@ $color-minor: $color-gray-40;
   --color-gray-f:   #{$color-gray-f};   --color-light:   #{$color-light};
   --color-lightest: #{$color-lightest};
 
-  --color-minor: #{$color-gray-40};
-  --color-minor-hover: #{$color-gray-20};
-
   --global-background-color: #{$color-light};
   --global-font-color: #{$color-gray-80};
 
@@ -103,9 +102,6 @@ $color-minor: $color-gray-40;
   --color-gray-e:   #{$color-gray-3};   --color-gray-10: #{$color-gray-80};
   --color-gray-f:   #{$color-gray-1};   --color-light:   #{$color-dark};
   --color-lightest: #{$color-darkest};
-
-  --color-minor: #{$color-gray-40};
-  --color-minor-hover: #{$color-gray-60};
 
   --global-background-color: #{$color-dark};
   --global-font-color: #{$color-gray-20};

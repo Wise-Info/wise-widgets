@@ -30,7 +30,6 @@ export default defineConfig({
       '@wiseinfo/wise-widgets': fileURLToPath(new URL('./components/index.ts', import.meta.url)),
       '@': fileURLToPath(new URL('./docs-src', import.meta.url)),
       '@components': fileURLToPath(new URL('./docs-src/components/index.ts', import.meta.url)),
-      '@components/': fileURLToPath(new URL('./docs-src/components/', import.meta.url)),
     },
   },
   plugins: [
@@ -43,7 +42,11 @@ export default defineConfig({
   ],
   css: {
     preprocessorOptions: {
-      scss: { additionalData: `@import '/docs-src/styles/variables';` },
+      scss: {
+        additionalData: `
+        @import '/docs-src/styles/variables';
+      `,
+      },
     },
   },
 });

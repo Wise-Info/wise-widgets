@@ -1,11 +1,19 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "useDefineForClassFields": true,
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "skipLibCheck": true,
     "types": ["vite/client"],
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "useDefineForClassFields": true,
+
+    /* declaration */
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "outDir": "./dist",
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -20,18 +28,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-
-    "paths": {
-      "@wiseinfo/wise-widgets": ["./components/index.ts"],
-      "@": ["./docs-src"],
-      "@components": ["./docs-src/components/index.ts"]
-    }
+    "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "components/**/*.ts",
-    "components/**/*.vue",
-    "docs-src/**/*.ts",
-    "docs-src/**/*.vue",
-    "docs-src/components/layout/index.ts"
-  ]
+  "include": ["components/**/*"],
+  "exclude": ["docs", "docs-src", "node_modules"]
 }

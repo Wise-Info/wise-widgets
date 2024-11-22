@@ -4,11 +4,12 @@
     class="header-bar">
     <Breadcrumb />
     <MainNav />
+    <!-- TODO: LanguageSwitch -->
     <ThemeSwitch />
   </header>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Breadcrumb from './Breadcrumb.vue';
 import MainNav from './MainNav.vue';
 import ThemeSwitch from './ThemeSwitch.vue';

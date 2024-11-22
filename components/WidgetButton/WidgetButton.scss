@@ -96,10 +96,10 @@
     border-color: var(--color);
   }
 
-  &.minor,
-  &.major {
-    text-decoration: none;
-  }
+  // &.minor,
+  // &.major {
+  //   text-decoration: none;
+  // }
 
   &.rounded {
     border-radius: $global-border-radius;
@@ -148,11 +148,11 @@
   }
 
   &.mute {
-    --color: var(--color-minor);
+    --color: var(--color-mute);
 
     &:hover,
     &:focus {
-      --color: var(--color-major-toggle);
+      --color: var(--color-minor-toggle);
     }
   }
 

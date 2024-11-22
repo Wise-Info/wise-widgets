@@ -1,10 +1,9 @@
 <template>
   <section class="section">
     <hgroup class="section__title">
-      <h4>
-        Property [ <span class="highlight">usage</span> ] : <span class="default">normal</span> ,
-        warning , danger
-      </h4>
+      <PropEnums
+        widget="WidgetButton"
+        prop="usage" />
     </hgroup>
     <WidgetGroup>
       <WidgetButton
@@ -38,4 +37,7 @@
   </section>
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+import { WidgetButton } from '@wiseinfo/wise-widgets';
+import { PropEnums } from '@components';
+</script>

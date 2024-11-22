@@ -28,7 +28,7 @@ const { enums, default: defaultValue } = widgets[props.widget].props[props.prop]
 
 <style lang="scss">
 .property-enums {
-  margin: $size-base 0;
+  margin: $size-base;
   font-size: $size-base * 2;
   line-height: $size-base * 3;
 

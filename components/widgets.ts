@@ -1,7 +1,11 @@
 export * from './WidgetIcon/index.ts';
 export * from './WidgetSvg/index.ts';
 export * from './WidgetButton/index.ts';
+
 export * from './WidgetGroup/index.ts';
+
+export * from './WidgetCard/index.ts';
+
 export * from './WidgetCode/index.ts';
 
 const modules = import.meta.glob('./Widget*/index.ts', { eager: true });

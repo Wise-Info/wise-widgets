@@ -1,5 +1,5 @@
 import PropEnums from './PropEnums.vue';
 
-export * from './layout/index.js';
+export * from './layout/index.ts';
 
 export { PropEnums };

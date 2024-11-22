@@ -3,6 +3,8 @@
     class="widget-group"
     :class="{
       [`gap-${gap}`]: true,
+      inline,
+      reverse: ['row-reverse', 'column-reverse'].includes(direction),
       disabled,
       error,
     }"
@@ -55,6 +57,10 @@ const props = defineProps({
     enums: WidgetGroupEnums.gap,
     validator: (gap: number | string) =>
       WidgetGroupEnums.gap.includes(typeof gap === 'number' ? gap : parseInt(gap)),
+  },
+  inline: {
+    type: Boolean,
+    default: false,
   },
   direction: {
     type: String,

@@ -6,17 +6,17 @@
   </main>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { Aside, HeaderBar } from './components/layout';
+import { Aside, HeaderBar } from '@components';
 
 const route = useRoute();
 
-const frameFree = [];
+const frameFree: string[] = [];
 
-const isFrameFree = computed(() => frameFree.includes(route.name));
+const isFrameFree = computed(() => frameFree.includes(route.path));
 </script>
 <style lang="scss">
 @import './styles/main.scss';

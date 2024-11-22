@@ -27,10 +27,18 @@
     &::after {
       content: " : ";
     }
+
+    .reverse & {
+      order: 1;
+    }
   }
 
   & + & {
     margin: var(--gap, var(--size-base)) 0 0;
+  }
+
+  &.inline {
+    display: inline-flex;
   }
 
   &.disabled {

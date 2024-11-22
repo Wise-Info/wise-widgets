@@ -1,6 +1,8 @@
 <template>
   <section class="section">
-    <h3 class="section__title">Basic Usage</h3>
+    <hgroup class="section__title">
+      <h4>Basic Usage</h4>
+    </hgroup>
 
     <div>
       <WidgetIcon

@@ -9,6 +9,10 @@
   </section>
 </template>
 
+<script lang="ts">
+export const viewTitle = 'WidgetButton';
+</script>
+
 <script setup lang="ts">
-// export const viewTitle = 'WidgetButton';
+import { WidgetButton } from '@wiseinfo/wise-widgets';
 </script>

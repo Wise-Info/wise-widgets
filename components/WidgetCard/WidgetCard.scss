@@ -1,0 +1,42 @@
+.widget-card {
+  --color: var(--color-major);
+
+  position: relative;
+
+  min-width: 400px;
+
+  min-height: 100px;
+
+  background-color: var(--color-lightest);
+  padding: calc(var(--size-base) * 2) calc(var(--size-base) * 3) calc(var(--size-base) * 2) calc(var(--size-base) * 4);
+  outline: none;
+  transition: 200ms box-shadow ease;
+
+  &.mute {
+    --color: var(--color-mute);
+  }
+  &.warning {
+    --color: var(--color-warning);
+  }
+
+  &.danger {
+    --color: var(--color-danger);
+  }
+
+  &:hover, &:focus, &.active {
+    @include rise(4);
+  }
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--size-base);
+    background-color: var(--color);
+    transition: background-color 0.4s;
+  }
+
+}

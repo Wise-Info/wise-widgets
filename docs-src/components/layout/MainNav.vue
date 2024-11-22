@@ -14,7 +14,7 @@
   </nav>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -68,7 +68,7 @@ const currentModule = computed(() => {
     color: var(--color-minor);
     &:hover,
     &:focus {
-      color: var(--color-major-hover);
+      color: var(--color-major-toggle);
     }
     &.active {
       color: var(--color-major);
