@@ -2,7 +2,7 @@ import type { DefineComponent } from 'vue';
 
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 
-import { routers } from './routes.ts';
+import { routes } from './routes.ts';
 
 import Demo from './components/Demo.vue';
 
@@ -40,7 +40,7 @@ const moduleSections = Object.entries(modules).reduce(
 
 const router = createRouter({
   history: import.meta.env.DOCS === 'true' ? createWebHashHistory() : createWebHistory(),
-  routes: [...new Set(routers)].map((path, order) => {
+  routes: [...new Set(routes)].map((path, order) => {
     const segments = path.split('/').reduce<string[]>((acc, cur) => {
       if (cur) acc.push(cur.trim());
       return acc;
@@ -66,4 +66,4 @@ const router = createRouter({
 
 export default router;
 
-export { routers };
+export { routes };

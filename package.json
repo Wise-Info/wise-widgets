@@ -20,7 +20,8 @@
   "main": "index.js",
   "imports": {
     "@wiseinfo/wise-widgets": "./components/index.ts",
-    "@componests": "./docs-src/components/index.ts"
+    "@componests": "./docs-src/components/index.ts",
+    "@routers": "./docs-src/routers.ts"
   },
   "scripts": {
     "dev": "vite --config vite.config.docs.js",

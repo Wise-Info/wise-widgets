@@ -9,7 +9,7 @@
     </li>
     <template v-for="item in breadcrumb">
       <li
-        v-if="routers.includes(item.path)"
+        v-if="routes.includes(item.path)"
         :key="item.label"
         class="breadcrumb__item">
         <router-link
@@ -28,16 +28,21 @@
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { routers } from '@/routers.ts';
+import { routes } from '@routers';
 
 const route = useRoute();
 
-const breadcrumb = computed(() =>
-  route.path.split('/').reduce((acc, cur, index, array) => {
+interface BreadcrumbItem {
+  path: string;
+  label: string;
+}
+
+const breadcrumb = computed<BreadcrumbItem[]>(() =>
+  route.path.split('/').reduce<BreadcrumbItem[]>((acc, cur, index, array) => {
     if (cur !== '') {
       acc.push({
         path: `${array.slice(0, index + 1).join('/')}`,
-        label: decodeURI(cur.split('.').pop().replace(/_/g, ' ')),
+        label: decodeURI(cur.replace(/_/g, ' ')),
       });
     }
     return acc;

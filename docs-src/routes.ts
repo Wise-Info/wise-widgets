@@ -1,4 +1,4 @@
-export const routers: string[] = [
+export const routes: string[] = [
   '/',
   '/guides',
   '/guides/how-to-use/installation',

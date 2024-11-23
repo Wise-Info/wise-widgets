@@ -46,11 +46,11 @@
         <template v-if="Object.keys(item?.children || {}).length">
           <div class="aside-nav__sub-item-menu">
             <li
-              v-for="subItem in Object.values(item.children)"
+              v-for="subItem in Object.values(item.children || {})"
               :key="subItem.meta.id"
               class="aside-nav__sub-item">
               <router-link
-                :to="subItem.path"
+                :to="subItem.path as string"
                 class="aside-nav__sub-item-link"
                 active-class="active">
                 <span class="aside-nav__sub-item-label">
@@ -73,28 +73,62 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 const routes = router.getRoutes();
 
-const asideNav = computed(() => {
+interface RouteMeta {
+  id: string;
+  parent: string;
+  parents: string[];
+  order: number;
+}
+
+interface AsideNavItem {
+  name: string;
+  path?: string;
+  meta: RouteMeta;
+  children?: AsideNav;
+}
+
+interface AsideNav {
+  [key: string]: AsideNavItem;
+}
+
+const asideNav = computed<AsideNav>(() => {
   const currentRoute = router.currentRoute.value;
-  const currentModule = currentRoute.meta.parents?.[1] || currentRoute.meta.id;
+  const currentModule = (currentRoute.meta.parents as string[])?.[1] || currentRoute.meta.id;
   return routes
-    .filter((r) => r.meta.id === currentModule || r.meta.parents?.[1] === currentModule)
-    .sort((a, b) => a.meta.order - b.meta.order)
-    .reduce((acc, cur) => {
+    .filter(
+      (r) => r.meta.id === currentModule || (r.meta.parents as string[])?.[1] === currentModule,
+    )
+    .sort((a, b) => (a.meta.order as number) - (b.meta.order as number))
+    .reduce<AsideNav>((acc, cur) => {
+      const parentId: string = cur.meta.parent as string;
+      const curId: string = cur.meta.id as string;
+      if (!parentId || !curId) return acc;
+
       if (['root', currentModule].includes(cur.meta.parent)) {
-        acc[cur.meta.id] = cur;
+        acc[curId] = cur as unknown as AsideNavItem;
       } else {
-        acc[cur.meta.parent] ||= {
-          name: cur.meta.parent.replace(/(?:^|-)([a-z])/g, (_, c) => ` ${c.toUpperCase()}`).trim(),
-          meta: { id: cur.meta.parent },
+        acc[parentId] ||= {
+          name: (cur.meta.parent as string)
+            .replace(/(?:^|-)([a-z])/g, (_, c) => ` ${c.toUpperCase()}`)
+            .trim(),
+          meta: { id: cur.meta.parent as string, parent: 'root', parents: ['root'], order: 0 },
         };
-        acc[cur.meta.parent].children ||= {};
-        acc[cur.meta.parent].children[cur.meta.id] = cur;
+        acc[parentId].children ||= {};
+        acc[parentId].children[cur.meta.id as string] = cur as unknown as AsideNavItem;
       }
       return acc;
     }, {});
 });
 
-const iconMapping = ref({
+interface IconMapping {
+  [key: string]: {
+    icon: string;
+    label: string;
+    size: number;
+  };
+}
+
+const iconMapping = ref<IconMapping>({
   home: {
     icon: 'e88a',
     label: 'Home',
@@ -162,12 +196,12 @@ const iconMapping = ref({
   },
 });
 
-const hasAsideCollapsed = ref(Boolean(JSON.parse(localStorage.getItem('has_aside_collapsed'))));
+const hasAsideCollapsed = ref(localStorage.getItem('has_aside_collapsed') === 'true');
 
-const toggleAsideCollapsedState = (element) => {
-  element.target.blur();
+const toggleAsideCollapsedState = () => {
   hasAsideCollapsed.value = !hasAsideCollapsed.value;
-  localStorage.setItem('has_aside_collapsed', hasAsideCollapsed.value);
+  localStorage.setItem('has_aside_collapsed', hasAsideCollapsed.value ? 'true' : 'false');
+  (document.activeElement as HTMLElement)?.blur();
 };
 </script>
 
@@ -209,17 +243,28 @@ const toggleAsideCollapsedState = (element) => {
 
   transition: background-color var(--theme-switch-duration);
 
+  &::before,
   &::after {
-    content: '\f3d3';
     position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    height: $size-base * 6;
     opacity: 0;
     color: var(--color-dark);
     font-family: $font-icon;
+  }
+
+  &::before {
+    content: '\f7e4';
+    height: $size-base * 6;
     font-size: $size-base * 8;
+    line-height: $size-base * 10;
+    font-weight: 200;
+  }
+
+  &::after {
+    content: '\e5c4';
+    font-size: $size-base * 2;
     line-height: $size-base * 10;
   }
 
@@ -229,14 +274,16 @@ const toggleAsideCollapsedState = (element) => {
       opacity: 0.08;
     }
 
-    &::after {
+    &::after,
+    &::before {
       opacity: 0.64;
     }
   }
 
-  &::after,
-  span {
-    transition: opacity 0.2s;
+  span,
+  &::before,
+  &::after {
+    transition: opacity 0.4s;
   }
 
   &__icon {
@@ -461,11 +508,17 @@ const toggleAsideCollapsedState = (element) => {
   @include aside--collapsed;
 
   .logo {
-    &::after {
-      content: '\f3d2';
+    &::before {
       height: $size-base * 8;
       font-size: $size-base * 4;
       line-height: $size-base * 8;
+    }
+    &::after {
+      content: '\e5c8';
+      margin: 0 0 0 2px;
+      font-size: $size-base * 1.25;
+      line-height: $size-base * 8;
+      font-weight: 700;
     }
   }
 }

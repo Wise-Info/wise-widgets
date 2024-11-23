@@ -23,8 +23,9 @@
 
     "paths": {
       "@wiseinfo/wise-widgets": ["./components/index.ts"],
-      "@": ["./docs-src"],
-      "@components": ["./docs-src/components/index.ts"]
+      "@": ["./docs-src/"],
+      "@components": ["./docs-src/components/index.ts"],
+      "@routers": ["./docs-src/routers.ts"]
     }
   },
   "include": [
