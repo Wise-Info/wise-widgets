@@ -2,17 +2,9 @@
   // reset
   appearance: none;
 
-  padding: 0;
   background: none;
   border: none;
   outline: none;
-  margin: 0;
-
-  font-size: 100%;
-  font-family: inherit;
-
-  white-space: nowrap;
-  cursor: pointer;
 }
 
 .widget-button {
@@ -28,26 +20,27 @@
   height: var(--size);
 
   padding: 0 calc(var(--size) / 2);
+  margin: 0;
   border: solid var(--global-border-size) transparent;
 
   color: var(--label-color);
+  font-family: inherit;
   font-size: calc(var(--size) / 2 - var(--size) / 16);
   line-height: calc(var(--size) - (var(--global-border-size) * 2));
   text-transform: uppercase;
+  white-space: nowrap;
+
+  cursor: pointer;
 
   &:hover,
   &:focus {
     --color: var(--color-major-toggle);
-    z-index: 2;
+    z-index: 4;
   }
 
   @keyframes active {
-    0% {
-      opacity: 0.32;
-    }
-    100% {
-      opacity: 1;
-    }
+    0% { opacity: 0.32; }
+    100% { opacity: 1; }
   }
 
   &:active {
@@ -95,11 +88,6 @@
     background-color: var(--color);
     border-color: var(--color);
   }
-
-  // &.minor,
-  // &.major {
-  //   text-decoration: none;
-  // }
 
   &.rounded {
     border-radius: $global-border-radius;
@@ -209,16 +197,18 @@
   }
 
   @keyframes rotate {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
 
   &__running-icon {
     transform-origin: center;
     animation: rotate 2s infinite linear;
+  }
+
+  & + & {
+    .gap-0 > & {
+      margin-left: calc(var(--global-border-size) * -1);
+    }
   }
 }

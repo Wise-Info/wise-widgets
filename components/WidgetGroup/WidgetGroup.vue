@@ -91,7 +91,6 @@ const props = defineProps({
 });
 
 const style = computed(() => ({
-  '--gap-scale': props.gap !== 1 ? props.gap : undefined,
   '--direction': props.direction !== 'row' ? props.direction : undefined,
   '--justify': props.justify !== 'start' ? props.justify : undefined,
   '--wrap': props.wrap !== 'nowrap' ? props.wrap : undefined,

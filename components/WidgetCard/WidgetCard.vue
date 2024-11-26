@@ -18,7 +18,7 @@ export const WidgetCardEnums = enums;
 
 type WidgetCardUsage = (typeof enums.usage)[number];
 
-export interface WidgetButtonProps {
+export interface WidgetCardProps {
   usage?: WidgetCardUsage;
 }
 </script>

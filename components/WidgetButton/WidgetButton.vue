@@ -13,6 +13,7 @@
       'icon-only': iconOnly,
     }"
     :type="type === 'submit' || type === 'reset' ? type : 'button'"
+    :autofocus="autoFocus"
     :disabled="disabled || ['running', 'disabled'].includes(state)"
     :title="label">
     <WidgetIcon
@@ -63,8 +64,9 @@ export interface WidgetButtonProps {
   size?: WidgetButtonSize;
   block?: boolean;
   state?: WidgetButtonState;
-  disabled?: boolean;
   usage?: WidgetButtonUsage;
+  autoFocus?: boolean;
+  disabled?: boolean;
   error?: boolean;
   icon?: string | WidgetIconProps;
   iconOnly?: boolean;
@@ -111,15 +113,19 @@ const props = defineProps({
     enums: enums.state,
     validator: (state: string) => enums.state.includes(state),
   },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
   usage: {
     type: String,
     default: 'normal',
     enums: enums.usage,
     validator: (usage: string) => enums.usage.includes(usage),
+  },
+  autoFocus: {
+    type: Boolean,
+    default: false,
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
   },
   error: {
     type: Boolean,

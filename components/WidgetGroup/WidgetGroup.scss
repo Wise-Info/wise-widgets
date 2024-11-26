@@ -3,10 +3,9 @@
 
   --label-color: var(--color-minor);
   --size: var(--size-normal);
-  --gap: calc(var(--size-base) * var(--gap-scale));
 
   display: flex;
-  gap: var(--gap, var(--size-base));
+  gap: var(--gap, var(--gap-1));
   flex-direction: var(--direction);
   justify-content: var(--justify);
   flex-wrap: var(--wrap);
@@ -20,7 +19,7 @@
     font-size: calc(var(--size) / 2 - var(--size) / 16);
     line-height: var(--size);
 
-    .gap-0 & {
+    .gap-0>& {
       margin: 0 var(--size-base) 0 0;
     }
 
@@ -67,11 +66,11 @@
     }
   }
 
-  &.gap-0 {
-    .widget-button+.widget-button {
-      margin-left: calc(var(--global-border-size) * -1);
-    }
-  }
+  // &.gap-0 {
+  //   .widget-button+.widget-button {
+  //     margin-left: calc(var(--global-border-size) * -1);
+  //   }
+  // }
 
   &.extra {
     --size: var(--size-extra);

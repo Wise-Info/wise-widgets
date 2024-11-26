@@ -4,9 +4,13 @@ export * from './WidgetButton/index.ts';
 
 export * from './WidgetGroup/index.ts';
 
+export * from './WidgetRadio/index.ts';
+
 export * from './WidgetCard/index.ts';
 
 export * from './WidgetCode/index.ts';
+
+export * from './WidgetRadio/index.ts';
 
 const modules = import.meta.glob('./Widget*/index.ts', { eager: true });
 

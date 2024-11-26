@@ -25,6 +25,7 @@
   },
   "scripts": {
     "dev": "vite --config vite.config.docs.js",
+    "tsc": "vue-tsc",
     "build:lib": "vue-tsc --build tsconfig.lib.json && vite build --config vite.config.lib.js",
     "build:docs": "dotenv -e .env.docs vue-tsc -b && vite build --config vite.config.docs.js",
     "preview": "vite preview --config vite.config.docs.js"
