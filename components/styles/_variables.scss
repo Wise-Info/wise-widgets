@@ -1,28 +1,74 @@
-@import './colors';
+// Grayscale
+$color-darkest:  #000;
+$color-gray-1:   #161616; $color-dark:    $color-gray-1;
+$color-gray-3:   #333;    $color-gray-80: $color-gray-3;
+$color-gray-6:   #666;    $color-gray-60: $color-gray-6;
+$color-gray-9:   #999;    $color-gray-40: $color-gray-9;
+$color-gray-c:   #CCC;    $color-gray-20: $color-gray-c;
+$color-gray-e:   #E6E6E6; $color-gray-10: $color-gray-e;
+$color-gray-f:   #F4F4F4; $color-light:   $color-gray-f;
+$color-lightest: #FFF;
 
-@import './fonts';
+// Flat UI Colors 2 -- American Palette
+$color-prunus-avium:        #E84393;
+$color-pico-8-pink:         #FD79A8;
 
-@import './sizes';
+$color-chi-gong:            #D63031;
+$color-pink-glamour:        #FF7675;
 
-@import './typography';
+$color-orangeville:         #E17055;
+$color-first-date:          #FAB1A0;
 
-@import './layouts';
+$color-bright-yarrow:       #FDCB6E;
+$color-sour-lemon:          #FFEAA7;
 
-@import './responsive';
+$color-mint-leaf:           #00B894;
+$color-light-greenish-blue: #55EFC4;
 
-/* ---- ---- ---- ---- */
+$color-robins-egg-blue:     #00CEC9;
+$color-faded-poster:        #81ECEC;
 
-$global-border-size: 2px;
-$global-border-radius: 4px;
+$color-electron-blue:       #0984E3;
+$color-green-darner-tail:   #74B9FF;
 
-:root {
-  --global-border-size: #{$global-border-size};
-  --global-border-radius: #{$global-border-radius};
-}
+$color-exodus-fruit:        #6C5CE7;
+$color-shy-moment:          #A29BFE;
+
+$color-dracula-orchid:      #2D3436;
+$color-american-river:      #636E72;
+
+$color-soothing-breeze:     #B2BEC3;
+$color-city-lights:         #DFE6E9;
 
 
-/* ---- ---- ---- ---- */
-// Global Z-Index
+// Color Theme
+$color-major:        $color-exodus-fruit;
+$color-major-toggle: $color-shy-moment;
+
+$color-minor:        $color-gray-40;
+
+
+// -------- -------- -------- -------- -------- -------- -------- --------
+// Fonts
+$font-standard: "SF Pro", "Open Sans Regular", "PingFang SC", "Microsoft YaHei", sans-serif;
+$font-condensed: "SF Compact", "Open Sans Condensed", "PingFang SC", "Microsoft YaHei", sans-serif;
+$font-monospace: "SF Mono", "Roboto Mono", monospace;
+$font-icon: "Material Symbols Outlined";
+
+$global-font: 14px/1em $font-standard;
+
+
+// -------- -------- -------- -------- -------- -------- -------- --------
+// Size
+$size-base: 8px;
+
+// Border
+$border-size: 2px;
+$border-radius: 4px;
+
+
+// -------- -------- -------- -------- -------- -------- -------- --------
+// Z-Index
 $z-index-dropdown:       1000;
 $z-index-sticky:         1020;
 $z-index-fixed:          1030;
@@ -30,4 +76,53 @@ $z-index-modal-backdrop: 1040;
 $z-index-modal:          1050;
 $z-index-popover:        1060;
 $z-index-tooltip:        1070;
+
+
+// -------- -------- -------- -------- -------- -------- -------- --------
+// Responsive
+$min-width: 320;
+
+$mobile-max: 460;
+//  320 ~ 460  -- Mobile Devices
+
+$portrait-max: 1199;
+//  320 ~ 1199 -- Portrait Devices ( Mobile Devices & Portrait Tablet Devices )
+
+$desktop-mix: 1200; // Responsive Breakpoint
+// 1200 ~ ∞ -- Horizontal Tablet Devices or Desktop Devices
+
+$desktop-extra: 1920;
+// 1920 ~ ∞ -- Extra Screen Devices
+
+@mixin media-mobile {
+  // 0 ~ 1199 -- Mobile Devices & Portrait Tablet Devices
+  @media (max-width: ($portrait-max)) {
+    @content;
+  }
+}
+
+@mixin media-desktop {
+  // 1200 ~ ∞ -- Desktop Devices
+  @media (min-width: $desktop-mix) {
+    @content;
+  }
+}
+
+
+// -------- -------- -------- -------- -------- -------- -------- --------
+// Mixins
+@mixin clearfix() {
+  &::after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+}
+
+@mixin rise($level: 1) {
+  box-shadow: 0 (1.6px * $level) (3.6px * $level) 0 rgba(0, 0, 0, 0.132),
+    0 (0.3px * $level) (0.9px * $level) 0 rgba(0, 0, 0, 0.108);
+
+  // TODO: need improvement
+}
 

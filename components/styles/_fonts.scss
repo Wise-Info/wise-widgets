@@ -1,17 +1,12 @@
-@import '@fontsource/material-symbols-outlined/100.css';
-@import '@fontsource/material-symbols-outlined/200.css';
-@import '@fontsource/material-symbols-outlined/300.css';
-@import '@fontsource/material-symbols-outlined/400.css';
-@import '@fontsource/material-symbols-outlined/500.css';
-@import '@fontsource/material-symbols-outlined/600.css';
-@import '@fontsource/material-symbols-outlined/700.css';
+@use '@fontsource/material-symbols-outlined/100.css' as *;
+@use '@fontsource/material-symbols-outlined/200.css' as *;
+@use '@fontsource/material-symbols-outlined/300.css' as *;
+@use '@fontsource/material-symbols-outlined/400.css' as *;
+@use '@fontsource/material-symbols-outlined/500.css' as *;
+@use '@fontsource/material-symbols-outlined/600.css' as *;
+@use '@fontsource/material-symbols-outlined/700.css' as *;
 
-$font-standard: "SF Pro", "Open Sans Regular", "PingFang SC", "Microsoft YaHei", sans-serif;
-$font-condensed: "SF Compact", "Open Sans Condensed", "PingFang SC", "Microsoft YaHei", sans-serif;
-$font-monospace: "SF Mono", "Roboto Mono", monospace;
-$font-icon: "Material Symbols Outlined";
-
-$global-font: 14px/1em $font-standard;
+@use 'variables' as *;
 
 .font-condensed {
   font-family: $font-condensed;

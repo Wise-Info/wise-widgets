@@ -28,11 +28,5 @@
       "@routers": ["./docs-src/routers.ts"]
     }
   },
-  "include": [
-    "components/**/*.ts",
-    "components/**/*.vue",
-    "docs-src/**/*.ts",
-    "docs-src/**/*.vue",
-    "docs-src/components/layout/index.ts"
-  ]
+  "include": ["components/**/*.ts", "components/**/*.vue", "docs-src/**/*.ts", "docs-src/**/*.vue"]
 }

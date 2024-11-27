@@ -1,5 +1,4 @@
-// Size
-$size-base: 8px;
+@use 'variables' as *;
 
 :root {
   --size-base:   #{$size-base};   // 8px
@@ -17,6 +16,15 @@ $size-base: 8px;
   --size-4: calc(var(--size-base) * 4);
   --size-5: calc(var(--size-base) * 5);
   --size-6: calc(var(--size-base) * 6);
+
+  --border-size:   #{$border-size};    // 2px
+  --border-radius: #{$border-radius};  // 4px
+
+  --gap-0: 0;
+  --gap-1: var(--size-base);
+  --gap-2: calc(var(--size-base) * 2);
+  --gap-3: calc(var(--size-base) * 3);
+  --gap-4: calc(var(--size-base) * 4);
 }
 
 .micro {
@@ -42,21 +50,21 @@ $size-base: 8px;
 }
 
 .gap-0 {
-  gap: val(--size-0);
+  --gap: var(--gap-0);
 }
 
 .gap-1 {
-  gap: val(--size-1);
+  --gap: var(--gap-1);
 }
 
 .gap-2 {
-  gap: val(--size-2);
+  --gap: var(--gap-2);
 }
 
 .gap-3 {
-  gap: val(--size-3);
+  --gap: var(--gap-3);
 }
 
 .gap-4 {
-  gap: val(--size-4);
+  --gap: var(--gap-4);
 }

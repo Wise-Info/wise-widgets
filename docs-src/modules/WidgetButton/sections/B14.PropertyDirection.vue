@@ -44,7 +44,7 @@ export const viewTitle = 'WidgetButtonGroup';
 
 <script setup lang="ts">
 import { WidgetButtonGroup } from '@wiseinfo/wise-widgets';
-import { PropEnums } from '@components';
+// import { PropEnums } from '@components';
 
 const items = [
   { label: 'Button 1' },

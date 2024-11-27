@@ -51,7 +51,7 @@ const currentModule = computed(() => {
     &::before {
       content: '';
       margin: ($size-base * 1.4) ($size-base * 2) ($size-base * 1.4) 0;
-      border-left: solid ($global-border-size * 0.5) $color-gray-9;
+      border-left: solid ($border-size * 0.5) $color-gray-9;
     }
     &:first-child {
       margin: 0;

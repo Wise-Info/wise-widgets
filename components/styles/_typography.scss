@@ -1,4 +1,4 @@
-$size-base: 8px;
+@use 'variables' as *;
 
 h1, h2, h3{
   margin: calc($size-base * 2) 0;

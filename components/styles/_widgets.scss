@@ -1,12 +1,12 @@
-@import '../WidgetIcon/WidgetIcon.scss';
-@import '../WidgetButton/WidgetButton.scss';
+@use '../WidgetIcon/WidgetIcon.scss';
+@use '../WidgetButton/WidgetButton.scss';
 
 
-@import '../WidgetGrid/WidgetGrid.scss';
-@import '../WidgetGroup/WidgetGroup.scss';
+@use '../WidgetGrid/WidgetGrid.scss';
+@use '../WidgetGroup/WidgetGroup.scss';
 
 
-@import './widgets/WidgetRadio-WidgetCheckbox.scss';
+@use './widgets/WidgetRadio-WidgetCheckbox.scss';
 
 
-@import '../WidgetCard/WidgetCard.scss';
+@use '../WidgetCard/WidgetCard.scss';

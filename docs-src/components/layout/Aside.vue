@@ -230,7 +230,7 @@ const toggleAsideCollapsedState = () => {
   display: table;
   width: 100%;
 
-  border-bottom: solid $global-border-size var(--color-gray-40);
+  border-bottom: solid $border-size var(--color-gray-40);
   outline: none;
   margin: 0;
 
@@ -448,7 +448,7 @@ const toggleAsideCollapsedState = () => {
 
       padding: 0 $size-base;
       background: var(--color-gray-40);
-      border-radius: $global-border-radius;
+      border-radius: $border-radius;
 
       color: var(--color-lightest);
       font-size: $size-base * 1.5;
@@ -523,7 +523,7 @@ const toggleAsideCollapsedState = () => {
   }
 }
 
-@media (max-width: $responsive-breakpoint) {
+@include media-desktop {
   .aside {
     @include aside--collapsed;
   }

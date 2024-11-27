@@ -28,7 +28,7 @@ interface Accumulator {
   enums: Record<string, unknown>;
 }
 
-const { widgets, enums } = Object.entries(modules as Modules).reduce<Accumulator>(
+const { widgets, enums } = Object.entries(modules as Modules).reduce(
   (acc, [, module]) => {
     Object.entries(module).forEach(([name, object]) => {
       if (object.install) {
@@ -41,6 +41,6 @@ const { widgets, enums } = Object.entries(modules as Modules).reduce<Accumulator
     return acc;
   },
   { widgets: {}, enums: {} },
-);
+) as Accumulator;
 
 export { widgets, enums };

@@ -1,9 +1,9 @@
 <template>
   <section class="section">
     <hgroup class="section__title">
-      <PropEnums
+      <!-- <PropEnums
         widget="WidgetButton"
-        prop="state" />
+        prop="state" /> -->
     </hgroup>
     <WidgetGroup>
       <WidgetButton label="Normal" />
@@ -51,7 +51,7 @@
 import { ref } from 'vue';
 
 import { WidgetButton } from '@wiseinfo/wise-widgets';
-import { PropEnums } from '@components';
+// import { PropEnums } from '@components';
 
 const isRunning = ref(false);
 

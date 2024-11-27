@@ -74,7 +74,7 @@ const breadcrumb = computed<BreadcrumbItem[]>(() =>
       content: '';
 
       margin: ($size-base * 1.4) ($size-base * 2) ($size-base * 1.4) $size-base;
-      border-left: solid ($global-border-size * 0.5) $color-gray-9;
+      border-left: solid ($border-size * 0.5) $color-gray-9;
 
       transform: rotate(20deg);
       transform-origin: center;

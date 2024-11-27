@@ -1,8 +1,13 @@
-@import './variables';
-@import './mixins';
+@use 'variables' as *;
 
-@import './elements';
+@use 'colors';
+@use 'states';
 
-@import './states';
+@use 'sizes';
 
-@import './widgets'
+@use 'fonts';
+@use 'typography';
+
+@use 'elements';
+
+@use 'widgets';

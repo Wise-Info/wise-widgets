@@ -1,8 +1,7 @@
-@import './variables';
-@import './mixins';
+@use './variables';
 
-@import './layouts';
-@import './styles';
+@use './layouts';
+@use './styles';
 
 
 *,

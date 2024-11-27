@@ -1,9 +1,9 @@
 <template>
   <section class="section">
     <hgroup class="section__title">
-      <PropEnums
+      <!-- <PropEnums
         widget="WidgetButton"
-        prop="size" />
+        prop="size" /> -->
     </hgroup>
     <WidgetGroup>
       <WidgetButton
@@ -56,5 +56,5 @@
 
 <script setup lang="ts">
 import { WidgetButton } from '@wiseinfo/wise-widgets';
-import { PropEnums } from '@components';
+// import { PropEnums } from '@components';
 </script>

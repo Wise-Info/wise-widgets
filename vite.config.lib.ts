@@ -18,10 +18,8 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `
-        @import '/components/styles/variables';
-        @import '/components/styles/mixins';
-      `,
+        api: 'modern-compiler',
+        additionalData: `@use '/components/styles/variables';`,
       },
     },
   },

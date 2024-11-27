@@ -1,3 +1,5 @@
+@use '../styles/variables' as *;
+
 .widget-button {
   // reset
   appearance: none;
@@ -21,12 +23,12 @@
 
   padding: 0 calc(var(--size) / 2);
   margin: 0;
-  border: solid var(--global-border-size) transparent;
+  border: solid var(--border-size) transparent;
 
   color: var(--label-color);
   font-family: inherit;
   font-size: calc(var(--size) / 2 - var(--size) / 16);
-  line-height: calc(var(--size) - (var(--global-border-size) * 2));
+  line-height: calc(var(--size) - (var(--border-size) * 2));
   text-transform: uppercase;
   white-space: nowrap;
 
@@ -90,7 +92,7 @@
   }
 
   &.rounded {
-    border-radius: $global-border-radius;
+    border-radius: $border-radius;
   }
 
   &.capsule {
@@ -208,7 +210,7 @@
 
   & + & {
     .gap-0 > & {
-      margin-left: calc(var(--global-border-size) * -1);
+      margin-left: calc(var(--border-size) * -1);
     }
   }
 }

@@ -1,3 +1,5 @@
+@use '../variables' as *;
+
 .widget-radio,
 .widget-checkbox {
   $symbol-size: 14px;
@@ -157,5 +159,5 @@
 
 // .widget-radio.widget-button+.widget-radio.widget-button,
 // .widget-checkbox.widget-button+.widget-checkbox.widget-button {
-//   margin-left: -$global-border-size;
+//   margin-left: -$border-size;
 // }

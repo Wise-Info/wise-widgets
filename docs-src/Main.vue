@@ -10,7 +10,7 @@
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { Aside, HeaderBar } from '@components';
+import { Aside, HeaderBar } from './components/index.ts';
 
 const route = useRoute();
 
@@ -18,6 +18,3 @@ const frameFree: string[] = [];
 
 const isFrameFree = computed(() => frameFree.includes(route.path));
 </script>
-<style lang="scss">
-@import './styles/main.scss';
-</style>
