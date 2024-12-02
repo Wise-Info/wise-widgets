@@ -1,7 +1,8 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
+import path from 'node:path'
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 
+// https://vite.dev/config/
 export default defineConfig({
   build: {
     lib: {
@@ -12,15 +13,21 @@ export default defineConfig({
       output: {
         exports: 'named',
       },
+
     },
   },
   plugins: [vue()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './components'),
+    },
+  },
   css: {
     preprocessorOptions: {
       scss: {
         api: 'modern-compiler',
-        additionalData: `@use '/components/styles/variables';`,
+        additionalData: `@use '@/styles/variables.scss' as *;`,
       },
     },
   },
-});
+})

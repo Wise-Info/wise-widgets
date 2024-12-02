@@ -11,18 +11,18 @@ import './styles/main.scss';
 export * from './widgets.ts';
 
 export default (app: App) => {
-  // Create widgets container
+  // create widgets container
   if (!document.getElementById('widgets')) {
     const widgetsContainer = document.createElement('div');
     widgetsContainer.id = 'widgets';
     document.body.appendChild(widgetsContainer);
   }
 
-  // Mount widgets container
+  // mount widgets container
   createApp(Widgets).mount('#widgets');
 
-  // Install widgets
+  // install widgets
   Object.values(widgets).forEach((widget) => {
-    (widget as { install: (app: App) => void }).install(app);
+    widget.install(app);
   });
 };

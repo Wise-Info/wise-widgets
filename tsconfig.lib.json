@@ -1,19 +1,11 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "ES2022",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "types": ["vite/client"],
-    "esModuleInterop": true,
-    "sourceMap": true,
     "skipLibCheck": true,
-    "useDefineForClassFields": true,
-
-    /* declaration */
-    "declaration": true,
-    "declarationMap": true,
-    "emitDeclarationOnly": true,
-    "outDir": "./dist",
+    "types": ["vite/client"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -21,15 +13,13 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
-    "jsx": "preserve",
 
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "forceConsistentCasingInFileNames": true
+    "noUncheckedSideEffectImports": true
   },
-  "include": ["components/**/*"],
-  "exclude": ["docs", "docs-src", "node_modules"]
+  "include": ["components/**/*.ts", "components/**/*.vue"]
 }

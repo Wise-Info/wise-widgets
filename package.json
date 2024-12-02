@@ -19,47 +19,38 @@
   "type": "module",
   "main": "index.js",
   "imports": {
-    "@wiseinfo/wise-widgets": "./components/index.ts",
-    "@componests": "./docs-src/components/index.ts",
-    "@routers": "./docs-src/routers.ts"
+    "@wiseinfo/wise-widgets": "./components/index.ts"
   },
   "scripts": {
     "dev": "vite --config vite.config.docs.js",
-    "tsc": "vue-tsc",
-    "build:lib": "vue-tsc tsconfig.lib.json && vite build --config vite.config.lib.js",
-    "build:docs": "dotenv -e .env.docs vue-tsc && vite build --config vite.config.docs.js",
-    "preview": "vite preview --config vite.config.docs.js"
+    "build:lib": "vue-tsc -b tsconfig.lib.json && vite build --config vite.config.lib.js",
+    "build:docs": "dotenv -e .env.docs vue-tsc -b && vite build --config vite.config.docs.js"
   },
   "dependencies": {
     "@fontsource/material-symbols-outlined": "^5.1.3",
-    "@fontsource/material-symbols-rounded": "^5.1.2",
-    "@highlightjs/vue-plugin": "^2.1.0",
-    "highlight.js": "^11.10.0",
     "normalize.css": "^8.0.1",
     "uid": "^2.0.2",
-    "vite-plugin-svg-icons": "^2.0.1",
-    "vue": "^3.5.10",
-    "vue-router": "^4.4.5"
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.12.0",
-    "@types/node": "^22.7.5",
-    "@vitejs/plugin-vue": "^5.1.4",
-    "@vitest/coverage-v8": "^2.1.1",
-    "dotenv-cli": "^7.4.2",
-    "eslint": "^9.12.0",
+    "@eslint/js": "^9.16.0",
+    "@types/node": "^22.10.1",
+    "@typescript-eslint/eslint-plugin": "^8.16.0",
+    "@typescript-eslint/parser": "^8.16.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitest/coverage-v8": "^2.1.6",
+    "dotenv-cli": "^7.4.4",
+    "eslint": "^9.16.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-vue": "^9.29.0",
-    "globals": "^15.11.0",
-    "prettier": "^3.3.3",
+    "eslint-plugin-vue": "^9.32.0",
+    "prettier": "^3.4.1",
     "sass-embedded": "^1.81.0",
-    "typescript": ">=5.5.0",
-    "typescript-eslint": "^8.8.1",
+    "typescript": "~5.6.2",
     "vite": "^6.0.1",
-    "vite-plugin-vue-devtools": "^7.4.6",
-    "vitest": "^2.1.1",
+    "vitest": "^2.1.6",
     "vue-tsc": "^2.1.10"
   }
 }

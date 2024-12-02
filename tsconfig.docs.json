@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",
     "useDefineForClassFields": true,
     "module": "ESNext",
@@ -20,13 +21,12 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
 
     "paths": {
       "@wiseinfo/wise-widgets": ["./components/index.ts"],
-      "@": ["./docs-src/"],
-      "@components": ["./docs-src/components/index.ts"],
-      "@routers": ["./docs-src/routers.ts"]
+      "@": ["./docs-src/"]
     }
   },
-  "include": ["components/**/*.ts", "components/**/*.vue", "docs-src/**/*.ts", "docs-src/**/*.vue"]
+  "include": ["docs-src/**/*.ts", "docs-src/**/*.vue"]
 }

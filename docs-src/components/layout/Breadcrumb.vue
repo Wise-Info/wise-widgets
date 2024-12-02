@@ -28,7 +28,7 @@
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { routes } from '@routers';
+import { routes } from '@/routers.ts';
 
 const route = useRoute();
 

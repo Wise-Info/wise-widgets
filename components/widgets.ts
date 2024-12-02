@@ -1,3 +1,5 @@
+import type { App, DefineComponent } from 'vue';
+
 export * from './WidgetIcon/index.ts';
 export * from './WidgetSvg/index.ts';
 export * from './WidgetButton/index.ts';
@@ -12,35 +14,36 @@ export * from './WidgetCode/index.ts';
 
 export * from './WidgetRadio/index.ts';
 
-const modules = import.meta.glob('./Widget*/index.ts', { eager: true });
+interface WidgetModule extends DefineComponent {
+  install: (app: App) => void;
+}
+
+interface WidgetModules {
+  [key: string]: WidgetModule;
+}
 
 interface Modules {
-  [key: string]: {
-    [key: string]: {
-      install?: () => void;
-      [key: string]: unknown;
-    };
-  };
+  [key: string]: WidgetModule | { [key: string]: WidgetModule };
 }
 
-interface Accumulator {
-  widgets: Record<string, unknown>;
-  enums: Record<string, unknown>;
-}
+const modules: { [key: string]: Modules } = import.meta.glob('./Widget*/index.ts', { eager: true });
 
-const { widgets, enums } = Object.entries(modules as Modules).reduce(
-  (acc, [, module]) => {
-    Object.entries(module).forEach(([name, object]) => {
-      if (object.install) {
-        acc.widgets[name] = object;
+const { widgets, enums } = Object.entries(modules).reduce(
+  (
+    acc: { widgets: WidgetModules; enums: { [key: string]: string[] } },
+    [, modules]: [string, Modules],
+  ) => {
+    Object.entries(modules).forEach(([name, module]) => {
+      if ('install' in module) {
+        acc.widgets[name] = module as WidgetModule;
       }
       if (name.endsWith('Enums')) {
-        Object.assign(acc.enums, object);
+        Object.assign(acc.enums, module);
       }
     });
     return acc;
   },
   { widgets: {}, enums: {} },
-) as Accumulator;
+);
 
 export { widgets, enums };
