@@ -75,8 +75,14 @@ html.dark {
   @include dark;
 }
 
-:root {
-  @include light;
+// :root {
+//   @include light;
+// }
+
+@media (prefers-color-scheme: light) {
+  :root{
+    @include light;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -84,3 +90,4 @@ html.dark {
     @include dark;
   }
 }
+

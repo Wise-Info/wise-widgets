@@ -4,6 +4,7 @@ import vue from '@vitejs/plugin-vue';
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: './',
   root: './docs-src',
   server: {
     open: true,
@@ -23,6 +24,8 @@ export default defineConfig({
     alias: {
       '@wiseinfo/wise-widgets': path.resolve(__dirname, './components'),
       '@': path.resolve(__dirname, './docs-src'),
+      '@components': path.resolve(__dirname, './docs-src/components'),
+      '@routers': path.resolve(__dirname, './docs-src/routers.ts'),
     },
   },
   css: {
