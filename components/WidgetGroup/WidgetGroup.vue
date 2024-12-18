@@ -3,8 +3,8 @@
     class="widget-group"
     :class="{
       [`gap-${gap}`]: true,
+      reverse: ['row-reverse'].includes(direction),
       inline,
-      reverse: ['row-reverse', 'column-reverse'].includes(direction),
       disabled,
       error,
     }"
@@ -14,7 +14,9 @@
       class="widget-label widget-group__label">
       {{ label }}
     </label>
-    <slot />
+    <div class="widget-group__inner">
+      <slot />
+    </div>
   </div>
 </template>
 <script lang="ts">

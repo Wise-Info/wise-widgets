@@ -5,12 +5,12 @@
     </hgroup>
 
     <WidgetRadio />
-    <code style="margin: 0 0 0 40px"> {{`<WidgetRadio" />`}}</code>
+    <code class="widget-code--inline"> {{`<WidgetRadio />`}}</code>
 
     <br /><br /><br /><br />
 
     <WidgetRadio label="Radio" />
-    <code style="margin: 0 0 0 40px"> {{`<WidgetRadio label="Radio" />`}}</code>
+    <code class="widget-code--inline"> {{`<WidgetRadio label="Radio" />`}}</code>
   </section>
 </template>
 
@@ -18,6 +18,4 @@
 export const viewTitle = 'WidgetRadio';
 </script>
 
-<script setup lang="ts">
-import {WidgetRadio} from '@wiseinfo/wise-widgets';
-</script>
+<script setup lang="ts"></script>

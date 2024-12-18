@@ -5,7 +5,26 @@
     </hgroup>
 
     <WidgetButton label="Button" />
-    <code style="margin: 0 0 0 40px"> {{`<WidgetButton label="Button" />`}}</code>
+    <code class="widget-code--inline"> {{`<WidgetButton label="Button" />`}}</code>
+
+    <br /><br /><br /><br />
+
+    <WidgetButton> Slot </WidgetButton>
+    <code class="widget-code--inline"> {{`<WidgetButton> Slot </WidgetButton>`}}</code>
+
+    <br /><br /><br /><br />
+
+    <WidgetButton label="Label"> Slot </WidgetButton>
+    <code class="widget-code--inline">
+      {{`<WidgetButton label="Label"> Slot </WidgetButton>`}}
+    </code>
+
+    <br /><br />
+
+    <b class="text-warning">
+      The 'label' property overrides the 'slot' content. It is recommended to prioritize the 'label'
+      property.
+    </b>
   </section>
 </template>
 

@@ -3,7 +3,8 @@
     class="widget-button-group"
     :class="{
       whole,
-      [itemsProps.shape]: whole && itemsProps.shape !== 'rectangle',
+      [itemsProps.shape]: whole && itemsProps.shape && itemsProps.shape !== 'rectangle',
+      [itemsProps.size]: itemsProps.size && itemsProps.size !== 'normal',
     }"
     v-bind="{
       label,
@@ -15,11 +16,15 @@
       error,
     }">
     <template
-      v-for="item in localItems"
-      :key="item.key">
+      v-for="(item, index) in items"
+      :key="`${widgetId}-${index}`">
       <WidgetButton
+        :index="index"
         v-bind="{
-          ...itemsProps,
+          ...{
+            ...itemsProps,
+            size: undefined,
+          },
           ...item,
           ...localProps,
         }"
@@ -35,6 +40,7 @@ import { WidgetGroup, WidgetGroupEnums, WidgetGroupProps } from '../WidgetGroup/
 import WidgetButton, { WidgetButtonProps } from './WidgetButton.vue';
 
 export interface WidgetButtonGroupProps extends WidgetGroupProps {
+  widgetId: string;
   items: WidgetButtonProps[];
   itemsProps?: WidgetButtonProps;
   whole?: boolean;
@@ -99,13 +105,6 @@ const props = defineProps({
     default: false,
   },
 });
-
-const localItems = computed(() =>
-  props.items.map((item, index) => ({
-    key: `${props.widgetId}-${index}`,
-    ...item,
-  })),
-);
 
 const localProps = computed(() =>
   Object.fromEntries(

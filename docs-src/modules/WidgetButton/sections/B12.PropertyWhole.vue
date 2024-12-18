@@ -7,12 +7,12 @@
       :items="items"
       :items-props="itemsProps"
       whole />
-    <code>
-      <pre>
+    <!-- prettier-ignore -->
+    <WidgetCode>
 {{`<WidgetButtonGroup
   :items="items"
   :items-props="itemsProps"
-  whole />`}}
+  whole />
 
 const items = [
   { label: 'Button 1' },
@@ -23,9 +23,9 @@ const items = [
 
 const itemsProps = {
   shape: 'capsule',
-};
-    </pre>
-    </code>
+};`}}
+    </WidgetCode>
+    <!-- prettier-ignore-end -->
   </section>
 </template>
 

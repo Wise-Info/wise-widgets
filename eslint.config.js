@@ -35,7 +35,7 @@ export default [
     languageOptions: {
       parser: tsParser,
       // parserOptions: {
-      //   project: "./tsconfig.json",
+      //   project: './tsconfig.json',
       // },
     },
     plugins: {
@@ -48,11 +48,12 @@ export default [
     },
   },
   // Vue configuration
+  ...vuePlugin.configs['flat/recommended'],
   {
     files: ['**/*.vue'],
-    languageOptions: {
-      parser: 'vue-eslint-parser',
-    },
+    // languageOptions: {
+    //   parser: 'vue-eslint-parser',
+    // },
     plugins: {
       vue: vuePlugin,
     },

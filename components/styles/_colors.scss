@@ -1,8 +1,8 @@
 @use 'variables' as *;
 
 :root{
-  --color-major: #{$color-exodus-fruit};
-  --color-major-toggle: #{$color-shy-moment};
+  --color-major: #{$color-major};
+  --color-major-toggle: #{$color-major-toggle};
 
   --color-minor: #{$color-gray-60};
   --color-minor-toggle: var(--color-major-toggle);
@@ -14,14 +14,14 @@
   --color-active: var(--color-major);
   --color-disabled: var(--color-gray-20);
 
-  --color-warning: #{$color-bright-yarrow};
-  --color-warning-toggle: #{$color-sour-lemon};
+  --color-warning: #{$color-warning};
+  --color-warning-toggle: #{$color-warning-toggle};
 
-  --color-danger: #{$color-chi-gong};
-  --color-danger-toggle: #{$color-pink-glamour};
+  --color-danger: #{$color-danger};
+  --color-danger-toggle: #{$color-danger-toggle};
 
-  --color-error: #{$color-chi-gong};
-  --color-error-toggle: #{$color-pink-glamour};
+  --color-error: #{$color-error};
+  --color-error-toggle: #{$color-error-toggle};
 }
 
 @mixin light {

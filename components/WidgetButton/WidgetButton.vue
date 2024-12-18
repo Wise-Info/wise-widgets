@@ -6,7 +6,6 @@
       [shape]: shape !== 'rectangle',
       [size]: size !== 'normal',
       [state]: state !== 'normal',
-      disabled: disabled || state === 'disabled',
       [usage]: usage !== 'normal',
       error: error || usage === 'error',
       block: block,
@@ -14,7 +13,7 @@
     }"
     :type="type === 'submit' || type === 'reset' ? type : 'button'"
     :autofocus="autoFocus"
-    :disabled="disabled || ['running', 'disabled'].includes(state)"
+    :disabled="disabled || state === 'disabled'"
     :title="label">
     <WidgetIcon
       v-if="icon || state === 'running'"
@@ -42,7 +41,7 @@ import { enumUsage } from '../enums.ts';
 const enums = {
   type: ['text', 'minor', 'major', 'reset', 'button', 'submit'],
   shape: ['rectangle', 'rounded', 'capsule', 'line'],
-  size: ['extra', 'large', 'normal', 'mini', 'micro', 'atom'],
+  size: ['atom', 'micro', 'mini', 'normal', 'large', 'extra'],
   state: ['normal', 'active', 'running', 'disabled', 'error'],
   usage: enumUsage,
   textTransform: ['capitalize', 'lowercase', 'uppercase'],

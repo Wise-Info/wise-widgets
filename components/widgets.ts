@@ -34,7 +34,7 @@ const { widgets, enums } = Object.entries(modules).reduce(
     [, modules]: [string, Modules],
   ) => {
     Object.entries(modules).forEach(([name, module]) => {
-      if ('install' in module) {
+      if (module && 'install' in module) {
         acc.widgets[name] = module as WidgetModule;
       }
       if (name.endsWith('Enums')) {

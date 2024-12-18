@@ -1,0 +1,23 @@
+@use '../styles/variables' as *;
+
+.widget-code{
+  display: block;
+  width: 100%;
+
+  padding: ($size-base * 2) ($size-base * 3);
+  margin: ($size-base * 4) 0;
+
+  background-color: $color-gray-80;
+
+  color: $color-gray-20;
+  font-family: $font-monospace;
+  line-height: calc(var(--size-base) * 3.75);
+  white-space: pre;
+}
+
+.widget-code--inline{
+  display: inline-block;
+  margin: 0 ($size-base * 4);
+  font-family: $font-monospace;
+  white-space: pre;
+}

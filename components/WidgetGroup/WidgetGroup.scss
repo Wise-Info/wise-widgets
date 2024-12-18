@@ -6,11 +6,6 @@
 
   display: flex;
   gap: var(--gap, var(--gap-1));
-  flex-direction: var(--direction);
-  justify-content: var(--justify);
-  flex-wrap: var(--wrap);
-
-  align-items: center;
 
   max-width: 100%;
 
@@ -26,14 +21,23 @@
     &::after {
       content: " : ";
     }
+  }
 
-    .reverse & {
-      order: 1;
-    }
+  &__inner{
+    display: flex;
+    gap: var(--gap, var(--gap-1));
+    flex-direction: var(--direction);
+    justify-content: var(--justify);
+    flex-wrap: var(--wrap);
+    align-items: center;
   }
 
   & + & {
     margin: var(--gap, var(--size-base)) 0 0;
+  }
+
+  &.reverse{
+    justify-content: end;
   }
 
   &.inline {

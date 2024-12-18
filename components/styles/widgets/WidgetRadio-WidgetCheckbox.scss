@@ -18,7 +18,6 @@
   position: relative;
   z-index: 2;
 
-  // display: block;
   outline: none;
 
   color: var(--label-color);
@@ -98,7 +97,7 @@
     }
   }
 
-  &.disabled:disabled {
+  &.disabled {
     --symbol-border-color: var(--color-disabled);
     --symbol-outline-color: transparent;
     --symbol-core-color: var(--$color-gary-10);

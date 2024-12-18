@@ -77,7 +77,7 @@ const props = defineProps({
 if (props.type === 'font' && !/^[0-9A-Fa-f]{4}$/.test(props.icon)) {
   console.error(
     new Error(
-      `Invalid icon value: ${props.icon}. When using 'font' type of icon, the icon value must be a string of 4-digit hexadecimal number.`,
+      `[WidgetIcon] Error. Invalid icon value: ${props.icon}. When using 'font' type of icon, the icon value must be a string of 4-digit hexadecimal number.`,
     ),
   );
 }

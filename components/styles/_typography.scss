@@ -41,3 +41,15 @@ p {
   margin: $size-base 0;
   line-height: calc($size-base * 2.5);  // 20px, 14 / 20 = 0.7
 }
+
+.text-warning {
+  color: var(--color-warning);
+}
+
+.text-danger {
+  color: var(--color-danger);
+}
+
+.text-error {
+  color: var(--color-error);
+}

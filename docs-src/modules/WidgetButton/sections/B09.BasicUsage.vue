@@ -4,17 +4,18 @@
       <h4>Basic Usage</h4>
     </hgroup>
     <WidgetButtonGroup :items="items" />
-    <code>
-      <pre>
-{{`<WidgetButtonGroup :items="items" />`}}
+    <!-- prettier-ignore -->
+    <WidgetCode>
+{{`<WidgetButtonGroup :items="items" />
+
 const items = [
   { label: 'Button 1' },
   { label: 'Button 2' },
   { label: 'Button 3' },
   { label: 'Button 4' },
-];
-    </pre>
-    </code>
+];`}}
+    </WidgetCode>
+    <!-- prettier-ignore-end -->
   </section>
 </template>
 

@@ -11,29 +11,28 @@
         type="radio"
         :name="name"
         :checked="checked"
-        @focus="$emit('focus')"
-        @blur="$emit('blur')"
-        @click="$emit('click', $event)"
+        :disabled="disabled"
         @change.stop="onChange" />
     </span>
     <span
       v-if="label !== undefined"
-      class="widget-radio__label"
-      >{{ label }}</span
-    >
+      class="widget-radio__label">
+      {{ label }}
+    </span>
   </label>
 </template>
 
-<script lang="ts"></script>
+<script lang="ts">
+export interface WidgetRadioProps {
+  name: string;
+  label?: string | number;
+  checked: boolean;
+  disabled: boolean;
+}
+</script>
 
 <script setup lang="ts">
-import { uid } from 'uid';
-
 defineProps({
-  widgetId: {
-    type: String,
-    default: () => `widget-${uid(6)}`,
-  },
   name: {
     type: String,
     default: undefined,
@@ -52,7 +51,7 @@ defineProps({
   },
 });
 
-const emits = defineEmits(['focus', 'blur', 'click', 'change', 'update:checked']);
+const emits = defineEmits(['change', 'update:checked']);
 
 const onChange = (event: Event) => {
   emits('change', (event.target as HTMLInputElement).checked);

@@ -4,9 +4,9 @@
       <h4>Property [ <span>items</span> ]</h4>
     </hgroup>
     <WidgetButtonGroup :items="items" />
-    <code>
-      <pre>
-{{`<WidgetButtonGroup :items="items" />`}}
+    <!-- prettier-ignore -->
+    <WidgetCode>
+{{`<WidgetButtonGroup :items="items" />
 
 const items = [
   { type: 'text', label: 'Text', disabled: true },
@@ -23,9 +23,9 @@ const items = [
   { type: 'reset', label: 'Reset' },
   { type: 'button', label: 'Button' },
   { type: 'submit', label: 'Submit' },
-];
-    </pre>
-    </code>
+];`}}
+    </WidgetCode>
+    <!-- prettier-ignore-end -->
   </section>
 </template>
 
@@ -41,7 +41,7 @@ const items = [
     type: 'major',
     label: 'Major',
     events: {
-      click: (event: MouseEvent) => {
+      click(event: MouseEvent) {
         console.info('Hello', event);
       },
     },

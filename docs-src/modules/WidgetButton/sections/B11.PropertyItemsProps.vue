@@ -4,13 +4,14 @@
       <h4>Property [ <span>itemsProps</span> ]</h4>
     </hgroup>
     <WidgetButtonGroup
+      label="Mini Buttons"
       :items="items"
       :items-props="itemsProps" />
-    <code>
-      <pre>
+    <!-- prettier-ignore -->
+    <WidgetCode>
 {{`<WidgetButtonGroup
   :items="items"
-  :items-props="itemsProps" />`}}
+  :items-props="itemsProps" />
 
 const items = [
   { label: 'Button 1' },
@@ -22,9 +23,9 @@ const items = [
 const itemProps = {
   shape: 'rounded',
   size: 'mini',
-};
-    </pre>
-    </code>
+};`}}
+    </WidgetCode>
+    <!-- prettier-ignore-end -->
   </section>
 </template>
 

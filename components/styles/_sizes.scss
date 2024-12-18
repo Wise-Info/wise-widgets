@@ -28,24 +28,24 @@
 }
 
 .micro {
-  --size: var(--size-micro);
+  --group-size: var(--size-micro);
 }
 
 .mini {
-  --size: var(--size-mini);
+  --group-size: var(--size-mini);
 }
 
 .normal {
-  --size: var(--size-normal);
+  --group-size: var(--size-normal);
 }
 
 .large {
-  --size: var(--size-large);
+  --group-size: var(--size-large);
   --icon-weight: 300;
 }
 
 .extra {
-  --size: var(--size-extra);
+  --group-size: var(--size-extra);
   --icon-weight: 400;
 }
 

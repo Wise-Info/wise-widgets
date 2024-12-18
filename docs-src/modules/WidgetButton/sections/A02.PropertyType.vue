@@ -31,7 +31,9 @@
       style="width: 400px; height: 160px">
       <p>I am an example.</p>
       <br /><br /><br /><br />
-      <WidgetGroup direction="row-reverse">
+      <WidgetGroup
+        direction="row-reverse"
+        justify="end">
         <WidgetButton
           type="major"
           icon="e541"
