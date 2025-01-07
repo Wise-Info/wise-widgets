@@ -1,26 +1,36 @@
 <template>
   <section class="section">
     <hgroup class="section__title">
-      <h4>Basic Usage</h4>
+      <h4>Property [ error, prompt ]</h4>
     </hgroup>
 
     <WidgetRadioGroup
       v-model="checked"
-      :options="options" />
+      required
+      label="Error Radio Group"
+      :options="options"
+      error
+      prompt="Field is required" />
 
-    <br /><br />
+    <br /><br /><br /><br />
 
-    checked: {{ checked }}
-
-    <br /><br />
+    <WidgetRadioGroup
+      v-model="checked"
+      required
+      label="Error Radio Group"
+      :options="options"
+      button
+      error
+      prompt="Field is required" />
 
     <!-- prettier-ignore -->
     <WidgetCode>
 {{`<WidgetRadioGroup
   v-model="checked"
-  :options="options" />
+  :options="options"
+  error />
 
-const checked = ref('Option 2');
+const checked = ref(undefined);
 
 const options = [
   { label: 'Option 1' },
@@ -33,14 +43,10 @@ const options = [
   </section>
 </template>
 
-<script lang="ts">
-export const viewTitle = 'WidgetRadioGroup';
-</script>
-
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const checked = ref('Option 2');
+const checked = ref(undefined);
 
 const options = [
   { label: 'Option 1' },

@@ -7,10 +7,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { useRoute } from "vue-router";
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 
-import { Aside, HeaderBar } from "./components/index.ts";
+import { Aside, HeaderBar } from './components/index.ts';
 
 const route = useRoute();
 

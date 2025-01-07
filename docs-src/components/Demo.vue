@@ -11,7 +11,7 @@
     <div class="view__body">
       <template
         v-for="section in view.sections"
-        :key="section.index">
+        :key="`section-${section.index}-${section.component.__hmrId}`">
         <component
           :is="section.component"
           v-bind="section" />

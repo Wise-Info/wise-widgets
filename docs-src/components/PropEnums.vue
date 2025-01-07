@@ -1,12 +1,18 @@
 <template>
   <h4>Property [ {{ prop }} ]</h4>
   <span class="property-enums">
-    <span
-      v-for="e in enums"
-      :key="e"
-      :class="{ default: defaultValue === e }">
-      {{ e }}
-    </span>
+    <template v-if="type?.name === 'Boolean'">
+      <span :class="{ default: defaultValue }">true</span>
+      <span :class="{ default: !defaultValue }">false</span>
+    </template>
+    <template v-else>
+      <span
+        v-for="e in localEnums"
+        :key="e"
+        :class="{ default: defaultValue === e }">
+        {{ e }}
+      </span>
+    </template>
   </span>
 </template>
 <script setup lang="ts">
@@ -23,7 +29,11 @@ const props = defineProps({
   },
 });
 
-const { enums, default: defaultValue } = widgets[props.widget].props[props.prop];
+const { enums, type, default: defaultValue } = widgets[props.widget].props?.[props.prop] || {};
+
+const localEnums = [
+  ...new Set((enums && enums.map((e: number | string) => e.toString())) || []),
+] as string[];
 </script>
 
 <style lang="scss">

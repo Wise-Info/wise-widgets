@@ -1,4 +1,29 @@
 .widget-label{
+  display: flex;
+  justify-content: flex-end;
   flex-shrink: 0;
+  min-width: var(--label-min-width);
+  text-align: right;
   white-space: nowrap;
+
+  .required &{
+    &::before{
+      content: "*";
+      margin: calc(var(--size-base) * -0.5) calc(var(--size-base) * 0.5) 0;
+      color: var(--color-danger);
+      font-size: calc(var(--size) * 0.625);
+      font-weight: 500;
+    }
+  }
+}
+
+.widget-prompt{
+  position: absolute;
+  right: 0;
+  bottom: calc(var(--size-base) * -2);
+  font-size: calc(var(--size-base) * 1.5);
+
+  .error &{
+    color: var(--color-error);
+  }
 }

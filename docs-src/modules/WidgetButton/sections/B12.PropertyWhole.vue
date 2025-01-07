@@ -1,7 +1,10 @@
 <template>
   <section class="section">
     <hgroup class="section__title">
-      <h4>Property [ <span>whole</span> ]</h4>
+      <PropEnums
+        widget="WidgetButtonGroup"
+        prop="whole" />
+      <!-- <h4>Property [ <span>whole</span> ]</h4> -->
     </hgroup>
     <WidgetButtonGroup
       :items="items"
@@ -29,11 +32,10 @@ const itemsProps = {
   </section>
 </template>
 
-<script lang="ts">
-export const viewTitle = 'WidgetButtonGroup';
-</script>
-
 <script setup lang="ts">
+import { WidgetButtonGroup } from '@wiseinfo/wise-widgets';
+import { PropEnums } from '@components';
+
 const items = [
   { label: 'Button 1' },
   { label: 'Button 2' },

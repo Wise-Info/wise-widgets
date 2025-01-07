@@ -2,6 +2,9 @@
   <WidgetGroup
     class="widget-radio-group"
     :class="{
+      required,
+      [buttonShape]: buttonShape,
+      [buttonSize]: buttonSize,
       whole,
     }"
     v-bind="{
@@ -10,139 +13,84 @@
       direction,
       justify,
       wrap,
+      readonly,
       disabled,
-      error,
+      error: localError,
     }">
-    <template
+    <WidgetRadio
       v-for="(option, index) in options"
-      :key="`${widgetId}-${index}`">
-      <WidgetRadio
-        :index="index"
-        v-bind="option"
-        :checked="localChecked === `${option.value || option.label || index}`"
-        v-on="{
-          ...option.events,
-        }"
-        @change="
-          (event) => {
-            onChange(option.value || option.label || index, event);
-          }
-        " />
-    </template>
+      :key="`${name}-${index}`"
+      :index="index"
+      :class="{
+        'widget-button': button,
+        major: button && modelValue === (option.value || option.label || index),
+        minor: button && modelValue !== (option.value || option.label || index),
+        [buttonShape]: buttonShape,
+        [buttonSize]: buttonSize,
+      }"
+      v-bind="option"
+      :checked="modelValue === (option.value || option.label || index)"
+      :disabled="disabled || option.disabled"
+      v-on="{
+        ...option.events,
+      }"
+      @change="
+        (event) => {
+          onChange(option.value || option.label || index, event);
+        }
+      " />
+    <div
+      v-if="localPrompt"
+      class="widget-prompt widget-radio-group__prompt">
+      {{ localPrompt }}
+    </div>
   </WidgetGroup>
 </template>
 <script lang="ts">
-import { WidgetGroup, WidgetGroupEnums, WidgetGroupProps } from '../WidgetGroup/index.ts';
-import WidgetRadio, { WidgetRadioProps } from './WidgetRadio.vue';
+import { WidgetGroup, WidgetGroupProps } from '../WidgetGroup/index.ts';
+import WidgetRadio, { WidgetRadioValue, WidgetRadioProps } from './WidgetRadio.vue';
+import { WidgetButtonEnums } from '../WidgetButton/index.ts';
 
-export interface WidgetButtonGroupProps extends WidgetGroupProps {
-  widgetId?: string;
+type Button = {
+  shape?: (typeof WidgetButtonEnums.shape)[number];
+  size?: (typeof WidgetButtonEnums.size)[number];
+};
+
+export interface WidgetRadioGroupProps extends WidgetGroupProps {
   name?: string;
   required?: boolean;
+  options: WidgetRadioProps[];
+  optionsProps?: WidgetRadioProps;
+  modelValue?: WidgetRadioValue;
+  button?: boolean | Button;
+  whole?: boolean;
+  readonly?: boolean;
+  prompt?: string;
 }
 </script>
 
 <script setup lang="ts">
-import { ref, computed, type PropType, watch } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { uid } from 'uid';
 
-const value = defineModel({ type: String, default: undefined });
+const props = withDefaults(defineProps<WidgetRadioGroupProps>(), {
+  name: `widget-${uid(6)}`,
+  required: false,
+  options: () => [],
+  optionsProps: () => ({}) as WidgetRadioProps,
+  modelValue: undefined,
+  button: false,
+  whole: false,
+  prompt: '',
+});
 
-const props = defineProps(
-  (() => {
-    const identify = `widget-${uid(6)}`;
-    return {
-      widgetId: {
-        type: String,
-        default: identify,
-      },
-      name: {
-        type: String,
-        default: identify,
-      },
-      label: {
-        type: String,
-        default: undefined,
-      },
-      required: {
-        type: Boolean,
-        default: false,
-      },
-      options: {
-        type: Array as PropType<WidgetRadioProps[]>,
-        default: () => [],
-      },
-      optionsProps: {
-        type: Object,
-        default: () => ({}),
-      },
+const emit = defineEmits(['update:modelValue', 'change', 'update:error', 'update:prompt']);
 
-      modelValue: {
-        type: [Boolean, Number, String],
-        default: undefined,
-      },
-
-      checked: {
-        type: [Boolean, Number, String],
-        default: undefined,
-      },
-
-      whole: {
-        type: Boolean,
-        default: false,
-      },
-      gap: {
-        type: [Number, String],
-        default: 2,
-        enums: WidgetGroupEnums.gap,
-        validator: (gap: number | string) =>
-          WidgetGroupEnums.gap.includes(typeof gap === 'number' ? gap : parseInt(gap)),
-      },
-      direction: {
-        type: String,
-        default: 'row',
-        enums: WidgetGroupEnums.direction,
-      },
-      justify: {
-        type: String,
-        default: 'start',
-        enums: WidgetGroupEnums.justify,
-        validator: (justify: string) => WidgetGroupEnums.justify.includes(justify),
-      },
-      wrap: {
-        type: String,
-        default: 'nowrap',
-        enums: WidgetGroupEnums.wrap,
-        validator: (wrap: string) => WidgetGroupEnums.wrap.includes(wrap),
-      },
-      button: {
-        type: [Boolean, Object],
-        default: false,
-      },
-      disabled: {
-        type: Boolean,
-        default: false,
-      },
-      error: {
-        type: Boolean,
-        default: false,
-      },
-      prompt: {
-        type: String,
-        default: undefined,
-      },
-    };
-  })(),
-);
-
-const emit = defineEmits(['update:modelValue', 'update:checked', 'change']);
-
-const localChecked = ref();
-
+// validate options
 watch(
   () => props.options,
   (options) => {
-    const values = options.reduce((acc, option, index) => {
+    const values = options.reduce((acc: WidgetRadioValue[], option, index) => {
       if (option.value === undefined && option.label === undefined) {
         console.error(
           `[WidgetRadioGroup] Error : The "value" or "label" property is required in the options[${index}].`,
@@ -160,34 +108,53 @@ watch(
   { immediate: true },
 );
 
+const localError = ref(false);
+const localPrompt = ref('');
+
 watch(
-  () => props.modelValue,
-  (newValue) => {
-    if (newValue !== undefined) {
-      if (props.checked !== undefined) {
-        console.error(
-          `[WidgetRadioGroup] Error : The "v-model", "modelValue" or "v-model:checked", "checked" cannot be used at the same time.`,
-        );
-      }
-      localChecked.value = newValue;
-    }
+  () => props.error,
+  (error) => {
+    localError.value = error;
   },
   { immediate: true },
 );
 
 watch(
-  () => props.checked,
-  (newValue) => {
-    if (newValue !== undefined) {
-      localChecked.value = newValue;
-    }
+  () => props.prompt,
+  (prompt) => {
+    localPrompt.value = prompt;
   },
   { immediate: true },
 );
 
-const onChange = (newValue: string, event: Event) => {
+const onChange = (newValue: WidgetRadioValue, event: Event) => {
   emit('update:modelValue', newValue);
-  emit('update:checked', newValue);
   emit('change', newValue, event);
+
+  localError.value = false;
+  localPrompt.value = '';
 };
+
+const buttonShape = computed(() =>
+  typeof props.button === 'object' && props.button.shape && props.button.shape !== 'rectangle'
+    ? props.button.shape
+    : '',
+);
+
+const buttonSize = computed(() =>
+  typeof props.button === 'object' && props.button.size && props.button.size !== 'normal'
+    ? props.button.size
+    : '',
+);
 </script>
+
+<style lang="scss">
+.widget-radio-group {
+  &.readonly {
+    cursor: not-allowed;
+    .widget-radio {
+      pointer-events: none;
+    }
+  }
+}
+</style>

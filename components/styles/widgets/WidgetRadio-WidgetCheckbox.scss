@@ -91,6 +91,10 @@
     --symbol-core-color: var(--color-major);
     --label-color: var(--color-major);
 
+    &.major{
+      --label-color: #{$color-lightest};
+    }
+
     &.widget-radio.disabled,
     &.widget-checkbox.disabled {
       --symbol-core-color: var(--color-disabled);
@@ -107,12 +111,17 @@
   }
 
   &.widget-button {
+    line-height: calc(var(--size) - (var(--border-size) * 2));
 
     .widget-radio__symbol,
     .widget-checkbox__symbol {
       position: absolute;
       opacity: 0;
     }
+  }
+
+  &.icon-only{
+    text-align: center;
   }
 }
 

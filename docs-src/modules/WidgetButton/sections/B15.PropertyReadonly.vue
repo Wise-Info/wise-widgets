@@ -3,36 +3,14 @@
     <hgroup class="section__title">
       <PropEnums
         widget="WidgetGroup"
-        prop="direction" />
+        prop="readonly" />
     </hgroup>
     <div style="display: flex; flex-direction: column; gap: 16px">
       <div>
         <WidgetButtonGroup
           :items="items"
-          label="row" />
-      </div>
-      <hr />
-      <div>
-        <WidgetButtonGroup
-          :items="items"
-          label="row-reverse"
-          direction="row-reverse" />
-      </div>
-      <hr />
-      <div>
-        <WidgetButtonGroup
-          :items="items"
-          label="column"
-          direction="column"
-          inline />
-      </div>
-      <hr />
-      <div>
-        <WidgetButtonGroup
-          :items="items"
-          label="column-reverse"
-          direction="column-reverse"
-          inline />
+          label="Button Group"
+          readonly />
       </div>
     </div>
   </section>

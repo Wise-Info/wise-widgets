@@ -46,10 +46,6 @@
   </section>
 </template>
 
-<script lang="ts">
-export const viewTitle = 'WidgetRadio';
-</script>
-
 <script setup lang="ts">
 import { WidgetRadio } from '@wiseinfo/wise-widgets';
 </script>

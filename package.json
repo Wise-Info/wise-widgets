@@ -18,9 +18,6 @@
   "license": "MIT",
   "type": "module",
   "main": "index.js",
-  "imports": {
-    "@wiseinfo/wise-widgets": "./components/index.ts"
-  },
   "scripts": {
     "dev": "vite --config vite.config.docs.js",
     "build:lib": "vue-tsc -b tsconfig.lib.json && vite build --config vite.config.lib.js",
@@ -49,9 +46,11 @@
     "prettier": "^3.4.1",
     "sass-embedded": "^1.81.0",
     "typescript": "~5.6.2",
+    "typescript-eslint": "^8.19.0",
     "vite": "^6.0.1",
     "vite-plugin-vue-devtools": "^7.6.7",
     "vitest": "^2.1.6",
+    "vue-eslint-parser": "^9.4.3",
     "vue-tsc": "^2.1.10"
   }
 }

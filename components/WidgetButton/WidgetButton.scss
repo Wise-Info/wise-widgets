@@ -26,6 +26,7 @@
   padding: 0 calc(var(--size) / 2);
   margin: 0;
   border: solid var(--border-size) transparent;
+  border-radius: var(--border-radius, 0);
 
   color: var(--label-color);
   font-family: inherit;
@@ -97,11 +98,11 @@
   }
 
   &.rounded {
-    border-radius: $border-radius;
+    --border-radius: var(--border-radius-rounded);
   }
 
   &.capsule {
-    border-radius: calc(var(--size) / 2);
+    --border-radius: calc(var(--size) / 2);
   }
 
   &.line {
@@ -110,6 +111,10 @@
     border-right: none;
     border-left: none;
     color: var(--color);
+    &.major{
+      background-color: var(--color);
+      color: var(--label-color);
+    }
   }
 
   &.mini {
@@ -183,7 +188,7 @@
     overflow: hidden;
     padding: 0;
 
-    #{$this}__label {
+    #{$this}__label, [class$="__label"] {
       display: none;
     }
   }

@@ -29,10 +29,6 @@ const items = [
   </section>
 </template>
 
-<script lang="ts">
-export const viewTitle = 'WidgetButtonGroup';
-</script>
-
 <script setup lang="ts">
 const items = [
   { type: 'text', label: 'Text', disabled: true },

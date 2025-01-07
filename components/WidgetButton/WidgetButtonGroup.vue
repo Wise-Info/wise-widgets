@@ -3,8 +3,8 @@
     class="widget-button-group"
     :class="{
       whole,
-      [itemsProps.shape]: whole && itemsProps.shape && itemsProps.shape !== 'rectangle',
-      [itemsProps.size]: itemsProps.size && itemsProps.size !== 'normal',
+      [itemsProps.shape as string]: whole && itemsProps.shape && itemsProps.shape !== 'rectangle',
+      [itemsProps.size as string]: itemsProps.size && itemsProps.size !== 'normal',
     }"
     v-bind="{
       label,
@@ -12,6 +12,7 @@
       direction,
       justify,
       wrap,
+      readonly,
       disabled,
       error,
     }">
@@ -36,74 +37,27 @@
   </WidgetGroup>
 </template>
 <script lang="ts">
-import { WidgetGroup, WidgetGroupEnums, WidgetGroupProps } from '../WidgetGroup/index.ts';
+import { WidgetGroup, WidgetGroupProps } from '../WidgetGroup/index.ts';
 import WidgetButton, { WidgetButtonProps } from './WidgetButton.vue';
 
 export interface WidgetButtonGroupProps extends WidgetGroupProps {
-  widgetId: string;
+  widgetId?: string;
   items: WidgetButtonProps[];
   itemsProps?: WidgetButtonProps;
   whole?: boolean;
+  readonly?: boolean;
 }
 </script>
 
 <script setup lang="ts">
-import { computed, type PropType } from 'vue';
+import { computed } from 'vue';
 import { uid } from 'uid';
 
-const props = defineProps({
-  widgetId: {
-    type: String,
-    default: () => `widget-${uid(6)}`,
-  },
-  label: {
-    type: String,
-    default: undefined,
-  },
-  items: {
-    type: Array as PropType<WidgetButtonProps[]>,
-    default: () => [],
-  },
-  itemsProps: {
-    type: Object,
-    default: () => ({}),
-  },
-  whole: {
-    type: Boolean,
-    default: false,
-  },
-  gap: {
-    type: [Number, String],
-    default: 1,
-    enums: WidgetGroupEnums.gap,
-    validator: (gap: number | string) =>
-      WidgetGroupEnums.gap.includes(typeof gap === 'number' ? gap : parseInt(gap)),
-  },
-  direction: {
-    type: String,
-    default: 'row',
-    enums: WidgetGroupEnums.direction,
-  },
-  justify: {
-    type: String,
-    default: 'start',
-    enums: WidgetGroupEnums.justify,
-    validator: (justify: string) => WidgetGroupEnums.justify.includes(justify),
-  },
-  wrap: {
-    type: String,
-    default: 'nowrap',
-    enums: WidgetGroupEnums.wrap,
-    validator: (wrap: string) => WidgetGroupEnums.wrap.includes(wrap),
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  error: {
-    type: Boolean,
-    default: false,
-  },
+const props = withDefaults(defineProps<WidgetButtonGroupProps>(), {
+  widgetId: `widget-${uid(6)}`,
+  items: () => [],
+  itemsProps: () => ({}),
+  whole: false,
 });
 
 const localProps = computed(() =>
@@ -115,3 +69,15 @@ const localProps = computed(() =>
   ),
 );
 </script>
+
+<style lang="scss">
+.widget-button-group {
+  &.readonly,
+  &.disabled {
+    .widget-button {
+      --color: var(--color-disabled);
+      cursor: not-allowed;
+    }
+  }
+}
+</style>

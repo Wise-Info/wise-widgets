@@ -12,7 +12,13 @@
 .disabled {
   &, [class$="__original"] {
     cursor: not-allowed !important;
+  }
+  [class$="__original"], [class$="__label"] {
     text-decoration: line-through;
+  }
+
+  .widget-label{
+    text-decoration: none;
   }
 
   &:active {

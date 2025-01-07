@@ -1,12 +1,16 @@
 <template>
   <section class="section">
     <hgroup class="section__title">
-      <h4>Basic Usage</h4>
+      <PropEnums
+        widget="WidgetGroup"
+        prop="readonly" />
     </hgroup>
 
     <WidgetRadioGroup
       v-model="checked"
-      :options="options" />
+      label="Readonly Radio Group"
+      :options="options"
+      readonly />
 
     <br /><br />
 
@@ -18,7 +22,8 @@
     <WidgetCode>
 {{`<WidgetRadioGroup
   v-model="checked"
-  :options="options" />
+  :options="options"
+  readonly />
 
 const checked = ref('Option 2');
 
@@ -33,12 +38,9 @@ const options = [
   </section>
 </template>
 
-<script lang="ts">
-export const viewTitle = 'WidgetRadioGroup';
-</script>
-
 <script setup lang="ts">
 import { ref } from 'vue';
+import { PropEnums } from '@components';
 
 const checked = ref('Option 2');
 

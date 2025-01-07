@@ -1,12 +1,13 @@
 <template>
   <button
-    class="widget-button"
+    class="widget-button widget-button__original"
     :class="{
       [type]: true,
       [shape]: shape !== 'rectangle',
       [size]: size !== 'normal',
       [state]: state !== 'normal',
       [usage]: usage !== 'normal',
+      disabled: disabled || state === 'disabled',
       error: error || usage === 'error',
       block: block,
       'icon-only': iconOnly,

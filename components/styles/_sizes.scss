@@ -18,7 +18,7 @@
   --size-6: calc(var(--size-base) * 6);
 
   --border-size:   #{$border-size};    // 2px
-  --border-radius: #{$border-radius};  // 4px
+  --border-radius-rounded: #{$border-radius-rounded};  // 4px
 
   --gap-0: 0;
   --gap-1: var(--size-base);

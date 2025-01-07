@@ -5,6 +5,7 @@
       [`gap-${gap}`]: true,
       reverse: ['row-reverse'].includes(direction),
       inline,
+      readonly,
       disabled,
       error,
     }"
@@ -21,7 +22,7 @@
 </template>
 <script lang="ts">
 const enums = {
-  gap: [0, 1, 2, 3, 4],
+  gap: [0, 1, 2, 3, 4, '0', '1', '2', '3', '4'],
   direction: ['row', 'row-reverse', 'column', 'column-reverse'],
   justify: ['start', 'end', 'center', 'space-between', 'space-around', 'space-evenly'],
   wrap: ['nowrap', 'wrap', 'wrap-reverse'],
@@ -40,6 +41,7 @@ export interface WidgetGroupProps {
   direction?: WidgetGroupDirection;
   justify?: WidgetGroupJustify;
   wrap?: WidgetGroupWrap;
+  readonly?: boolean;
   disabled?: boolean;
   error?: boolean;
 }
@@ -57,7 +59,7 @@ const props = defineProps({
     type: [Number, String],
     default: 1,
     enums: WidgetGroupEnums.gap,
-    validator: (gap: number | string) =>
+    validator: (gap: number | string): boolean =>
       WidgetGroupEnums.gap.includes(typeof gap === 'number' ? gap : parseInt(gap)),
   },
   inline: {
@@ -81,6 +83,10 @@ const props = defineProps({
     default: 'nowrap',
     enums: WidgetGroupEnums.wrap,
     validator: (wrap: string) => WidgetGroupEnums.wrap.includes(wrap),
+  },
+  readonly: {
+    type: Boolean,
+    default: false,
   },
   disabled: {
     type: Boolean,

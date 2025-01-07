@@ -24,6 +24,7 @@
   }
 
   &__inner{
+    position: relative;
     display: flex;
     gap: var(--gap, var(--gap-1));
     flex-direction: var(--direction);
@@ -54,7 +55,7 @@
 
   &.whole {
     .rounded {
-      --border-radius: var(--border-radius);
+      --border-radius: var(--border-radius-rounded);
     }
     &.capsule{
       --border-radius: calc(var(--size) / 2);

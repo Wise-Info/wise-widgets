@@ -2,7 +2,7 @@
   <section class="section">
     <hgroup class="section__title">
       <PropEnums
-        widget="WidgetButtonGroup"
+        widget="WidgetGroup"
         prop="gap" />
     </hgroup>
     <div class="gap-group">
@@ -38,12 +38,7 @@
   </section>
 </template>
 
-<script lang="ts">
-export const viewTitle = 'WidgetButtonGroup';
-</script>
-
 <script setup lang="ts">
-import { WidgetButtonGroup } from '@wiseinfo/wise-widgets';
 import { PropEnums } from '@components';
 
 const items = [

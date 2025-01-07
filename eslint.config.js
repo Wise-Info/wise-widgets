@@ -1,9 +1,12 @@
 import globals from 'globals';
+
 import js from '@eslint/js';
-import tsPlugin from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
-import importPlugin from 'eslint-plugin-import';
+
+import tseslint from "typescript-eslint";
+
 import vuePlugin from 'eslint-plugin-vue';
+
+import importPlugin from 'eslint-plugin-import';
 
 import prettierConfig from 'eslint-config-prettier';
 import prettierPlugin from 'eslint-plugin-prettier';
@@ -12,53 +15,33 @@ export default [
   // Base configuration
   {
     ignores: ['node_modules/**', 'dist/**'],
-  },
-  // JavaScript configuration
-  js.configs.recommended,
-  {
+    files: ["**/*.{js,mjs,cjs,ts,vue}"],
     languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
       globals: {
         ...globals.browser,
         ...globals.node,
       },
+      ecmaVersion: 'latest',
+      sourceType: 'module',
     },
     rules: {
       'no-console': ['warn', { allow: ['debug', 'info', 'warn', 'error'] }],
     },
   },
-
+  // JavaScript configuration
+  js.configs.recommended,
   // TypeScript configuration
-  {
-    files: ['**/*.ts', '**/*.tsx'],
-    languageOptions: {
-      parser: tsParser,
-      // parserOptions: {
-      //   project: './tsconfig.json',
-      // },
-    },
-    plugins: {
-      '@typescript-eslint': tsPlugin,
-    },
-    rules: {
-      ...tsPlugin.configs.recommended.rules,
-      ...tsPlugin.configs['recommended-requiring-type-checking'].rules,
-      'import/no-unresolved': [2, { ignore: ['^#.+$', '^@.+$'] }],
-    },
-  },
+  ...tseslint.configs.recommended,
   // Vue configuration
   ...vuePlugin.configs['flat/recommended'],
   {
     files: ['**/*.vue'],
-    // languageOptions: {
-    //   parser: 'vue-eslint-parser',
-    // },
-    plugins: {
-      vue: vuePlugin,
+    languageOptions: {
+      parserOptions: {
+        parser: tseslint.parser
+      }
     },
     rules: {
-      ...vuePlugin.configs.recommended.rules,
       'vue/multi-word-component-names': 'off',
       'vue/valid-define-props': 'off',
     },

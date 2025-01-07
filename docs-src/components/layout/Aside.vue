@@ -435,23 +435,30 @@ const toggleAsideCollapsedState = () => {
   }
 
   .aside-nav {
-    &__item-link::before {
-      display: none;
+    &__item-link {
+      pointer-events: auto;
+
+      &::before {
+        display: none;
+      }
     }
 
     &__item-label {
-      position: absolute;
-      left: $size-base * 10;
+      --background-color: var(--color-lightest);
 
-      // opacity: 0.9;
+      position: absolute;
+      left: $size-base * 9.5;
+      z-index: 2;
+
+      // opacity: 0.96;
       display: none;
 
-      padding: 0 $size-base;
-      background: var(--color-gray-40);
-      border-radius: $border-radius;
+      padding: 0 ($size-base * 2.5);
+      background: var(--background-color);
+      border-radius: $border-radius-rounded;
 
-      color: var(--color-lightest);
-      font-size: $size-base * 1.5;
+      color: var(--color-major);
+      font-weight: bold;
 
       &::before {
         content: '';
@@ -464,40 +471,55 @@ const toggleAsideCollapsedState = () => {
         display: block;
         border: solid 6px transparent;
         border-left-width: 0;
-        border-right-color: var(--color-gray-40);
+        border-right-color: var(--background-color);
       }
     }
 
     &__sub-item-menu {
       position: absolute;
-      top: 0;
+      top: $size-base * 0.5;
       left: $size-base * 9;
       display: none;
       height: auto;
 
-      padding: $size-base 0;
+      padding: ($size-base * 7.25) 0 ($size-base * 0.5);
       background: var(--color-lightest);
       border: solid 1px var(--color-light);
+      border-radius: $border-radius-rounded;
       box-shadow: 0 0 ($size-base * 2) 0 var(--global-shadow-color);
       margin: -$size-base 0 0;
 
       &::before {
         content: '';
         position: absolute;
+        top: $size-base * 6.25;
+        left: $size-base * 2;
+        right: $size-base * 2;
+        border-top: solid $border-size var(--color-gray-10);
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: $size-base * 0.5;
         left: -$size-base;
         display: block;
         width: $size-base;
-        height: $size-base * 6;
+        height: $size-base * 8;
       }
 
       .aside-nav__sub-item {
+        &-link {
+          height: $size-base * 5;
+        }
+
         &-icon {
           display: block;
         }
 
         &-label {
           padding: 0 ($size-base * 2.5) 0 ($size-base * 2);
-          margin: $size-base 0;
+          margin: ($size-base * 0.5) 0;
         }
       }
     }
