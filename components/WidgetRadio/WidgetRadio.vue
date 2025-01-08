@@ -38,8 +38,8 @@ export type WidgetRadioValue = boolean | number | string;
 export interface WidgetRadioProps {
   name: string;
   label?: number | string;
-  value: WidgetRadioValue;
-  checked: boolean;
+  value?: WidgetRadioValue;
+  checked?: boolean;
   disabled: boolean;
   icon?: string | WidgetIconProps;
   iconOnly: boolean;

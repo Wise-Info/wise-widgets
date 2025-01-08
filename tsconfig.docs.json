@@ -28,9 +28,5 @@
       "@components": ["./docs-src/components/index.ts"]
     }
   },
-  "include": [
-    "docs-src/**/*.ts",
-    "docs-src/**/*.vue",
-    "docs-src/modules/WidgetRadio/sections/A01.BasicUsage.vue"
-  ]
+  "include": ["docs-src/**/*.ts", "docs-src/**/*.vue"]
 }

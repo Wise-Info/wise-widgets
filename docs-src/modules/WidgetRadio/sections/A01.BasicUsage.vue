@@ -28,4 +28,6 @@
 export const viewTitle = 'WidgetRadio';
 </script>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { WidgetRadio } from '@wiseinfo/wise-widgets';
+</script>
