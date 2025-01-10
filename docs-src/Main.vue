@@ -4,13 +4,14 @@
     <HeaderBar v-if="!isFrameFree" />
     <router-view />
   </main>
+  <!-- <AnchorNav v-if="!isFrameFree" /> -->
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { Aside, HeaderBar } from './components/index.ts';
+import { Aside, HeaderBar, AnchorNav } from './components/index.ts';
 
 const route = useRoute();
 

@@ -9,27 +9,28 @@
       </h3>
     </div>
     <div class="view__body">
-      <template
+      <component
+        :is="section.component"
         v-for="section in view.sections"
-        :key="`section-${section.index}-${section.component.__hmrId}`">
-        <component
-          :is="section.component"
-          v-bind="section" />
-      </template>
+        :id="`section-${section.index}-${section.name}`"
+        :key="`section-${section.index}-${section.name}`"
+        v-bind="section" />
     </div>
   </div>
 </template>
-<script setup lang="ts">
-import { computed } from 'vue';
-import type { DefineComponent } from 'vue';
-
-interface Section {
+<script lang="ts">
+export interface Section {
   group: string;
   viewTitle?: string;
   index: number;
   name: string;
+  title: string;
   component: DefineComponent;
 }
+</script>
+<script setup lang="ts">
+import { computed } from 'vue';
+import type { DefineComponent } from 'vue';
 
 interface Views {
   [key: string]: {

@@ -4,35 +4,25 @@ import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router
 
 import { routes } from './routes.ts';
 
-import Demo from './components/Demo.vue';
+import Demo, { type Section } from './components/Demo.vue';
 
-const modules: {
-  [key: string]: DefineComponent;
-} = import.meta.glob('./modules/**/sections/*.vue', {
-  eager: true,
-});
+const modules: { [key: string]: DefineComponent } = import.meta.glob(
+  './modules/**/sections/*.vue',
+  { eager: true },
+);
 
-interface ModulesSections {
-  [key: string]: {
-    group: string;
-    viewTitle?: string;
-    index: number;
-    name: string;
-    component: DefineComponent;
-  }[];
-}
-
-const moduleSections: ModulesSections = Object.entries(modules).reduce(
-  (acc: ModulesSections, [path, module]) => {
+const moduleSections = Object.entries(modules).reduce(
+  (acc: { [key: string]: Section[] }, [path, module]) => {
     const match = path.match(
-      /\.\/modules\/(?<module>[\w]+)\/sections\/(?<group>[A-F]*)(?<order>[\d]+)\.(?<section>[^/]+).vue$/,
+      /\.\/modules\/(?<module>[\w]+)\/sections\/(?<group>[A-F]*)(?<index>[\d]+)\.(?<section>[^/]+).vue$/,
     );
     if (match && match.groups)
       (acc[match.groups.module] ||= []).push({
         group: match.groups.group || 'A',
         viewTitle: module.viewTitle,
-        index: parseInt(match.groups.order, 10),
-        name: match.groups.section.replace(/((?<!^)[A-Z])/g, (_, c) => ` ${c}`),
+        index: parseInt(match.groups.index, 10),
+        name: match.groups.section,
+        title: match.groups.section.replace(/((?<!^)[A-Z])/g, (_, c) => ` ${c}`),
         component: module.default,
       });
     return acc;
