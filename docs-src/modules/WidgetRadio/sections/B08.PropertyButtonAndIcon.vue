@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <hgroup class="section__title">
-      <h4>Property [ button.shape ]</h4>
+      <h4>Property [ button.shape, options.option.icon, options.option.iconOnly ]</h4>
     </hgroup>
 
     <WidgetRadioGroup
@@ -30,12 +30,21 @@
 
 const align = ref('left');
 
-const alignOptions = [
-  { label: 'Left', value: 'left', icon: 'e236', iconOnly: true },
-  { label: 'Center', value: 'center', icon: 'e234', iconOnly: true },
-  { label: 'Right', value: 'right', icon: 'e237', iconOnly: true },
-  { label: 'Justify', value: 'justify', icon: 'e235', iconOnly: true },
-];`}}
+const alignOptions = computed(() =>
+  [
+    { label: 'Left', value: 'left', icon: 'e236', iconOnly: true },
+    { label: 'Center', value: 'center', icon: 'e234', iconOnly: true },
+    { label: 'Right', value: 'right', icon: 'e237', iconOnly: true },
+    { label: 'Justify', value: 'justify', icon: 'e235', iconOnly: true },
+  ].map((option) =>
+    option.value === align.value
+      ? {
+          ...option,
+          iconOnly: false,
+        }
+      : option,
+  ),
+);`}}
     </WidgetCode>
     <!-- prettier-ignore-end -->
   </section>

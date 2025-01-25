@@ -4,7 +4,7 @@
     <HeaderBar v-if="!isFrameFree" />
     <router-view />
   </main>
-  <!-- <AnchorNav v-if="!isFrameFree" /> -->
+  <AnchorNav v-if="!isFrameFree" />
 </template>
 
 <script setup lang="ts">

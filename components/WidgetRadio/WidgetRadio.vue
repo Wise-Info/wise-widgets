@@ -30,8 +30,15 @@
 </template>
 
 <script lang="ts">
-import { computed } from 'vue';
 import { WidgetIcon, WidgetIconProps } from '../WidgetIcon/index.ts';
+
+import { enumSize, type Size } from '../enums.ts';
+
+const enums = {
+  size: enumSize,
+};
+
+export const WidgetRadioEnums = enums;
 
 export type WidgetRadioValue = boolean | number | string;
 
@@ -40,14 +47,17 @@ export interface WidgetRadioProps {
   label?: number | string;
   value?: WidgetRadioValue;
   checked?: boolean;
-  disabled: boolean;
+  size?: Size;
   icon?: string | WidgetIconProps;
   iconOnly: boolean;
+  disabled: boolean;
   events: Record<string, (event: Event) => void>;
 }
 </script>
 
-<script setup lang="ts">
+<script lang="ts" setup>
+import { computed } from 'vue';
+
 const props = defineProps({
   name: {
     type: String,
@@ -65,15 +75,21 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  disabled: {
-    type: Boolean,
-    default: false,
+  size: {
+    type: String,
+    default: 'normal',
+    enums: enums.size,
+    validator: (size: string) => enums.size.includes(size),
   },
   icon: {
     type: [String, Object],
     default: undefined,
   },
   iconOnly: {
+    type: Boolean,
+    default: false,
+  },
+  disabled: {
     type: Boolean,
     default: false,
   },

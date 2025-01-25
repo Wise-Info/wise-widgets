@@ -38,6 +38,6 @@
   </section>
 </template>
 
-<script setup></script>
+<script lang="ts"></script>
 
 <style lang="scss"></style>

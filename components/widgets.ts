@@ -6,6 +6,8 @@ export * from './WidgetButton/index.ts';
 
 export * from './WidgetGroup/index.ts';
 
+export * from './WidgetSwitch/index.ts';
+
 export * from './WidgetRadio/index.ts';
 
 export * from './WidgetCard/index.ts';

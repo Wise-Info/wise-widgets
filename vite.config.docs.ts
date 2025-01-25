@@ -17,6 +17,24 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       input: { docs: './docs-src/index.html' },
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+          if (id.includes('/docs-src/components/')) {
+            return 'docs-components';
+          }
+          if (id.includes('/docs-src/modules/')) {
+            const name = id
+              .split('/docs-src/modules/')[1]
+              .split('/')[0]
+              .replace(/(?<!^)([A-Z])/g, '-$1')
+              .toLowerCase();
+            return `docs-${name}`;
+          }
+        },
+      },
     },
   },
 

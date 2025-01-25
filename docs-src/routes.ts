@@ -19,6 +19,7 @@ export const routes: string[] = [
   '/components/navigation/widget-steps',
   '/components/navigation/widget-tabs',
   '/components/navigation/widget-pagination',
+  '/components/data-input/widget-switch',
   '/components/data-input/widget-radio',
   '/components/data-input/widget-checkbox',
   '/components/data-input/widget-select',

@@ -1,0 +1,108 @@
+.widget-switch{
+  $this: &;
+
+  --size: var(--group-size, var(--size-normal));
+
+  --switch-height: calc(var(--size) - var(--size-base));
+
+  --switch-background-color: var(--color-minor);
+
+  --switch-thumb-gap: calc(var(--switch-height) * 0.125);
+
+  --switch-thumb-size: calc(var(--switch-height) - var(--switch-thumb-gap) * 2);
+
+  --switch-push-offset: calc(var(--switch-thumb-size) + var(--switch-thumb-gap) * 3);
+  --switch-pull-offset: calc(var(--switch-push-offset) / 2.5);
+  --switch-active-offset: 0;
+
+  --switch-thumb-left: 0;
+  --switch-thumb-transform: translateX(0%);
+
+  position: relative;
+
+  &:focus-within,
+  &:hover {
+    --switch-background-color: var(--color-gray-40);
+
+    #{$this}__original:checked + #{$this}__symbol {
+      --switch-background-color: var(--color-major-toggle);
+    }
+  }
+
+  &:active &__symbol{
+    --switch-active-offset: calc(var(--switch-thumb-size) * 0.2);
+
+    &::before {
+      width: calc(var(--switch-thumb-size) * 1.2);
+    }
+  }
+
+
+  &__original {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+
+    &:focus + #{$this}__symbol {
+      --switch-background-color: var(--color-gray-40);
+    }
+
+    &:checked + #{$this}__symbol {
+      --switch-background-color: var(--color-major);
+      --switch-thumb-left: calc(100% - var(--switch-thumb-gap) * 2);
+      --switch-thumb-transform: translateX(-100%);
+
+
+    }
+
+    &:checked + #{$this}__symbol + #{$this}__label {
+      --label-color: var(--color-major);
+    }
+  }
+
+  &__symbol {
+    position: relative;
+
+    vertical-align: calc(var(--switch-height) * -0.25);
+
+    display: inline-block;
+
+    min-width: calc(var(--switch-height) * 2);
+    height: var(--switch-height);
+    overflow: hidden;
+
+    border-radius: var(--switch-height);
+
+    background-color: var(--switch-background-color);
+
+    transition: background-color 0.4s;
+
+
+    &::before {
+      content: "";
+
+      position: absolute;
+      top: 0;
+      left: var(--switch-thumb-left);
+      transform: var(--switch-thumb-transform);
+
+      display: block;
+      width: var(--switch-thumb-size);
+      height: var(--switch-thumb-size);
+
+      border-radius: var(--switch-thumb-size);
+
+      background-color: var(--color-lightest);
+
+      margin: var(--switch-thumb-gap);
+
+      transition: left 0.4s, transform 0.4s, width 0.4s;
+    }
+  }
+
+  &__label{
+    margin: 0 0 0 var(--size-base);
+    color: var(--label-color);
+  }
+}

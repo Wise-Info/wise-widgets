@@ -15,7 +15,8 @@
     :type="type === 'submit' || type === 'reset' ? type : 'button'"
     :autofocus="autoFocus"
     :disabled="disabled || state === 'disabled'"
-    :title="label">
+    :title="label"
+    :aria-label="label">
     <WidgetIcon
       v-if="icon || state === 'running'"
       class="widget-button__icon"
@@ -37,12 +38,12 @@
 <script lang="ts">
 import type { StyleValue } from 'vue';
 
-import { enumUsage } from '../enums.ts';
+import { enumSize, type Size, enumUsage, type Usage } from '../enums.ts';
 
 const enums = {
   type: ['text', 'minor', 'major', 'reset', 'button', 'submit'],
   shape: ['rectangle', 'rounded', 'capsule', 'line'],
-  size: ['atom', 'micro', 'mini', 'normal', 'large', 'extra'],
+  size: enumSize,
   state: ['normal', 'active', 'running', 'disabled', 'error'],
   usage: enumUsage,
   textTransform: ['capitalize', 'lowercase', 'uppercase'],
@@ -52,19 +53,17 @@ export const WidgetButtonEnums = enums;
 
 type WidgetButtonType = (typeof enums.type)[number];
 type WidgetButtonShape = (typeof enums.shape)[number];
-type WidgetButtonSize = (typeof enums.size)[number];
 type WidgetButtonState = (typeof enums.state)[number];
-type WidgetButtonUsage = (typeof enums.usage)[number];
 type WidgetButtonTextTransform = (typeof enums.textTransform)[number];
 
 export interface WidgetButtonProps {
   label?: string;
   type?: WidgetButtonType;
   shape?: WidgetButtonShape;
-  size?: WidgetButtonSize;
+  size?: Size;
   block?: boolean;
   state?: WidgetButtonState;
-  usage?: WidgetButtonUsage;
+  usage?: Usage;
   autoFocus?: boolean;
   disabled?: boolean;
   error?: boolean;

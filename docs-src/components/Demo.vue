@@ -1,7 +1,9 @@
 <template>
   <div
-    v-for="(view, index) in views"
-    :key="index"
+    v-for="view in views"
+    :id="`view-${view.group}-${view.viewTitle}`"
+    :key="`view-${view.group}-${view.viewTitle}`"
+    :data-title="view.viewTitle || $route.name"
     class="view">
     <div class="view__header">
       <h3 class="view__title">
@@ -14,29 +16,30 @@
         v-for="section in view.sections"
         :id="`section-${section.index}-${section.name}`"
         :key="`section-${section.index}-${section.name}`"
+        :data-title="section.sectionTitle"
         v-bind="section" />
     </div>
   </div>
 </template>
 <script lang="ts">
+interface View {
+  group: string;
+  viewTitle?: string;
+  sections: Section[];
+}
+
 export interface Section {
   group: string;
   viewTitle?: string;
   index: number;
   name: string;
-  title: string;
+  sectionTitle: string;
   component: DefineComponent;
 }
 </script>
 <script setup lang="ts">
 import { computed } from 'vue';
 import type { DefineComponent } from 'vue';
-
-interface Views {
-  [key: string]: {
-    sections: Section[];
-  };
-}
 
 const props = defineProps({
   widget: {
@@ -49,10 +52,16 @@ const props = defineProps({
   },
 });
 
-const views = computed(() =>
+const views = computed<View[]>(() =>
   Object.values(
-    props.sections.reduce<Views>((acc, section) => {
-      acc[section.group] ||= { sections: [] };
+    props.sections.reduce<{
+      [group: string]: View;
+    }>((acc, section) => {
+      acc[section.group] ||= {
+        group: section.group,
+        viewTitle: section.viewTitle,
+        sections: [],
+      };
       acc[section.group].sections.push(section);
       return acc;
     }, {}),

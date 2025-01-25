@@ -44,7 +44,7 @@
           </span>
         </span>
         <template v-if="Object.keys(item?.children || {}).length">
-          <div class="aside-nav__sub-item-menu">
+          <menu class="aside-nav__sub-item-menu">
             <li
               v-for="subItem in Object.values(item.children || {})"
               :key="subItem.meta.id"
@@ -58,7 +58,7 @@
                 </span>
               </router-link>
             </li>
-          </div>
+          </menu>
         </template>
       </li>
     </nav>
@@ -390,6 +390,9 @@ const toggleAsideCollapsedState = () => {
 
   &__sub-item {
     &-menu {
+      padding: 0;
+      margin: 0;
+      list-style: none;
       &--collapsed {
         height: 0;
         overflow: hidden;
@@ -545,7 +548,7 @@ const toggleAsideCollapsedState = () => {
   }
 }
 
-@include media-desktop {
+@include media-mobile {
   .aside {
     @include aside--collapsed;
   }

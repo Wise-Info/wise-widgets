@@ -5,6 +5,8 @@
   // flex-direction: column;
   padding: 0 ($size-base * 3);
 
+  scroll-margin-top: $size-base * 5;
+
   &__header {
     $this: &;
 
@@ -45,6 +47,8 @@
 .section{
   padding: 0 ($size-base * 2);
   margin: 0 0 ($size-base * 8);
+
+  scroll-margin-top: $size-base * 15;
 
   &__title{
     display: flex;

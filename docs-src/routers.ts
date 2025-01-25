@@ -22,7 +22,7 @@ const moduleSections = Object.entries(modules).reduce(
         viewTitle: module.viewTitle,
         index: parseInt(match.groups.index, 10),
         name: match.groups.section,
-        title: match.groups.section.replace(/((?<!^)[A-Z])/g, (_, c) => ` ${c}`),
+        sectionTitle: match.groups.section.replace(/((?<!^)[A-Z])/g, (_, c) => ` ${c}`),
         component: module.default,
       });
     return acc;
