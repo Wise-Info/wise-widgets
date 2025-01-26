@@ -1,6 +1,6 @@
 import type { DefineComponent } from 'vue';
 
-import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 
 import { routes } from './routes.ts';
 
@@ -31,7 +31,8 @@ const moduleSections = Object.entries(modules).reduce(
 );
 
 const router = createRouter({
-  history: import.meta.env.DOCS === 'true' ? createWebHashHistory() : createWebHistory(),
+  history:
+    import.meta.env.DOCS === 'true' ? createWebHistory(import.meta.env.PATH) : createWebHistory(),
   routes: [...new Set(routes)].map((path, order) => {
     const segments = path.split('/').reduce((acc: string[], cur: string) => {
       if (cur) acc.push(cur.trim());

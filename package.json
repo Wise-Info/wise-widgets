@@ -21,7 +21,7 @@
   "scripts": {
     "dev": "vite --config vite.config.docs.js",
     "build:lib": "vue-tsc -b tsconfig.lib.json && vite build --config vite.config.lib.js",
-    "build:docs": "dotenv -e .env.docs vue-tsc -b && vite build --config vite.config.docs.js"
+    "build:docs": "dotenv -e .env.docs vue-tsc -b && vite build --config vite.config.docs.js && cp docs/index.html docs/404.html"
   },
   "dependencies": {
     "@fontsource/material-symbols-outlined": "^5.1.3",

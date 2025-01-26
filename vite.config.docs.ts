@@ -5,11 +5,12 @@ import vueDevTools from 'vite-plugin-vue-devtools';
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: './',
+  base: process.env.NODE_ENV === 'production' ? '/wise-widgets/' : './',
   root: './docs-src',
   server: {
     open: true,
     port: 4000,
+    cors: false,
   },
   build: {
     outDir: '../docs',
@@ -17,27 +18,8 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       input: { docs: './docs-src/index.html' },
-      output: {
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            return 'vendor';
-          }
-          if (id.includes('/docs-src/components/')) {
-            return 'docs-components';
-          }
-          if (id.includes('/docs-src/modules/')) {
-            const name = id
-              .split('/docs-src/modules/')[1]
-              .split('/')[0]
-              .replace(/(?<!^)([A-Z])/g, '-$1')
-              .toLowerCase();
-            return `docs-${name}`;
-          }
-        },
-      },
     },
   },
-
   plugins: [vue(), vueDevTools()],
   resolve: {
     alias: {
