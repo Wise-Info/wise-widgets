@@ -15,10 +15,13 @@
       wrap,
       readonly,
       disabled,
-      error: localError,
-    }">
+      error,
+    }"
+    role="radiogroup"
+    :aria-required="required"
+    :aria-label="label">
     <WidgetRadio
-      v-for="(option, index) in options"
+      v-for="(option, index) in localOptions"
       :key="`${name}-${index}`"
       :index="index"
       :class="{
@@ -28,6 +31,7 @@
         [buttonShape]: buttonShape,
         [buttonSize]: buttonSize,
       }"
+      :required
       v-bind="option"
       :checked="modelValue === (option.value || option.label || index)"
       :disabled="disabled || option.disabled"
@@ -40,9 +44,9 @@
         }
       " />
     <div
-      v-if="localPrompt"
+      v-if="prompt"
       class="widget-prompt widget-radio-group__prompt">
-      {{ localPrompt }}
+      {{ prompt }}
     </div>
   </WidgetGroup>
 </template>
@@ -65,26 +69,50 @@ export interface WidgetRadioGroupProps extends WidgetGroupProps {
   button?: boolean | Button;
   whole?: boolean;
   readonly?: boolean;
+  validator?: (value: WidgetRadioValue) => boolean | { error: boolean; prompt?: string };
+  error?: boolean;
   prompt?: string;
 }
 </script>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { computed, watch } from 'vue';
 import { uid } from 'uid';
 
-const props = withDefaults(defineProps<WidgetRadioGroupProps>(), {
-  name: `widget-${uid(6)}`,
-  required: false,
-  options: () => [],
-  optionsProps: () => ({}) as WidgetRadioProps,
-  modelValue: undefined,
-  button: false,
-  whole: false,
-  prompt: '',
+const props = withDefaults(
+  defineProps<Omit<WidgetRadioGroupProps, 'modelValue' | 'error' | 'prompt'>>(),
+  {
+    name: `widget-${uid(6)}`,
+    required: false,
+    options: () => [],
+    optionsProps: () => ({}) as WidgetRadioProps,
+    button: false,
+    whole: false,
+    validator: undefined,
+  },
+);
+
+const emit = defineEmits(['change']);
+
+const value = defineModel<WidgetRadioValue>();
+
+const error = defineModel<boolean>('error', {
+  type: Boolean,
+  default: false,
 });
 
-const emit = defineEmits(['update:modelValue', 'change', 'update:error', 'update:prompt']);
+const prompt = defineModel<string>('prompt', {
+  type: String,
+  default: '',
+});
+
+// merge optionsProps with options
+const localOptions = computed(() =>
+  props.options.map((option) => ({
+    ...props.optionsProps,
+    ...option,
+  })),
+);
 
 // validate options
 watch(
@@ -92,7 +120,7 @@ watch(
   (options) => {
     const values = options.reduce((acc: WidgetRadioValue[], option, index) => {
       if (option.value === undefined && option.label === undefined) {
-        console.error(
+        console.warn(
           `[WidgetRadioGroup] Error : The "value" or "label" property is required in the options[${index}].`,
         );
       }
@@ -100,7 +128,7 @@ watch(
       return acc;
     }, []);
     if (new Set(values).size !== values.length) {
-      console.error(
+      console.warn(
         `[WidgetRadioGroup] Error : The "value" property in the options must be unique.`,
       );
     }
@@ -108,31 +136,23 @@ watch(
   { immediate: true },
 );
 
-const localError = ref(false);
-const localPrompt = ref('');
-
-watch(
-  () => props.error,
-  (error) => {
-    localError.value = error;
-  },
-  { immediate: true },
-);
-
-watch(
-  () => props.prompt,
-  (prompt) => {
-    localPrompt.value = prompt;
-  },
-  { immediate: true },
-);
-
 const onChange = (newValue: WidgetRadioValue, event: Event) => {
-  emit('update:modelValue', newValue);
   emit('change', newValue, event);
 
-  localError.value = false;
-  localPrompt.value = '';
+  value.value = newValue;
+
+  error.value = false;
+  prompt.value = '';
+
+  if (props.validator) {
+    const validatorResult = props.validator(newValue);
+    if (typeof validatorResult === 'object') {
+      error.value = validatorResult.error;
+      prompt.value = validatorResult.prompt || '';
+    } else if (validatorResult === false) {
+      error.value = true;
+    }
+  }
 };
 
 const buttonShape = computed(() =>

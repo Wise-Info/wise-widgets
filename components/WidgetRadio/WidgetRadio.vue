@@ -10,10 +10,11 @@
       <input
         class="widget-radio__original"
         type="radio"
-        :name="name"
+        :required
+        :name
         :value="value || label"
-        :checked="checked"
-        :disabled="disabled"
+        :checked
+        :disabled
         @change.stop="onChange" />
     </span>
     <WidgetIcon
@@ -43,15 +44,16 @@ export const WidgetRadioEnums = enums;
 export type WidgetRadioValue = boolean | number | string;
 
 export interface WidgetRadioProps {
-  name: string;
+  name?: string;
+  required?: boolean;
   label?: number | string;
   value?: WidgetRadioValue;
   checked?: boolean;
   size?: Size;
   icon?: string | WidgetIconProps;
-  iconOnly: boolean;
-  disabled: boolean;
-  events: Record<string, (event: Event) => void>;
+  iconOnly?: boolean;
+  disabled?: boolean;
+  events?: Record<string, (event: Event) => void>;
 }
 </script>
 
@@ -62,6 +64,10 @@ const props = defineProps({
   name: {
     type: String,
     default: undefined,
+  },
+  required: {
+    type: Boolean,
+    default: false,
   },
   label: {
     type: [Number, String],

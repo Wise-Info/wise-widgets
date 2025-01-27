@@ -1,37 +1,26 @@
 <template>
   <section class="section">
     <hgroup class="section__title">
-      <h4>Property [ error, prompt ]</h4>
+      <PropEnums
+        widget="WidgetRadioGroup"
+        prop="validator" />
     </hgroup>
 
     <WidgetRadioGroup
       v-model="checked"
       required
-      label="Error Radio Group"
-      :options="options"
-      error
-      prompt="Field is required" />
-
-    <br /><br /><br /><br />
-
-    <WidgetRadioGroup
-      v-model="checked"
-      required
-      label="Error Radio Group"
-      :options="options"
-      button
-      error
-      prompt="Field is required" />
+      label="Radio Group Validator"
+      :options
+      :validator />
 
     <!-- prettier-ignore -->
     <WidgetCode>
 {{`<WidgetRadioGroup
   v-model="checked"
   required
-  label="Error Radio Group"
-  :options="options"
-  error
-  prompt="Field is required" />
+  label="Radio Group Validator"
+  :options
+  :validator />
 
 const checked = ref(undefined);
 
@@ -40,7 +29,13 @@ const options = [
   { label: 'Option 2' },
   { label: 'Option 3' },
   { label: 'Option 4' },
-];`}}
+];
+
+const validator = (value: string) => {
+  if (value !== 'Option 2') {
+    return { error: true, prompt: 'Only "Option 2" is allowed' };
+  }
+};`}}
     </WidgetCode>
     <!-- prettier-ignore-end -->
   </section>
@@ -57,4 +52,10 @@ const options = [
   { label: 'Option 3' },
   { label: 'Option 4' },
 ];
+
+const validator = (value: string) => {
+  if (value !== 'Option 2') {
+    return { error: true, prompt: 'Only "Option 2" is allowed' };
+  }
+};
 </script>
