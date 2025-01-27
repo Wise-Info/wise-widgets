@@ -1,33 +1,48 @@
-name: Generate Docs
+name: Generate Docs and Deploy
 
 on:
   push:
     branches:
       - develop
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
-  build:
+  build_and_deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+      # 1) checkout
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '20'
+      # 2) setup node
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
 
-    - name: Install dependencies
-      run: yarn
+      # 3) install
+      - name: Install dependencies
+        run: yarn
 
-    - name: Generate Documentation
-      run: yarn build:docs
+      # 4) build docs
+      - name: Generate Documentation
+        run: yarn build:docs
 
-    - name: Commit files
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add docs/* -f
-        git commit -m "Update docs @ $(date '+%Y.%m.%d')" -a || echo "No changes to commit"
-        git push
+      # 5) setup pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # 6) upload docs
+      - name: Upload artifact to Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './docs'
+
+      # 7) deploy
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -32,7 +32,9 @@ const moduleSections = Object.entries(modules).reduce(
 
 const router = createRouter({
   history:
-    import.meta.env.DOCS === 'true' ? createWebHistory(import.meta.env.PATH) : createWebHistory(),
+    import.meta.env.MODE === 'production'
+      ? createWebHistory(import.meta.env.BASE_URL)
+      : createWebHistory(),
   routes: [...new Set(routes)].map((path, order) => {
     const segments = path.split('/').reduce((acc: string[], cur: string) => {
       if (cur) acc.push(cur.trim());
@@ -55,8 +57,30 @@ const router = createRouter({
       },
     };
   }),
-  scrollBehavior() {
-    document.querySelector('.main')?.scrollTo({ top: 0 });
+  scrollBehavior(to, _, savedPosition) {
+    const main = document.querySelector('.main');
+
+    if (!main) {
+      return;
+    }
+
+    if (savedPosition) {
+      main.scrollTop = savedPosition.top;
+      return;
+    }
+    if (to.hash) {
+      const anchor = main.querySelector(to.hash) as HTMLElement;
+      if (anchor) {
+        main.scroll({
+          top: anchor.offsetTop,
+          behavior: 'smooth',
+        });
+        return;
+      }
+    }
+
+    main.scrollTop = 0;
+    return;
   },
 });
 

@@ -2,7 +2,8 @@ import globals from 'globals';
 
 import js from '@eslint/js';
 
-import tseslint from "typescript-eslint";
+// eslint-disable-next-line import/no-unresolved
+import tseslint from 'typescript-eslint';
 
 import vuePlugin from 'eslint-plugin-vue';
 
@@ -12,10 +13,12 @@ import prettierConfig from 'eslint-config-prettier';
 import prettierPlugin from 'eslint-plugin-prettier';
 
 export default [
+  {
+    ignores: ['**/node_modules/**', '**/dist/**', '**/docs/**'],
+  },
   // Base configuration
   {
-    ignores: ['node_modules/**', 'dist/**'],
-    files: ["**/*.{js,mjs,cjs,ts,vue}"],
+    files: ['**/*.{js,mjs,cjs,ts,vue}'],
     languageOptions: {
       globals: {
         ...globals.browser,
@@ -38,8 +41,8 @@ export default [
     files: ['**/*.vue'],
     languageOptions: {
       parserOptions: {
-        parser: tseslint.parser
-      }
+        parser: tseslint.parser,
+      },
     },
     rules: {
       'vue/multi-word-component-names': 'off',

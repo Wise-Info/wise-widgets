@@ -24,6 +24,7 @@
     "noUncheckedSideEffectImports": true,
 
     "paths": {
+      "@/*": ["./docs-src/*"],
       "@wiseinfo/wise-widgets": ["./components/index.ts"],
       "@components": ["./docs-src/components/index.ts"]
     }

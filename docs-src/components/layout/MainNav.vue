@@ -2,7 +2,7 @@
   <nav class="main-nav">
     <li
       v-for="module in modules"
-      :key="module.meta.id"
+      :key="module.path"
       class="main-nav__item">
       <router-link
         class="main-nav__link"
@@ -16,19 +16,22 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, type RouteRecordRaw } from 'vue-router';
 
 const router = useRouter();
 const routes = router.getRoutes();
 
 const modules = computed(() =>
   routes
-    .filter((router) => router.meta.parent === 'root' && router.meta.disabled !== true)
-    .sort((a, b) => a.meta.order - b.meta.order),
+    .filter(
+      (router: RouteRecordRaw) => router.meta?.parent === 'root' && router.meta.disabled !== true,
+    )
+    .sort((a, b) => (a.meta.order as number) - (b.meta.order as number)),
 );
 
 const currentModule = computed(() => {
-  return router.currentRoute.value.meta.parents?.[1] || router.currentRoute.value.meta.id;
+  const parents = router.currentRoute.value.meta.parents as string[] | undefined;
+  return parents?.[1] || router.currentRoute.value.meta.id;
 });
 </script>
 

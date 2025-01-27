@@ -48,13 +48,12 @@ const switchTheme = (targetTheme: Theme = 'auto') => {
       html.classList.remove('light');
       html.classList.add('dark');
       break;
-    case 'auto':
+    default:
       html.classList.remove('dark', 'light');
-      break;
   }
 };
 
-switchTheme(localStorage.getItem('theme') as Theme);
+switchTheme((localStorage.getItem('theme') as Theme) || 'auto');
 
 setTimeout(() => {
   html.style.setProperty('--theme-switch-duration', '1s');
