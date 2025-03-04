@@ -1,9 +1,7 @@
 <template>
   <section class="section">
     <hgroup class="section__title">
-      <PropEnums
-        widget="WidgetRadioGroup"
-        prop="validator" />
+      <h4>Property [ validator ] : Function</h4>
     </hgroup>
 
     <WidgetRadioGroup

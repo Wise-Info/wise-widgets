@@ -7,10 +7,104 @@
       tabindex="0"
       @click="toggleAsideCollapsedState">
       <span class="logo__icon">
-        <WidgetSvg
+        <!-- <WidgetSvg
           auto
           svg="logo"
-          style="color: var(--color-major)" />
+          style="color: var(--color-major)" /> -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="100%"
+          height="100%"
+          viewBox="0 0 64 64"
+          style="color: var(--color-major)">
+          <svg
+            x="18"
+            y="20"
+            width="44"
+            height="44"
+            viewBox="0 0 64 64">
+            <path
+              fill="currentColor"
+              d="
+            M31 4
+            l-6 16
+            a8 8 0 0 1-5 5
+            l-16 6
+            a1.4 1.1 0 0 0 0 2
+            l16 6
+            a8 8 0 0 1 5 5
+            l6 16
+            a1.1 1.4 0 0 0 2 0
+            l6-16
+            a8 8 0 0 1 5-5
+            l16-6
+            a1.4 1.1 0 0 0 0-2
+            l-16-6
+            a8 8 0 0 1-5-5
+            l-6-16
+            a1.1 1.4 0 0 0-2 0
+            z
+        " />
+          </svg>
+          <svg
+            x="4"
+            y="14"
+            width="24"
+            height="24"
+            viewBox="0 0 64 64">
+            <path
+              fill="currentColor"
+              d="
+            M31 4
+            l-6 16
+            a8 8 0 0 1-5 5
+            l-16 6
+            a1.4 1.1 0 0 0 0 2
+            l16 6
+            a8 8 0 0 1 5 5
+            l6 16
+            a1.1 1.4 0 0 0 2 0
+            l6-16
+            a8 8 0 0 1 5-5
+            l16-6
+            a1.4 1.1 0 0 0 0-2
+            l-16-6
+            a8 8 0 0 1-5-5
+            l-6-16
+            a1.1 1.4 0 0 0-2 0
+            z
+   " />
+          </svg>
+          <svg
+            x="22"
+            y="2"
+            width="18"
+            height="18"
+            viewBox="0 0 64 64">
+            <path
+              fill="currentColor"
+              d="
+            M31 4
+            l-6 16
+            a8 8 0 0 1-5 5
+            l-16 6
+            a1.4 1.1 0 0 0 0 2
+            l16 6
+            a8 8 0 0 1 5 5
+            l6 16
+            a1.1 1.4 0 0 0 2 0
+            l6-16
+            a8 8 0 0 1 5-5
+            l16-6
+            a1.4 1.1 0 0 0 0-2
+            l-16-6
+            a8 8 0 0 1-5-5
+            l-6-16
+            a1.1 1.4 0 0 0-2 0
+            z
+   " />
+          </svg>
+        </svg>
       </span>
       <span class="logo__label">WISE-WIDGETS</span>
     </h1>

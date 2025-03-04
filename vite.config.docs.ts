@@ -25,7 +25,7 @@ export default defineConfig({
     alias: {
       '@wiseinfo/wise-widgets': path.resolve(__dirname, './components'),
       '@': path.resolve(__dirname, './docs-src'),
-      '@components': path.resolve(__dirname, './docs-src/components'),
+      '@components': path.resolve(__dirname, './docs-src/components/index.ts'),
       '@routers': path.resolve(__dirname, './docs-src/routers.ts'),
     },
   },

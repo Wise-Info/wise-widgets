@@ -1,7 +1,9 @@
 import type { App, DefineComponent } from 'vue';
 
 export * from './WidgetIcon/index.ts';
+
 export * from './WidgetSvg/index.ts';
+
 export * from './WidgetButton/index.ts';
 
 export * from './WidgetGroup/index.ts';
@@ -10,11 +12,11 @@ export * from './WidgetSwitch/index.ts';
 
 export * from './WidgetRadio/index.ts';
 
+export * from './WidgetCheckbox/index.ts';
+
 export * from './WidgetCard/index.ts';
 
 export * from './WidgetCode/index.ts';
-
-export * from './WidgetRadio/index.ts';
 
 interface WidgetModule extends DefineComponent {
   install: (app: App) => void;

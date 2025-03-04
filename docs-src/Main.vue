@@ -11,7 +11,7 @@
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { Aside, HeaderBar, AnchorNav } from './components/index.ts';
+import { Aside, HeaderBar, AnchorNav } from '@components';
 
 const route = useRoute();
 

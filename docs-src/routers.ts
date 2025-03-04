@@ -4,7 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import { routes } from './routes.ts';
 
-import Demo, { type Section } from './components/Demo.vue';
+import { Sections, type Section } from '@components';
 
 const modules: { [key: string]: DefineComponent } = import.meta.glob(
   './modules/**/sections/*.vue',
@@ -30,7 +30,7 @@ const moduleSections = Object.entries(modules).reduce(
   {},
 );
 
-const router = createRouter({
+export default createRouter({
   history:
     import.meta.env.MODE === 'production'
       ? createWebHistory(import.meta.env.BASE_URL)
@@ -42,7 +42,7 @@ const router = createRouter({
     }, []);
     const id = segments.pop() || 'home';
     const name = id.replace(/(?:^|-)([a-z])/g, (_, c) => c.toUpperCase());
-    const component = modules[`./modules/${name}/${name}.vue`]?.default || Demo;
+    const component = modules[`./modules/${name}/${name}.vue`]?.default || Sections;
 
     return {
       path,
@@ -83,7 +83,5 @@ const router = createRouter({
     return;
   },
 });
-
-export default router;
 
 export { routes };

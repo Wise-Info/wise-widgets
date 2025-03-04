@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <hgroup class="section__title">
-      <h4>Property [ checked , disabled ] - State</h4>
+      <h4>Property [ checked , readonly , disabled ] - State</h4>
       <span class="property-enums">
         <span class="default">unchecked</span>
         <span>checked</span>
@@ -10,7 +10,9 @@
       </span>
     </hgroup>
     <WidgetGroup gap="4">
-      <WidgetRadio label="unchecked" />
+      <WidgetRadio
+        label="unchecked"
+        readonly />
 
       <WidgetRadio
         label="checked"

@@ -18,8 +18,10 @@ export default (app: App) => {
     document.body.appendChild(widgetsContainer);
   }
 
-  // mount widgets container
-  createApp(Widgets).mount('#widgets');
+  // mount widgets container. Use setTimeout to lower priority in devtools component tree.
+  setTimeout(() => {
+    createApp(Widgets).mount('#widgets');
+  }, 0);
 
   // install widgets
   Object.values(widgets).forEach((widget) => {

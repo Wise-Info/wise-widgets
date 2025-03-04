@@ -3,17 +3,20 @@
     class="widget-radio"
     :class="{
       checked: checked,
+      readonly: readonly,
       disabled: disabled,
       'icon-only': iconOnly,
     }">
     <span class="widget-radio__symbol">
       <input
+        v-model="checked"
         class="widget-radio__original"
         type="radio"
         :required
         :name
         :value="value || label"
         :checked
+        :readonly
         :disabled
         @change.stop="onChange" />
     </span>
@@ -52,6 +55,7 @@ export interface WidgetRadioProps {
   size?: Size;
   icon?: string | WidgetIconProps;
   iconOnly?: boolean;
+  readonly?: boolean;
   disabled?: boolean;
   events?: Record<string, (event: Event) => void>;
 }
@@ -59,6 +63,11 @@ export interface WidgetRadioProps {
 
 <script lang="ts" setup>
 import { computed } from 'vue';
+
+const checked = defineModel('checked', {
+  type: Boolean,
+  default: false,
+});
 
 const props = defineProps({
   name: {
@@ -77,10 +86,6 @@ const props = defineProps({
     type: [Boolean, Number, String],
     default: undefined,
   },
-  checked: {
-    type: Boolean,
-    default: false,
-  },
   size: {
     type: String,
     default: 'normal',
@@ -95,20 +100,29 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  readonly: {
+    type: Boolean,
+    default: false,
+  },
   disabled: {
     type: Boolean,
     default: false,
   },
 });
 
-const emits = defineEmits(['update:checked', 'change']);
+const emits = defineEmits(['change']);
 
 const onChange = (event: Event) => {
+  // checked.value = (event.target as HTMLInputElement).checked;
+
   emits('change', (event.target as HTMLInputElement).checked);
-  emits('update:checked', (event.target as HTMLInputElement).checked);
 };
 
 const localIcon = computed((): WidgetIconProps => {
   return typeof props.icon === 'string' ? { icon: props.icon } : (props.icon as WidgetIconProps);
 });
+
+// TODO: Size
+
+// TODO: Use :checked pseudo-class replace label checked class
 </script>

@@ -1,6 +1,6 @@
 import globals from 'globals';
 
-import js from '@eslint/js';
+import jsPlugin from '@eslint/js';
 
 // eslint-disable-next-line import/no-unresolved
 import tseslint from 'typescript-eslint';
@@ -16,6 +16,7 @@ export default [
   {
     ignores: ['**/node_modules/**', '**/dist/**', '**/docs/**'],
   },
+
   // Base configuration
   {
     files: ['**/*.{js,mjs,cjs,ts,vue}'],
@@ -31,10 +32,13 @@ export default [
       'no-console': ['warn', { allow: ['debug', 'info', 'warn', 'error'] }],
     },
   },
+
   // JavaScript configuration
-  js.configs.recommended,
+  jsPlugin.configs.recommended,
+
   // TypeScript configuration
   ...tseslint.configs.recommended,
+
   // Vue configuration
   ...vuePlugin.configs['flat/recommended'],
   {
@@ -49,6 +53,7 @@ export default [
       'vue/valid-define-props': 'off',
     },
   },
+
   // Import plugin configuration
   {
     plugins: {
@@ -61,6 +66,7 @@ export default [
       'import/prefer-default-export': 'off',
     },
   },
+
   // Prettier plugin configuration
   {
     plugins: {
@@ -70,6 +76,7 @@ export default [
       'prettier/prettier': 'error',
     },
   },
+
   // Disable formatting rules that might conflict with Prettier
   prettierConfig,
 ];
