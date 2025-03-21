@@ -2,9 +2,12 @@
   <WidgetGroup
     class="widget-button-group"
     :class="{
+      [buttonShape]: buttonShape,
+      [buttonSize]: buttonSize,
       whole,
-      [itemsProps.shape as string]: whole && itemsProps.shape && itemsProps.shape !== 'rectangle',
-      [itemsProps.size as string]: itemsProps.size && itemsProps.size !== 'normal',
+      readonly,
+      disabled,
+      error,
     }"
     v-bind="{
       label,
@@ -12,9 +15,6 @@
       direction,
       justify,
       wrap,
-      readonly,
-      disabled,
-      error,
     }">
     <template
       v-for="(item, index) in items"
@@ -27,7 +27,7 @@
             size: undefined,
           },
           ...item,
-          ...localProps,
+          disabled: props.disabled || itemsProps.disabled || item.disabled,
         }"
         v-on="{
           ...itemsProps.events,
@@ -46,6 +46,8 @@ export interface WidgetButtonGroupProps extends WidgetGroupProps {
   itemsProps?: WidgetButtonProps;
   whole?: boolean;
   readonly?: boolean;
+  disabled?: boolean;
+  error?: boolean;
 }
 </script>
 
@@ -60,13 +62,21 @@ const props = withDefaults(defineProps<WidgetButtonGroupProps>(), {
   whole: false,
 });
 
-const localProps = computed(() =>
-  Object.fromEntries(
-    Object.entries({
-      disabled: props.disabled,
-      error: props.error,
-    }).filter(([_, value]) => !!value),
-  ),
+const buttonShape = computed(() =>
+  props.whole &&
+  typeof props.itemsProps === 'object' &&
+  props.itemsProps.shape &&
+  props.itemsProps.shape !== 'rectangle'
+    ? props.itemsProps.shape
+    : '',
+);
+
+const buttonSize = computed(() =>
+  typeof props.itemsProps === 'object' &&
+  props.itemsProps.size &&
+  props.itemsProps.size !== 'normal'
+    ? props.itemsProps.size
+    : '',
 );
 </script>
 
@@ -77,6 +87,20 @@ const localProps = computed(() =>
     .widget-button {
       --color: var(--color-disabled);
       cursor: not-allowed;
+
+      &:active {
+        --color: var(--color-disabled);
+        animation: none;
+      }
+    }
+  }
+  &.error {
+    .widget-button {
+      --color: var(--color-error);
+      &:hover,
+      &:focus {
+        --color: var(--color-error-toggle);
+      }
     }
   }
 }

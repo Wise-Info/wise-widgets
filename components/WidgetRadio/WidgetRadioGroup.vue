@@ -6,6 +6,9 @@
       [buttonShape]: buttonShape,
       [buttonSize]: buttonSize,
       whole,
+      readonly,
+      disabled,
+      error,
     }"
     v-bind="{
       label,
@@ -13,9 +16,6 @@
       direction,
       justify,
       wrap,
-      readonly,
-      disabled,
-      error,
     }"
     role="radiogroup"
     :aria-required="required"
@@ -23,26 +23,21 @@
     <WidgetRadio
       v-for="(option, index) in localOptions"
       :key="`${name}-${index}`"
-      :index="index"
+      v-model="value"
+      :index
+      :name
       :class="{
         'widget-button': button,
-        major: button && modelValue === (option.value || option.label || index),
-        minor: button && modelValue !== (option.value || option.label || index),
+        major: button && value === (option.value || option.label || index),
+        minor: button && value !== (option.value || option.label || index),
         [buttonShape]: buttonShape,
         [buttonSize]: buttonSize,
+        'icon-only': button && option.iconOnly,
       }"
       :required
-      v-bind="option"
-      :checked="modelValue === (option.value || option.label || index)"
       :disabled="disabled || option.disabled"
-      v-on="{
-        ...option.events,
-      }"
-      @change="
-        (event) => {
-          onChange(option.value || option.label || index, event);
-        }
-      " />
+      v-bind="option"
+      v-on="option.events || {}" />
     <div
       v-if="prompt"
       class="widget-prompt widget-radio-group__prompt">
@@ -50,6 +45,7 @@
     </div>
   </WidgetGroup>
 </template>
+
 <script lang="ts">
 import { WidgetGroup, WidgetGroupProps } from '../WidgetGroup/index.ts';
 import WidgetRadio, { WidgetRadioValue, WidgetRadioProps } from './WidgetRadio.vue';
@@ -61,38 +57,27 @@ type Button = {
 };
 
 export interface WidgetRadioGroupProps extends WidgetGroupProps {
+  label?: string;
   name?: string;
   required?: boolean;
   options: WidgetRadioProps[];
   optionsProps?: WidgetRadioProps;
-  modelValue?: WidgetRadioValue;
-  button?: boolean | Button;
-  whole?: boolean;
+  value?: WidgetRadioValue;
   readonly?: boolean;
-  validator?: (value: WidgetRadioValue) => boolean | { error: boolean; prompt?: string };
+  disabled?: boolean;
+  validator?: (
+    value: WidgetRadioValue | undefined,
+  ) => boolean | { error: boolean; prompt?: string };
   error?: boolean;
   prompt?: string;
+  button?: boolean | Button;
+  whole?: boolean;
 }
 </script>
 
 <script setup lang="ts">
 import { computed, watch } from 'vue';
 import { uid } from 'uid';
-
-const props = withDefaults(
-  defineProps<Omit<WidgetRadioGroupProps, 'modelValue' | 'error' | 'prompt'>>(),
-  {
-    name: `widget-${uid(6)}`,
-    required: false,
-    options: () => [],
-    optionsProps: () => ({}) as WidgetRadioProps,
-    button: false,
-    whole: false,
-    validator: undefined,
-  },
-);
-
-const emit = defineEmits(['change']);
 
 const value = defineModel<WidgetRadioValue>();
 
@@ -105,6 +90,24 @@ const prompt = defineModel<string>('prompt', {
   type: String,
   default: '',
 });
+
+const props = withDefaults(
+  defineProps<Omit<WidgetRadioGroupProps, 'modelValue' | 'error' | 'prompt'>>(),
+  {
+    name: () => `widget-${uid(6)}`,
+    required: false,
+    options: () => [],
+    optionsProps: () => ({}) as WidgetRadioProps,
+    readonly: false,
+    disabled: false,
+    error: false,
+    prompt: '',
+    button: false,
+    whole: false,
+  },
+);
+
+const emit = defineEmits(['change']);
 
 // merge optionsProps with options
 const localOptions = computed(() =>
@@ -136,27 +139,31 @@ watch(
   { immediate: true },
 );
 
-const onChange = (newValue: WidgetRadioValue, event: Event) => {
-  emit('change', newValue, event);
+watch(
+  () => value.value,
+  (value) => {
+    emit('change', value);
 
-  value.value = newValue;
+    error.value = false;
+    prompt.value = '';
 
-  error.value = false;
-  prompt.value = '';
-
-  if (props.validator) {
-    const validatorResult = props.validator(newValue);
-    if (typeof validatorResult === 'object') {
-      error.value = validatorResult.error;
-      prompt.value = validatorResult.prompt || '';
-    } else if (validatorResult === false) {
-      error.value = true;
+    if (props.validator) {
+      const validatorResult = props.validator(value);
+      if (typeof validatorResult === 'object') {
+        error.value = validatorResult.error;
+        prompt.value = validatorResult.prompt || '';
+      } else if (validatorResult === false) {
+        error.value = true;
+      }
     }
-  }
-};
+  },
+);
 
 const buttonShape = computed(() =>
-  typeof props.button === 'object' && props.button.shape && props.button.shape !== 'rectangle'
+  props.whole &&
+  typeof props.button === 'object' &&
+  props.button.shape &&
+  props.button.shape !== 'rectangle'
     ? props.button.shape
     : '',
 );
@@ -174,6 +181,15 @@ const buttonSize = computed(() =>
     cursor: not-allowed;
     .widget-radio {
       pointer-events: none;
+    }
+  }
+  &.error {
+    .widget-radio {
+      --color: var(--color-error);
+      &:hover,
+      &:focus {
+        --color: var(--color-error-toggle);
+      }
     }
   }
 }

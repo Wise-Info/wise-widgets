@@ -17,7 +17,7 @@
   --color: var(--group-color, var(--color-major));
 
   --label-color: var(--color);
-  --icon-size: calc(var(--size) * 0.5);
+  --icon-size: calc(var(--size) / 2);
 
   flex-shrink: 0;
 
@@ -30,7 +30,7 @@
 
   color: var(--label-color);
   font-family: inherit;
-  font-size: calc(var(--size) / 2 - var(--size) / 16);
+  font-size: calc(var(--size) * 0.4375);
   line-height: calc(var(--size) - (var(--border-size) * 2));
   text-transform: uppercase;
   white-space: nowrap;
@@ -119,11 +119,12 @@
 
   &.mini {
     text-transform: capitalize;
+    font-size: 12px;
   }
 
   &.micro {
     text-transform: lowercase;
-    line-height: $size-base * 1.25 !important;
+    font-size: 10px;
   }
 
   &.atom {
@@ -187,6 +188,7 @@
     width: var(--size);
     overflow: hidden;
     padding: 0;
+    text-align: center;
 
     #{$this}__label, [class$="__label"] {
       display: none;

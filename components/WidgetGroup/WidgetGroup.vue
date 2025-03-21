@@ -5,11 +5,8 @@
       [`gap-${gap}`]: true,
       reverse: ['row-reverse'].includes(direction),
       inline,
-      readonly,
-      disabled,
-      error,
     }"
-    :style="style">
+    :style>
     <label
       v-if="label !== undefined"
       class="widget-label widget-group__label">
@@ -38,12 +35,10 @@ type WidgetGroupWrap = (typeof enums.wrap)[number];
 export interface WidgetGroupProps {
   label?: string;
   gap?: WidgetGroupGap;
+  inline?: boolean;
   direction?: WidgetGroupDirection;
   justify?: WidgetGroupJustify;
   wrap?: WidgetGroupWrap;
-  readonly?: boolean;
-  disabled?: boolean;
-  error?: boolean;
 }
 </script>
 
@@ -83,18 +78,6 @@ const props = defineProps({
     default: 'nowrap',
     enums: WidgetGroupEnums.wrap,
     validator: (wrap: string) => WidgetGroupEnums.wrap.includes(wrap),
-  },
-  readonly: {
-    type: Boolean,
-    default: false,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  error: {
-    type: Boolean,
-    default: false,
   },
 });
 

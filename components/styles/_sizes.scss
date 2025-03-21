@@ -3,7 +3,7 @@
 :root {
   --size-base:   #{$size-base};   // 8px
 
-  --size-micro:  calc(var(--size-base) * 2); // 16px
+  --size-micro:  calc(var(--size-base) * 2); // 20px
   --size-mini:   calc(var(--size-base) * 3); // 24px
   --size-normal: calc(var(--size-base) * 4); // 32px
   --size-large:  calc(var(--size-base) * 5); // 40px

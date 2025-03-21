@@ -70,8 +70,7 @@ export interface WidgetButtonProps {
   icon?: string | WidgetIconProps;
   iconOnly?: boolean;
   textTransform?: WidgetButtonTextTransform | string;
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-  events?: Record<string, Function>;
+  events?: Record<string, (event: Event) => void>;
 }
 </script>
 

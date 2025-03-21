@@ -2,33 +2,31 @@
   <label
     class="widget-radio"
     :class="{
-      checked: checked,
-      readonly: readonly,
-      disabled: disabled,
-      'icon-only': iconOnly,
+      [size]: size !== 'normal',
     }">
-    <span class="widget-radio__symbol">
-      <input
-        v-model="checked"
-        class="widget-radio__original"
-        type="radio"
-        :required
-        :name
-        :value="value || label"
-        :checked
-        :readonly
-        :disabled
-        @change.stop="onChange" />
-    </span>
-    <WidgetIcon
-      v-if="icon"
-      class="widget-button__icon"
-      v-bind="localIcon" />
-    <span class="widget-radio__label">
-      <template v-if="label || value !== undefined">
-        {{ label || value }}
-      </template>
-      <slot v-else />
+    <input
+      v-model="modelValue"
+      class="widget-radio__original"
+      type="radio"
+      :required
+      :name
+      :value="value || label"
+      :readonly
+      :disabled="disabled || readonly"
+      :aria-disabled="disabled"
+      v-on="events" />
+    <span class="widget-radio__container">
+      <span class="widget-radio__symbol" />
+      <WidgetIcon
+        v-if="icon"
+        class="widget-button__icon"
+        v-bind="localIcon" />
+      <span class="widget-radio__label">
+        <template v-if="label || value !== undefined">
+          {{ label || value }}
+        </template>
+        <slot v-else />
+      </span>
     </span>
   </label>
 </template>
@@ -36,11 +34,11 @@
 <script lang="ts">
 import { WidgetIcon, WidgetIconProps } from '../WidgetIcon/index.ts';
 
-import { enumSize, type Size } from '../enums.ts';
-
 const enums = {
-  size: enumSize,
+  size: ['mini', 'normal', 'large', 'extra'],
 };
+
+export type Size = (typeof enums.size)[number];
 
 export const WidgetRadioEnums = enums;
 
@@ -51,10 +49,11 @@ export interface WidgetRadioProps {
   required?: boolean;
   label?: number | string;
   value?: WidgetRadioValue;
-  checked?: boolean;
   size?: Size;
   icon?: string | WidgetIconProps;
   iconOnly?: boolean;
+  checked?: boolean;
+  modelValue?: WidgetRadioValue;
   readonly?: boolean;
   disabled?: boolean;
   events?: Record<string, (event: Event) => void>;
@@ -62,12 +61,9 @@ export interface WidgetRadioProps {
 </script>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 
-const checked = defineModel('checked', {
-  type: Boolean,
-  default: false,
-});
+const modelValue = defineModel<WidgetRadioValue>();
 
 const props = defineProps({
   name: {
@@ -86,6 +82,10 @@ const props = defineProps({
     type: [Boolean, Number, String],
     default: undefined,
   },
+  checked: {
+    type: Boolean,
+    default: false,
+  },
   size: {
     type: String,
     default: 'normal',
@@ -96,10 +96,6 @@ const props = defineProps({
     type: [String, Object],
     default: undefined,
   },
-  iconOnly: {
-    type: Boolean,
-    default: false,
-  },
   readonly: {
     type: Boolean,
     default: false,
@@ -108,21 +104,35 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  events: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 
-const emits = defineEmits(['change']);
+const emit = defineEmits(['update:checked']);
 
-const onChange = (event: Event) => {
-  // checked.value = (event.target as HTMLInputElement).checked;
+watch(
+  () => props.checked,
+  (checked: boolean) => {
+    if (checked) {
+      modelValue.value = props.value || props.label;
+    }
+  },
+  { immediate: true },
+);
 
-  emits('change', (event.target as HTMLInputElement).checked);
-};
+watch(
+  () => modelValue.value,
+  (value) => {
+    const newChecked = value === props.value || value === props.label;
+    if (newChecked !== props.checked) {
+      emit('update:checked', newChecked);
+    }
+  },
+);
 
 const localIcon = computed((): WidgetIconProps => {
   return typeof props.icon === 'string' ? { icon: props.icon } : (props.icon as WidgetIconProps);
 });
-
-// TODO: Size
-
-// TODO: Use :checked pseudo-class replace label checked class
 </script>

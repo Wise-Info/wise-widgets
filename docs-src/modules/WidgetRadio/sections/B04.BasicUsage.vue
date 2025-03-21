@@ -12,7 +12,7 @@
 
     checked: {{ checked }}
 
-    <br /><br />
+    <br />
 
     <!-- prettier-ignore -->
     <WidgetCode>

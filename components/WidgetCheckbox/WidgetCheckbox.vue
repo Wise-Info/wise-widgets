@@ -1,6 +1,34 @@
 <template>
-  <label class="widget-checkbox">
-    <!--  -->
+  <label
+    class="widget-checkbox"
+    :class="{
+      [size]: size !== 'normal',
+    }">
+    <input
+      ref="original"
+      v-model="checked"
+      class="widget-checkbox__original"
+      type="checkbox"
+      :required
+      :name
+      :value="value || label"
+      :checked
+      :readonly
+      :disabled="disabled || readonly"
+      @change.stop="onChange" />
+    <span class="widget-checkbox__container">
+      <span class="widget-checkbox__symbol" />
+      <WidgetIcon
+        v-if="icon"
+        class="widget-button__icon"
+        v-bind="localIcon" />
+      <span class="widget-checkbox__label">
+        <template v-if="label || value !== undefined">
+          {{ label || value }}
+        </template>
+        <slot v-else />
+      </span>
+    </span>
   </label>
 </template>
 
@@ -25,18 +53,98 @@ export interface WidgetCheckboxProps {
   required?: boolean;
   label?: number | string;
   value?: WidgetCheckboxValue;
-  checked?: boolean;
   size?: Size;
   icon?: string | WidgetIconProps;
-  iconOnly?: boolean;
+  checked?: boolean;
+  indeterminate?: boolean;
   disabled?: boolean;
   events?: Record<string, (event: Event) => void>;
 }
 </script>
 
 <script setup lang="ts">
+import { ref, computed, watch, onMounted } from 'vue';
+
+const original = ref<HTMLInputElement | null>(null);
+
 const checked = defineModel('checked', {
   type: Boolean,
   default: false,
+});
+
+const props = defineProps({
+  name: {
+    type: String,
+    default: undefined,
+  },
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  label: {
+    type: [Number, String],
+    default: undefined,
+  },
+  value: {
+    type: [Boolean, Number, String],
+    default: undefined,
+  },
+  size: {
+    type: String,
+    default: 'normal',
+    enums: enums.size,
+    validator: (size: string) => enums.size.includes(size),
+  },
+  icon: {
+    type: [String, Object],
+    default: undefined,
+  },
+  indeterminate: {
+    type: Boolean,
+    default: false,
+  },
+  readonly: {
+    type: Boolean,
+    default: false,
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const emits = defineEmits(['change']);
+
+watch(
+  () => props.indeterminate,
+  (indeterminate) => {
+    if (original.value) {
+      original.value.indeterminate = indeterminate;
+    }
+  },
+);
+
+onMounted(() => {
+  if (original.value && props.indeterminate) {
+    original.value.indeterminate = props.indeterminate;
+    console.log({
+      propIndeterminate: props.indeterminate,
+      indeterminate: original.value.indeterminate,
+      classList: original.value.classList,
+    });
+  }
+});
+
+const onChange = (event: Event) => {
+  console.log({
+    propIndeterminate: props.indeterminate,
+    indeterminate: (event.target as HTMLInputElement).indeterminate,
+    class: (event.target as HTMLInputElement).classList,
+  });
+  emits('change', (event.target as HTMLInputElement).checked);
+};
+
+const localIcon = computed((): WidgetIconProps => {
+  return typeof props.icon === 'string' ? { icon: props.icon } : (props.icon as WidgetIconProps);
 });
 </script>
