@@ -6,16 +6,14 @@
     }">
     <input
       ref="original"
-      v-model="checked"
+      v-model="modelValue"
       class="widget-checkbox__original"
       type="checkbox"
       :required
       :name
       :value="value || label"
-      :checked
       :readonly
-      :disabled="disabled || readonly"
-      @change.stop="onChange" />
+      :disabled="disabled || readonly" />
     <span class="widget-checkbox__container">
       <span class="widget-checkbox__symbol" />
       <WidgetIcon
@@ -67,10 +65,7 @@ import { ref, computed, watch, onMounted } from 'vue';
 
 const original = ref<HTMLInputElement | null>(null);
 
-const checked = defineModel('checked', {
-  type: Boolean,
-  default: false,
-});
+const modelValue = defineModel<WidgetCheckboxValue[]>();
 
 const props = defineProps({
   name: {
@@ -88,6 +83,10 @@ const props = defineProps({
   value: {
     type: [Boolean, Number, String],
     default: undefined,
+  },
+  checked: {
+    type: Boolean,
+    default: false,
   },
   size: {
     type: String,

@@ -14,6 +14,7 @@
       :readonly
       :disabled="disabled || readonly"
       :aria-disabled="disabled"
+      v-bind="checked === true ? { checked: true } : {}"
       v-on="events" />
     <span class="widget-radio__container">
       <span class="widget-radio__symbol" />
@@ -61,7 +62,7 @@ export interface WidgetRadioProps {
 </script>
 
 <script lang="ts" setup>
-import { computed, watch } from 'vue';
+import { computed } from 'vue';
 
 const modelValue = defineModel<WidgetRadioValue>();
 
@@ -109,28 +110,6 @@ const props = defineProps({
     default: () => ({}),
   },
 });
-
-const emit = defineEmits(['update:checked']);
-
-watch(
-  () => props.checked,
-  (checked: boolean) => {
-    if (checked) {
-      modelValue.value = props.value || props.label;
-    }
-  },
-  { immediate: true },
-);
-
-watch(
-  () => modelValue.value,
-  (value) => {
-    const newChecked = value === props.value || value === props.label;
-    if (newChecked !== props.checked) {
-      emit('update:checked', newChecked);
-    }
-  },
-);
 
 const localIcon = computed((): WidgetIconProps => {
   return typeof props.icon === 'string' ? { icon: props.icon } : (props.icon as WidgetIconProps);

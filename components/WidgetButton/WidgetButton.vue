@@ -8,7 +8,7 @@
       [state]: state !== 'normal',
       [usage]: usage !== 'normal',
       disabled: disabled || state === 'disabled',
-      error: error || usage === 'error',
+      error: error || state === 'error',
       block: block,
       'icon-only': iconOnly,
     }"

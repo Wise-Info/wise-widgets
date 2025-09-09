@@ -16,6 +16,9 @@
       <WidgetButton
         state="disabled"
         label="Disabled" />
+      <WidgetButton
+        state="error"
+        label="Error" />
     </WidgetGroup>
     <WidgetGroup>
       <WidgetButton
@@ -33,6 +36,10 @@
         type="major"
         state="disabled"
         label="Disabled" />
+      <WidgetButton
+        type="major"
+        state="error"
+        label="Error" />
     </WidgetGroup>
     <br /><br />
     <WidgetGroup label="Try It">
